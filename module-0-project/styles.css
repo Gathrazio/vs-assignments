@@ -1,0 +1,443 @@
+/* ----------------------------------------------------------------------------------- */
+/* styling for displays with a minimum width of 999px (desktops, laptops, large iPads) */
+/* ----------------------------------------------------------------------------------- */
+
+
+@media only screen and (min-width: 1000px) {
+    html, body { /* clear out default margins and paddings and such */
+        margin: 0;
+        padding: 0; 
+    }
+
+    html {
+        overflow-x: hidden; /* having overflow-x: hidden property on both html and body tags breaks the sticky property! */
+    }
+
+    * { /* give everything this font family list */
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+
+
+    /* --------------------------------------------------------- */
+    /* ↓ styling the background color selection part of the page */
+    /* --------------------------------------------------------- */
+
+
+    h3 { /* there is exactly one h3 element: the "Pick a background ..." line in the background-color-selection section */
+        text-align: center;
+        height: 20px;
+        line-height: 30px;
+    }
+
+    h5 { /* there is exactly one h5 element: the "To turn the screen... " line in the background-color-selection section */
+        text-align: center;
+        height: 20px;
+        line-height: 5px;
+    }
+
+    #color-container { /* styling the color container, using flexbox */
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 30px;
+    }
+
+    #color-container > * { /* styling the two children of color-container */
+        width: 50%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .child { /* styling the color boxes, children of color-container1 and color-container2 */
+        height: 60px;
+        width: 60px;
+        border: 3px solid black;
+        text-align: center;
+        line-height: 60px;
+        cursor: pointer;
+    }
+
+    #color1 { /* styling each color box, children of the color-container, by id */
+        background-color: rgb(235, 128, 96);
+    }
+
+    #color2 {
+        background-color: rgb(238, 120, 157);
+    }
+
+    #color3 {
+        background-color: rgb(207, 104, 238);
+    }
+
+    #color4 {
+        background-color: rgb(128, 104, 250);
+    }
+
+    #color5 {
+        background-color: rgb(52, 130, 235);
+    }
+
+    #color6 {
+        background-color: rgb(129, 229, 204);
+    }
+
+
+
+    /* --------------------------------------------------- */
+    /* ↓ styling the math practice sections of the pages */
+    /* --------------------------------------------------- */
+
+
+    .button-menu-container {
+        position: sticky; /* so the container follows you as you scroll */
+        top:0px; /* so there is no space between the top of the container and the top of the browser */
+        z-index: 1; /* put it in front of everything */
+    }
+
+    #main-title { /* there is exactly one h1 element: the "Integral Practice!" title */
+        text-align: center;
+        height: 100px;
+        line-height: 100px;
+        background-color:rgba(173, 179, 178, 1);
+        border: 4px solid black;
+    }
+
+    .menu-btn { /* laying out the general stylings of the menu buttons */
+        position: absolute;
+        top: 24px;
+        padding: 20px;
+        width: 240px;
+        border: 2px solid black;
+        cursor: pointer;
+        font-size: large;
+    }
+
+    .menu-btn:hover { /* determining what the background of a menu button should be if one hovers their mouse over it, along with the associated delay */
+        background-color:rgb(37, 160, 160);
+        transition: 0.7 s;
+    }
+
+    #d-calc, #i-calc { /* the derivative calculator button/integral calculator button styling, hanging off the left side of the screen (depending on what html page is loaded) */
+        position: absolute;
+        left:32px;
+    }
+
+    #derivatives, #integrals { /* styling the derivative practice and integral practice buttons (only one will display depending on the html file) */
+        position: absolute;
+        right: 32px;
+    }
+
+    .exercise-container { /* styling the exercise container, also using flexbox -- exercise container wrapped around pairs of exercises */
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .exercise { /* styling the exercises themselves, children of the exercise container using flexbox */
+        display: flex;
+        flex-direction: column;
+        width: 49%;
+    }
+
+    .exercise > * { /* styling all children of each exercise (like the question number, integral statement, solution button, and solution) */
+        padding: 10px;
+    }
+
+    .math { /* styling the math statements */
+        padding-top: 0px;
+        font-size: large;
+    }
+
+    #math1.integral { /* styling each math integral statement individually to get the solution buttons to line up horizontally */
+        margin-bottom: 29px;
+    }
+
+    #math2.integral {
+        margin-bottom: 20.3px;
+    }
+
+    #math3.integral {
+        margin-bottom: 16.5px;
+    }
+
+    #math4.integral {
+        margin-bottom: 27.3px;
+    }
+
+    #math5.integral {
+        margin-bottom: 13.5px;
+    }
+
+    #math6.integral {
+        margin-bottom: 22.5px;
+    }
+
+    #math7.integral {
+        margin-bottom: 19.5px;
+    }
+
+    #math8.integral {
+        margin-bottom: 30px;
+    }
+
+    #math9.integral {
+        margin-bottom: 15.5px;
+    }
+
+    #math10.integral {
+        margin-bottom: 18px;
+    }
+
+
+    #math1.derivative { /* styling each math derivative statement individually to get the solution buttons to line up horizontally */
+        margin-bottom: 33px;
+    }
+
+    #math2.derivative {
+        margin-bottom: 33px;
+    }
+
+    #math3.derivative {
+        margin-bottom: 28px;
+    }
+
+    #math4.derivative {
+        margin-bottom: 13px;
+    }
+
+    #math5.derivative {
+        margin-bottom: 32px;
+    }
+
+    #math6.derivative {
+        margin-bottom: 32px;
+    }
+
+    #math7.derivative {
+        margin-bottom: 19px;
+    }
+
+    #math8.derivative {
+        margin-bottom: 17px;
+    }
+
+    #math9.derivative {
+        margin-bottom: 12px;
+    }
+
+    #math10.derivative {
+        margin-bottom: 24.5px;
+    }
+
+
+    .exercise-container .center { /* styling all exercise-container decendants I wish to be centered; namely, select grandchildren */
+        text-align: center;
+    }
+
+    .exercise-container .justify { /* styling all exercise-container decendants I wish to be justified; namely, select grandchildren */
+        text-align: justify;
+    }
+
+    .solution-btn { /* styling the solution buttons */
+        padding: 20px;
+        background-color:rgb(217, 190, 172);
+        cursor: pointer;
+        margin-bottom: 50px;
+        font-size: large;
+        border: 4px solid black;
+    }
+
+    .solution-btn:hover {
+        background-color:rgb(210, 170, 160);
+        transition: 0.7 s;
+    }
+
+    .solution { /* giving the solutions its own background color and padding and hiding them when the page loads */
+        padding: 20px;
+        background-color:rgba(243, 243, 149);
+        display: none;
+        margin-top: 10px;
+        margin-bottom: 60px;
+        font-size: large;
+    }
+
+    hr { /* styling the border between collections of exercises */
+        border: 2px solid black;
+    }
+
+    hr.mobile { /* making the horizontal rules that are part of the mobile versions of the pages go away in desktop mode */
+        display: none;
+    }
+}
+
+
+
+
+/* -------------------------------------------------------------------------------- */
+/* ↓ styling the mobile versions of the pages (window widths a maximum of 999 pixels) */
+/* -------------------------------------------------------------------------------- */
+
+
+@media only screen and (max-width: 999px) { /* phone display settings */
+
+    html, body { /* clear out default margins and paddings */
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden; 
+    }
+
+    * { /* give everything this font family list */
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+
+
+    /* --------------------------------------------------------- */
+    /* ↓ styling the background color selection part of the page */
+    /* --------------------------------------------------------- */
+
+
+    .beginning { /* making the background color instructions go away -- too much clutter, also it is pretty self-explanatory how it works once someone starts clicking the boxes */
+        display: none;
+    }
+
+    #color-container > * { /* styling container1 and container2, making their children flex horizontally and having the containers themselves display with block */
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    #color-container1 > * { /* styling the top row of colored boxes */
+        margin-top: 5%;
+        margin-bottom: 40px;
+    }
+
+    #color-container2 > * { /* styling the bottom row of colored boxes */
+        margin-bottom: 40px;
+    }
+
+    .child { /* styling the shared characteristics of the colored boxes */
+        height: 150px;
+        width: 150px;
+        display: inline-block;
+        border: 3px solid black;
+        text-align: center;
+        line-height: 60px;
+        cursor: pointer;
+    }
+
+    #color1 { /* styling each color box, children of the color-container, by Id */
+        background-color: rgb(235, 128, 96);
+    }
+
+    #color2 {
+        background-color: rgb(238, 120, 157);
+    }
+
+    #color3 {
+        background-color: rgb(207, 104, 238);
+    }
+
+    #color4 {
+        background-color: rgb(128, 104, 250);
+    }
+
+    #color5 {
+        background-color: rgb(52, 130, 235);
+    }
+
+    #color6 {
+        background-color: rgb(129, 229, 204);
+    }
+
+
+
+    /* ------------------------------------------------- */
+    /* ↓ styling the math practice sections of the pages */
+    /* ------------------------------------------------- */
+
+
+    #main-title { /* including and styling the main title */
+        text-align: center;
+        height: 100px;
+        line-height: 100px;
+        background-color:rgba(173, 179, 178, 1);
+        border: 4px solid black;
+        margin-bottom: 50px;
+    }
+
+    .menu-btn { /* styling the menu buttons */
+        top: 24px;
+        display: block;
+        padding: 40px;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        border: 4px solid black;
+        cursor: pointer;
+        font-size: x-large;
+    }
+
+    #derivatives, #integrals { /* styling these buttons, they are located in the same spot for both pages */
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .menu-btn:hover { /* determines what the background of a menu button should be if one hovers their mouse over it, along with the associated delay */
+        background-color:rgb(37, 160, 160);
+        transition: 0.7 s;
+    }
+
+    .exercise-container { /* styling the exercise container, using flexbox -- each container houses two exercises */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .exercise {
+        text-align: center; /* effectively centers inline block or block decendants of the exercises */
+    }
+
+    .exercise > * { /* styling all children of each exercise (like the question number, integral statement, solution button, and solution) */
+        padding: 10px;
+    }
+
+    .math { /* styling the math statements */
+        padding-top: 0px;
+        margin-bottom: 20px;
+        font-size: xx-large;
+    }
+
+    .exercise .justify { /* styling all exercise decendants I wish to be justified */
+        text-align: justify;
+    }
+
+    .solution-btn:hover {
+        background-color:rgb(210, 170, 160);
+        transition: 0.7 s;
+    }
+
+    .solution {
+        padding: 20px; /* giving the solution its own background color and padding */
+        background-color:rgba(243, 243, 149);
+        font-size: xx-large;
+        display: none;
+        margin-top: 10px;
+        margin-bottom: 60px;
+    }
+
+    .solution-btn { /* style for just the solution buttons, also hiding them on page load */
+        cursor: pointer;
+        margin-bottom: 50px;
+        padding: 40px;
+        border: 4px solid black;
+        font-size: x-large;
+        background-color:rgb(217, 190, 172);
+        width: 80%;
+    }
+
+    hr { /* styling the border between collections of exercises */
+        border: 2px solid black;
+        width: 100%;
+    }
+
+
+}

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Integral Practice Resource</title> <!-- site title in tab -->
+        <link rel="stylesheet" href="styles.css"/> <!-- injecting my stylesheet -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <!-- the following two js scripts are used to compile typeset math using mathjax -->
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+
+
+
+
+    <body> <!-- body section: where all the content is happening -->
+
+        <!------------------------------------------------------------------------------------------------>
+        <!-- ↓ the section at the top of the page that allows the user to toggle site background colors -->
+        <!------------------------------------------------------------------------------------------------>
+
+        <section id="background-color-selection"> 
+            <h3 class="beginning">Pick a background color by clicking the associated box!</h3> <!-- background color selection instructions -->
+            <h5 class="beginning">To turn the screen back to white, click the box that is the color of the current background.</h5>
+            <div id="color-container"> <!-- a div to hold all the colored boxes -->
+                <div id="color-container1">
+                    <div id="color1" class="child"></div> <!-- each box has its unique color, so I've given each its own unique Id -->
+                    <div id="color2" class="child"></div> <!-- I've also given each box the same class for styling -->
+                    <div id="color3" class="child"></div>
+                </div>
+                <div id="color-container2">
+                    <div id="color4" class="child"></div>
+                    <div id="color5" class="child"></div>
+                    <div id="color6" class="child"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- end of the background color selection section -->
+
+        <!--------------------------->
+        <!-- ↓ button menu section -->
+        <!--------------------------->
+
+        <div class="button-menu-container">
+            <h1 id="main-title">Integral Practice!</h1> <!-- more or less the main title of the page -->
+            <button id="i-calc" class="menu-btn">Integral Calculator</button> <!-- navigation buttons -->
+            <button id="derivatives" class="menu-btn">Derivative Practice</button>
+        </div>
+
+        <!-- end of button menu section -->
+
+
+        <!--------------------------------->
+        <!-- ↓ integral practice section -->
+        <!--------------------------------->
+
+        <!-- ↓ beginning of the first exercise container, each container holds two integral exercises -->
+
+        <div class="exercise-container">
+
+            <hr class="mobile"/> <!-- these horizontal rules will show up only if the screen is small enough -- see styles.css -->
+
+            <!-- ↓ beginning of exercise 1 -->
+
+            <div id="exercise-1" class="exercise">
+                <h3 class="question justify">Q. 1:</h3> <!-- question number -->
+                <div id="math1" class="math integral center">$$\int xe^{x^2}dx\;\; = \;\;\;?$$</div> <!-- integral statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-1" class="solution justify"> <!-- solution -->
+                    We can use \(u\)-substitution here, where \(u=x^2\). Thus \(\frac{1}{2}du=xdx\), which means
+                    $$\begin{align*}\int xe^{x^2}dx &= \frac{1}{2}\int e^u du\\&=\frac{1}{2}e^u + C\\
+                    &=\boxed{\frac{1}{2}e^{x^2} + C}.\end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 1 -->
+
+            <hr class="mobile" />
+
+            <!-- ↓ beginning of exercise 2 -->
+
+            <div id="exercise-2" class="exercise"> <!-- exercise 2 -->
+                <h3 class="question justify">Q. 2:</h3> <!-- question number -->
+                <div id="math2" class="math integral center">$$\int_0^1 x^2 dx \;\;= \;\;\;?$$</div> <!-- integral statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-2" class="solution justify"> <!-- solution -->
+                    In this case the reverse power rule works nicely. Also, do not forget to evaluate the antiderivative at the bounds of the integral like so:
+                    $$\begin{align*}\int_0^1x^2dx &= \frac{1}{3}x^3\bigg\rvert_0^1\\
+                    &=\frac{1}{3}\left[1^3-0^3\right]\\
+                    &=\boxed{\frac{1}{3}}. \end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 2 -->
+
+        </div>
+
+        <!-- end of the first exercise container -->
+
+
+        <hr/> <!-- separating line between pairs of exercises -- will always display -->
+
+
+
+        <!-- ↓ beginning of second exercise container -->
+
+        <div class="exercise-container">
+
+            <!-- ↓ beginning of exercise 3 -->
+
+            <div id="exercise-3" class="exercise"> <!--exercise 3 -->
+                <h3 class="question justify">Q. 3:</h3> <!-- question number -->
+                <div id="math3" class="math integral center">$$\int\left[\frac{4}{(x+2)\ln(x+2)}\right]dx\;\; = \;\;\;?$$</div> <!-- integral statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-3" class="solution justify"> <!-- solution -->
+                    For this problem, it is good to notice that we have the derivative of \(\ln(x+2)\) in the integrand product. This should encourage us to perform a \(u\)-substitution with \(\ln(x+2)\), namely \(u = \ln(x+2)\), which implies that \(du = \frac{dx}{x+2}\). The integral then becomes $$\begin{align*}&\;\;\;\;\int\left[\frac{4}{(x+2)\ln(x+2)}\right]dx\\
+                    &= 4\int\left[\frac{1}{u}\right]du\\ &=4\ln|\;u| + C\\&=\boxed{4\ln|\ln(x+2)| \;+ C}.\end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 3 -->
+
+            <hr class="mobile"/>
+
+            <!-- ↓ beginning of exercise 4 -->
+
+            <div id="exercise-4" class="exercise"> <!-- exercise 4 -->
+                <h3 class="question justify">Q. 4:</h3> <!-- question number -->
+                <div id="math4" class="math integral center">$$\int e^x \tan^2\left(e^x\right)\sec^2\left(e^x\right)dx\;\; = \;\;\;?$$</div> <!-- integral statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-4" class="solution justify"> <!-- solution -->
+                    It is important to recall that \(\frac{d}{dx}\tan(x) = \sec^2(x)\). Knowing this, and being sure not to forget the chain rule, we can see that \(\frac{d}{dx}\tan(e^x) = e^x\sec^2(e^x)\), which appears in the integrand! So we shall perform a \(u\)-sub with \(u = \tan(e^x)\) and \(du = e^x\sec^2(x)dx\):
+                    $$\begin{align*}&\;\;\;\;\int e^x \tan^2(e^x) \sec^2(e^x) dx\\
+                    &= \int \tan^2(e^x)e^x\sec^2(x)dx\\
+                    &=\int u^2 du\\
+                    &=\frac{1}{3}u^3 + C\\
+                    &=\boxed{\frac{1}{3}\tan^3(e^x)+ C}.\end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 4 -->
+
+        </div>
+
+        <!-- end of the second exercise container -->
+
+
+        <hr/>
+
+
+
+        <!-- ↓ beginning of third exercise container -->
+
+        <div class="exercise-container">
+
+            <!-- ↓ beginning of exercise 5 -->
+
+            <div id="exercise-5" class="exercise"> <!-- exercise 5 -->
+                <h3 class="question justify">Q. 5:</h3> <!-- question number -->
+                <div id="math5" class="math integral center">$$\int_0^4xe^{\frac{x}{2}}dx \;\;= \;\;\;?$$</div> <!-- integral statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-5" class="solution justify"> <!-- solution -->
+                    This integral is a bit different in that we need to use integration by parts. Recall the definite integral version of the integration by parts formula below, where \(u\) and \(v\) are functions of \(x\):
+                    $$\int_a^b udv = uv\bigg\rvert_a^b - \int_a^b v du$$
+                    If we make the substitutions \(u = x\) and \( v = 2e^{\frac{x}{2}}\), we have this form! Namely, it follows that \(du = dx\) and \(dv = e^{\frac{x}{2}}dx\), so the whole integral can be computed like so: 
+                    $$\begin{align*}&\;\;\;\;\int_0^4 xe^{\frac{x}{2}}dx\\
+                    &= \int_0^4 udv\\
+                    &=uv\bigg\rvert_0^4 - \int_0^4 vdu\\
+                    &=2xe^{\frac{x}{2}}\bigg\rvert_0^4 - \int_0^4 2e^{\frac{x}{2}}\\
+                    &=8e^2 - 4e^{\frac{x}{2}}dx\\
+                    &=8e^2 - 4\;(e^2-1)\\
+                    &=\boxed{4\;(e^2+1)}.\end{align*}$$
+                    For those of you who know multivariable calculus, we are not able to integrate like so
+                    $$\int udv = uv\;+C$$
+                    precisely because \(u\) and \(v\) are not independent variables.
+                </div>
+            </div>
+
+            <!-- end of exercise 5 -->
+
+            <hr class="mobile" />
+
+            <!-- ↓ beginning of exercise 6 -->
+
+            <div id="exercise-6" class="exercise"> <!--exercise 6 -->
+                <h3 class="question justify">Q. 6:</h3> <!-- question number -->
+                <div id="math6" class="math integral center">$$\int \sec(\theta)d\theta\;\; = \;\;\;?$$</div> <!-- integral statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-6" class="solution justify"> <!-- solution -->
+                    Deceptively simple, the key to this integral is multiplication by a special form of 1 followed by a clever \(u\)-substitution. We proceed as follows:
+                    $$\begin{align*}&\;\;\;\;\int\sec(\theta)dx\\
+                    &= \int \frac{\sec(\theta)[\sec(\theta)+\tan(\theta)]}{\sec(\theta)+\tan(\theta)}d\theta\\
+                    &=\int \frac{\sec^2(\theta) + \sec(\theta)\tan(\theta)}{\sec(\theta) + \tan(\theta)}d\theta.\end{align*}$$
+                    At this point, we can make the \(u\)-substitution \(u=\sec(\theta) + \tan(\theta)\), which implies that \(du = (\sec(\theta)\tan(\theta) + \sec^2(\theta))d\theta\). This makes the ending clear:
+                    $$\begin{align*}
+                    &\;\;\;\;\int\sec(\theta)d\theta\\
+                    &= \int \frac{\sec^2(\theta) + \sec(\theta)\tan(\theta)}{\sec(\theta) + \tan(\theta)}d\theta\\
+                    &=\int \frac{du}{u}\\
+                    &=\ln|\;u| +C\\
+                    &=\boxed{\ln |\;\sec(\theta)+\tan(\theta)|\;+C}.
+                    \end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 6 -->
+
+        </div>
+
+        <!-- end of the third exercise container -->
+
+
+        <hr/>
+
+
+
+        <!-- ↓ beginning of fourth exercise container -->
+
+        <div class="exercise-container">
+
+            <!-- ↓ beginning of exercise 7 -->
+            
+            <div id="exercise-7" class="exercise"> <!-- exercise 7 -->
+                <h3 class="question justify">Q. 7:</h3> <!-- question number -->
+                <div id="math7" class="math integral center">$$\int_0^\infty \frac{x^2}{x^6+1}dx\;\; = \;\;\;?$$</div> <!-- integral statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-7" class="solution justify"> <!-- solution -->
+                    This is an improper integral, which means we must rewrite with limit notation. We can also identify the \(u\)-substitution \(u = x^3\) and \(\frac{1}{3}du = x^2dx\). It would also be useful to re-familiarize ourselves with the conventionally accepted definition (including domain and range) of the arctangent function:
+                    $$\begin{align*}&\;\;\;\;\int_0^\infty \frac{x^2}{x^6+1}dx\\
+                    &= \lim_{b\to\infty}\int_0^b \frac{x^2}{x^6+1}dx\\
+                    &=\frac{1}{3}\lim_{b\to\infty} \int_0^b\frac{1}{u^2+1}du\\
+                    &=\frac{1}{3}\lim_{b\to\infty} \Bigg[\arctan(u)\bigg\rvert_0^b\Bigg]\\
+                    &=\frac{1}{3}\lim_{b\to\infty}\left[\arctan(b) - \arctan(0)\right]\\
+                    &=\frac{1}{3}\left[\frac{\pi}{2}-0\right]\\
+                    &=\boxed{\frac{\pi}{6}}.\end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 7 -->
+            
+            <hr class="mobile" />
+
+            <!-- ↓ beginning of exercise 8 -->
+
+            <div id="exercise-8" class="exercise"> <!-- exercise 8 -->
+                <h3 class="question justify">Q. 8:</h3> <!-- question number -->
+                <div id="math8" class="math integral center">$$\int \csc(\theta)d\theta \;\;= \;\;\;?$$</div> <!-- integral statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-8" class="solution justify"> <!-- solution -->
+                    The solution to this one is a mirror of the \(\sec(\theta)\) integral in Question 6; we instead here use a slightly different form of 1 and the \(u\)-substitution \(u = \csc(\theta) + \cot(\theta)\),  \(\;\;du = -(\csc(\theta)\cot(\theta)+\csc^2(\theta))d\theta\):
+                    $$\begin{align*}&\;\;\;\;\int\csc(\theta)d\theta\\
+                    &= \int \frac{\csc(\theta)(\csc(\theta)+\cot(\theta))}{\csc(\theta)+\cot(\theta)}d\theta\\
+                    &=\int\frac{\csc^2(\theta) + \csc(\theta)\cot(\theta)}{\csc(\theta)+\cot(\theta)}d\theta\\
+                    &=-\int \frac{du}{u}\\
+                    &=-\ln|u| + C\\
+                    &= \boxed{-\ln|\;\csc(\theta) + \cot(\theta)|\; + C}.\end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 8 -->
+
+        </div>
+
+        <!-- end of the fourth exercise container -->
+
+
+        <hr/>
+
+
+
+        <!-- ↓ beginning of the fifth exercise container -->
+
+        <div class="exercise-container">
+
+            <!-- ↓ beginning of exercise 9 -->
+
+            <div id="exercise-9" class="exercise"> <!--exercise 9 -->
+                <h3 class="question justify">Q. 9:</h3> <!-- question number -->
+                <div id="math9" class="math integral center">$$\int \frac{1}{x\sqrt{16-9x^2}}dx\;\; = \;\;\;?$$</div> <!-- integral statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-9" class="solution justify"> <!-- solution -->
+                    This integral is one that will require trigonometric substitution, as the square root looks like something related to the Pythagorean Identity. That is, we can manipulate the square root into a form attainable by the Pythagorean Identity: $$\sqrt{16-9x^2} = 4\sqrt{1-\left(\frac{3x}{4}\right)^2}.$$ Manipulating the Pythagorean Identity, we see we have an identical form that will reveal to us the correct trig substitution: $$\sin^2(\theta) + \cos^2(\theta) = 1$$
+                    $$\iff$$
+                    $$\cos(\theta) = \sqrt{1-[\sin(\theta)]^2}.$$ Hence the trig sub we choose is \(\sin(\theta) = \frac{3x}{4} \iff x = \frac{4}{3}\sin(\theta)\) and \(dx = \frac{4}{3}\cos(\theta)d\theta\). We will also use the solution to Question 8: $$\begin{align*}&\;\;\;\;\int \frac{1}{x\sqrt{16 - 9x^2}}dx\\
+                    &= \int \frac{1}{4x\sqrt{1-\left(\frac{3x}{4}\right)^2}}dx\\ &=\int\frac{\frac{4}{3}\cos(\theta)d\theta}{4\left(\frac{4}{3}\sin(\theta)\right)\sqrt{1-\sin^2(\theta)}}\\
+                    &=\frac{1}{4}\int \frac{1}{\sin(\theta)}d\theta\\ &=\frac{1}{4}\int \csc(\theta)d\theta\\ &=-\frac{1}{4}\ln|\csc(\theta)+\cot(\theta)| \;+ C.\end{align*}$$ We aren't done yet though. If we draw a right triangle to represent our original substitution, we would draw our angle \(\theta\) as one of the acute angles, \(3|\;x|\) as the opposite side of said angle, and \(4\) as the hypotenuse of the triangle. The Pythagorean Theorem says that the adjacent side must be \(\sqrt{16-9x^2}\). Note that the final side in this process will always be the square root in the original problem statement. What is \(\csc(\theta)\) in terms of \(x\)? Well, from our original substitution, \(\csc(\theta) = \frac{1}{\sin(\theta)} = \frac{4}{3|\;x|}\) as \(\theta \in (0, \frac{\pi}{2})\). What is \(\cot(\theta)\) in terms of \(x\)? Since cotangent is adjacent over opposite, it follows that \(\cot(\theta) = \frac{\sqrt{16-9x^2}}{3|\;x|}\). Our solution can then be simplified using a log rule:
+                    $$\begin{align*}&\;\;\;\;\int \frac{1}{x\sqrt{16 - 9x^2}}dx\\ &=-\frac{1}{4}\ln|\;\csc(\theta)+\cot(\theta)| \;+ C\\
+                    &=-\frac{1}{4}\ln\bigg\rvert\frac{4}{3|\;x|} + \frac{\sqrt{16-9x^2}}{3|\;x|}\bigg\rvert\;+C\\
+                    &=-\frac{1}{4}\ln\bigg\rvert\frac{1}{3}\left[\frac{4}{|\;x|} + \frac{\sqrt{16-9x^2}}{|\;x|}\right]\bigg\rvert \;+C\\
+                    &=-\frac{1}{4}\ln\left(\frac{1}{3}\right) - \frac{1}{4}\ln\bigg\rvert\frac{4}{|\;x|} + \frac{\sqrt{16-9x^2}}{|\;x|}\bigg\rvert \;+C\\
+                    &=\boxed{-\frac{1}{4}\ln\bigg\rvert \frac{4}{|\;x|} + \frac{\sqrt{16-9x^2}}{|\;x|}\bigg\rvert \;+D}.\end{align*}$$
+                    \(D\) in this case is just another arbitrary constant to represent the fact that \(C\) absorbed the constant we pulled out.
+                </div>
+            </div>
+
+            <!-- end of exercise 9 -->
+
+            <hr class="mobile"/>
+
+            <!-- ↓ beginning of exercise 10 -->
+            
+            <div id="exercise-10" class="exercise"> <!--exercise 10 -->
+                <h3 class="question justify">Q. 10:</h3> <!-- question number -->
+                <div id="math10" class="math integral center">$$\int\frac{x+1}{(x+3)(x+2)}dx\;\; = \;\;\;?$$</div> <!-- integral statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-10" class="solution justify"> <!-- solution -->
+                    Even if we distributed the denominator, the integrand would still not be in a form fit for \(u\)-substitution. It looks like we can break this quotient apart by solving a system of equations (see partial fraction decomposition). What we are thinking is that
+                    $$\frac{x+1}{(x+3)(x+2)}$$
+                    $$=$$
+                    $$\frac{a}{x+3}+\frac{b}{x+2}$$
+                    where \(a\) and \(b\) are constants to be determined. If we find like-denominators on the right side and equate numerators, we obtain the following system:
+                    $$\begin{cases}a+b &=& 1\\2a+3b &=& 1\;.\end{cases}$$
+                    Hence \(a=2\) and \(b=-1\;\). We can then compute the integral as follows:
+                    $$\begin{align*}
+                        &\;\;\;\;\int\frac{x+1}{(x+3)(x+2)}dx\\
+                        &= \int \left(\frac{2}{x+3} - \frac{1}{x+2}\right)dx\\
+                        &=\boxed{2\ln(x+3) - \ln(x+2) + C}.
+                    \end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 10 -->
+
+        </div>
+
+        <!-- end of the fifth exercise container -->
+
+
+        <!-- end of the integral practice section of the page -->
+
+
+        <script async src="app.js"></script> <!-- links the js file which adds actual functionality, like the color toggling and solution hiding/showing, button links, etc. -->
+    </body>
+</html>

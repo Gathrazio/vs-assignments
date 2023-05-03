@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Derivative Practice Resource</title> <!-- site title in chrome tab -->
+        <link rel="stylesheet" href="styles.css"/> <!-- injecting my stylesheet -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <!-- the following two js scripts are used to compile typeset math using mathjax -->
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+
+
+
+
+    <body> <!-- body section: where all the content is happening -->
+
+        <!------------------------------------------------------------------------------------------------>
+        <!-- ↓ the section at the top of the page that allows the user to toggle site background colors -->
+        <!------------------------------------------------------------------------------------------------>
+
+        <section id="background-color-selection">
+            <h3 class="beginning">Pick a background color by clicking the associated box!</h3> <!-- background color selection instructions -->
+            <h5 class="beginning">To turn the screen back to white, click the box that is the color of the current background.</h5>
+            <div id="color-container"> <!-- a div to hold all the colored boxes -->
+                <div id="color-container1">
+                    <div id="color1" class="child"></div> <!-- each box has its unique color, so I've given each its own unique Id -->
+                    <div id="color2" class="child"></div> <!-- I've also given each box the same class for styling -->
+                    <div id="color3" class="child"></div>
+                </div>
+                <div id="color-container2">
+                    <div id="color4" class="child"></div>
+                    <div id="color5" class="child"></div>
+                    <div id="color6" class="child"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- end of the background color selection section -->
+
+        <!--------------------------->
+        <!-- ↓ button menu section -->
+        <!--------------------------->
+
+        <div class="button-menu-container">
+            <h1 id="main-title">Derivative Practice!</h1> <!-- more or less the main title of the page -->
+            <button id="d-calc" class="menu-btn">Derivative Calculator</button> <!-- navigation buttons -->
+            <button id="integrals" class="menu-btn">Integral Practice</button>
+        </div>
+
+        <!-- end of button menu section -->
+
+
+        <!----------------------------------->
+        <!-- ↓ derivative practice section -->
+        <!----------------------------------->
+
+        <!-- ↓ beginning of the first exercise container, each container holds two derivative exercises -->
+
+        <div class="exercise-container">
+
+            <hr class="mobile"/> <!-- these horizontal rules will show up only if the screen is small enough -- see styles.css -->
+
+            <!-- beginning of exercise 1 -->
+
+            <div id="exercise-1" class="exercise"> <!-- exercise 1 -->
+                <h3 class="question justify">Q. 1:</h3> <!-- question number -->
+                <div id="math1" class="math derivative center">$$\frac{d}{dx}(x-4)^3\;\; = \;\;\;?$$ </div> <!-- derivative statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-1" class="solution justify"> <!-- solution -->
+                We can compute this derivative in two ways. The first involves identifying a function composition -- i.e., if \(f(x) = x^3\) and \(g(x) = x-4\), then we are computing \(\frac{d}{dx} f\circ g(x) = \frac{d}{dx} f(g(x)) = f\prime(g(x))g\prime(x)\) via the chain rule (and power rule for \(f\prime\)):
+                $$\frac{d}{dx}(x-4)^3$$
+                $$=$$
+                $$3(x-4)^{3\;-1}(1)$$
+                $$=$$ 
+                $$\boxed{3\;(x-4)^2}.$$ See the Resources button for more information. The alternative way, which does not require the chain rule, is to simply distribute the polynomial and use the power rule along with the linearity of the derivative:
+                $$\begin{align*}&\;\;\;\;\frac{d}{dx}(x-4)^3\\
+                &= \frac{d}{dx}\left((x-4)^2(x-4)\right)\\
+                &=\frac{d}{dx}\left((x^2-8x+16)(x-4)\right)\\
+                &=\frac{d}{dx}\left((x^3 - 8x^2 + 16x) + (-4x^2 +32x - 64)\right)\\
+                &=\frac{d}{dx}\left(x^3 - 12x^2 + 48x - 64\right)\\
+                &=\frac{d}{dx}x^3 - 12\frac{d}{dx}x^2 + 48\frac{d}{dx}x - \frac{d}{dx}64\\
+                &=3x^2 -24x+48\\
+                &=3\;(x^2 - 8x + 16)\\
+                &\stackrel{\checkmark}{=}\boxed{3\;(x-4)^2}.\end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 1 -->
+
+            <hr class="mobile" />
+
+            <!-- ↓ beginning of exercise 2 -->
+
+            <div id="exercise-2" class="exercise"> <!-- exercise 2 -->
+                <h3 class="question justify">Q. 2:</h3> <!-- question number -->
+                <div id="math2" class="math derivative center">$$\frac{d}{dx}\ln(\sin(\cos\;(2x))) \;\;= \;\;\;?$$</div> <!-- derivative statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-2" class="solution justify"> <!-- solution -->
+                This derivative really requires us to sort out our understanding of the chain rule. We shall compute this derivative in sections. First, the derivative of \(\ln(x)\) is \(\frac{d}{dx}\ln(x) = \frac{1}{x}\). So the derivative of \(\ln(f(x))\) is \(\frac{d}{dx}\ln(f(x)) = \frac{1}{f(x)}f\prime(x)\). Hence
+                $$\frac{d}{dx}\ln(\sin(\cos\;(2x)))$$
+                $$=$$
+                $$\frac{1}{\sin(\cos\;(2x))}\frac{d}{dx}\sin(\cos\;(2x)).$$
+                We compute this derivative next. We know that \(\frac{d}{dx}\sin(x) = \cos\;(x)\), so \(\frac{d}{dx}\sin(g(x)) = \cos\;(g(x))g\prime(x)\). Thus
+                $$\frac{d}{dx}\sin(\cos\;(2x))$$
+                $$=$$
+                $$\cos\;(\cos\;(2x))\frac{d}{dx}\cos\;(2x).$$
+                And finally, as \(\frac{d}{dx}\cos\;(x)=-\sin(x)\), it follows that \(\frac{d}{dx}\cos\;(q(x)) = -\sin(q(x))q\prime(x)\). Hence
+                $$\frac{d}{dx}\cos\;(2x)$$
+                $$=$$
+                $$-\sin(2x)(2) = -2\sin(2x).$$
+                Putting this all together, the solution follows:
+                $$\begin{align*}
+                &\;\;\;\;\frac{d}{dx}\ln(\sin(\cos\;(2x)))\\
+                &=\frac{1}{\sin(\cos\;(2x))}\frac{d}{dx}\sin(\cos\;(2x))\\
+                &=\frac{\cos\;(\cos\;(2x))}{\sin(\cos\;(2x))}\frac{d}{dx}\cos\;(2x)\\
+                &=\boxed{\frac{-2\sin(2x)\cos\;(\cos\;(2x))}{\sin(\cos\;(2x))}}.\end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 2 -->
+
+        </div>
+
+        <!-- end of the first exercise container -->
+
+
+        <hr/> <!-- separating line between pairs of exercises -->
+
+
+
+        <!-- ↓ beginning of the second exercise container -->
+
+        <div class="exercise-container">
+
+            <!-- ↓ beginning of exercise 3 -->
+
+            <div id="exercise-3" class="exercise"> <!--exercise 3 -->
+                <h3 class="question justify">Q. 3:</h3> <!-- question number -->
+                <div id="math3" class="math derivative center">$$\frac{d}{dx}5x^2e^x\;\; = \;\;\;?$$</div> <!-- derivative statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-3" class="solution justify"> <!-- solution -->
+                Here we use the product rule. Namely,
+                $$\begin{align*}&\;\;\;\;\frac{d}{dx}5x^2e^x\\
+                &= 5x^2\frac{d}{dx}e^x + e^x\frac{d}{dx}5x^2 \\
+                &= 5x^2e^x + 10xe^x\\
+                &=\boxed{5xe^x(x+2)}.
+                \end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 3 -->
+
+            <hr class="mobile"/>
+
+            <!-- ↓ beginning of exercise 4 -->
+
+            <div id="exercise-4" class="exercise"> <!-- exercise 4 -->
+                <h3 class="question justify">Q. 4:</h3> <!-- question number -->
+                <div id="math4" class="math derivative center">$$\frac{d}{dx}\left(\frac{x^6+2}{\sin(x)}\right)\;\; = \;\;\;?$$</div> <!-- derivative statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-4" class="solution justify"> <!-- solution -->
+                    Here we must use the quotient rule:
+                    \begin{align*}
+                    &\;\;\;\;\frac{d}{dx}\left(\frac{x^6+2}{\sin(x)}\right)\\
+                    &= \frac{\sin(x)\frac{d}{dx}(x^6+2)- (x^6+2)\frac{d}{dx}\sin(x)}{\sin^2(x)}\\\
+                    &= \boxed{\frac{6x^5\sin(x) - (x^6+2)\cos(x)}{\sin^2(x)}}.
+                    \end{align*}
+                </div>
+            </div>
+
+            <!-- end of exercise 4 -->
+
+        </div>
+
+        <!-- end of the second exercise container -->
+
+
+        <hr/>
+
+
+
+        <!-- ↓ beginning of the third exercise container -->
+
+        <div class="exercise-container">
+
+            <!-- ↓ beginning of exercise 5 -->
+
+            <div id="exercise-5" class="exercise"> <!-- exercise 5 -->
+                <h3 class="question justify">Q. 5:</h3> <!-- question number -->
+                <div id="math5" class="math derivative center">$$\frac{d}{dx}x^\pi\pi^x2^{4x}\;\;= \;\;\;?$$</div> <!-- derivative statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-5" class="solution justify"> <!-- solution -->
+                    As can be seen, we are trying to compute the derivative of the product of three functions of \(x\). This will require us to nest applications of the product rule, and to recall the derivative of an exponent:
+                    $$\frac{d}{dx}b^x = b^x \ln(b).$$
+                    Thus, we proceed as follows (noting that the \(2^{4x}\) term will require the chain rule as well)
+                    \begin{align*}
+                        &\;\;\;\;\frac{d}{dx}x^\pi\pi^x2^{4x}\\
+                        &= x^{\pi}\frac{d}{dx}(\pi^x 2^{4x}) + \pi^x2^{4x}\frac{d}{dx}x^\pi\\
+                        &=x^\pi \left(\pi^x\frac{d}{dx}2^{4x}+2^{4x}\frac{d}{dx}\pi^x\right) + \pi^x2^{4x}\left(\pi x^{\pi-1}\right)\\
+                        &=x^\pi\left(\pi^x2^{4x}\ln(2)(4) + 2^{4x}\pi^x \ln(\pi)\right)+\pi^{x+1}2^{4x}x^{\pi-1}\\
+                        &=\boxed{x^{\pi-1}\pi^x2^{4x}\left(4x\ln(2) + x\ln(\pi)+\pi\right)}.
+                    \end{align*}
+                </div>
+            </div>
+
+            <!-- end of exercise 5 -->
+
+            <hr class="mobile" />
+
+            <!-- ↓ beginning of exercise 6 -->
+
+            <div id="exercise-6" class="exercise"> <!--exercise 6 -->
+                <h3 class="question justify">Q. 6:</h3> <!-- question number -->
+                <div id="math6" class="math derivative center">$$\frac{d}{dx}\ln(x)^{x\ln(x)}\;\; = \;\;\;?$$</div> <!-- derivative statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-6" class="solution justify"> <!-- solution -->
+                    The viable technique here is logarithmic differentiation, as it will be easier to take the derivative of the log of this function rather than the function itself. We can name this function \(y = \ln(x)^{x\ln(x)}\) and take the natural log of both sides:
+                    $$\ln(y) = x\ln(x)\ln(\ln(x)).$$
+                    We now take the derivative of both sides with respect to \(x\):
+                    $$\begin{align*}&\;\;\;\;\frac{d}{dx}\ln(y)\\
+                    &= \frac{1}{y}\frac{dy}{dx}\\
+                    &=\frac{d}{dx}x\ln(x)\ln(\ln(x))\\
+                    &= (x\ln(x))\left(\frac{1}{\ln(x)}\frac{1}{x}\right)+ \ln(\ln(x))\left(x\left(\frac{1}{x}\right) + \ln(x)\right)\\
+                    &=1 + (\ln(x) + 1)\ln(\ln(x)).
+                    \end{align*}$$
+                    We now just solve for \(y\prime = \frac{dy}{dx}\), which is the desired derivative. Note that \(y\) is still a function of \(x\), so we can replace it at the end:
+                    $$\begin{align*}\frac{dy}{dx} &= y\;[1 + (\ln(x) + 1)\ln(\ln(x))]\\
+                    & = \boxed{\ln(x)^{x\ln(x)}[1+(\ln(x)+1)\ln(\ln(x))]}.
+                    \end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 6 -->
+
+        </div>
+
+        <!-- end of the third exercise container -->
+
+
+        <hr/>
+
+
+        
+        <!-- ↓ beginning of the fourth exercise container -->
+
+        <div class="exercise-container">
+
+            <!-- ↓ beginning of exercise 7 -->
+
+            <div id="exercise-7" class="exercise"> <!-- exercise 7 -->
+                <h3 class="question justify">Q. 7:</h3> <!-- question number -->
+                <div id="math7" class="math derivative center">$$\frac{d}{dx}\frac{1}{\log_{10}(\sec(x))}\;\; = \;\;\;?$$</div> <!-- derivative statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-7" class="solution justify"> <!-- solution -->
+                    Here we use the quotient rule, the chain rule, the derivative of a log with an arbitrary base, and the derivative of secant being secant tangent:
+                        $$\begin{align*}
+                            &\;\;\;\;\frac{d}{dx}\frac{1}{\log_{10}(\sec(x))}\\
+                            &= \frac{\log_{10}(\sec(x))(0) - \frac{d}{dx}\log_{10}(\sec(x))}{\log_{10}(\sec(x))^2}\\
+                            &=\frac{-\frac{1}{\sec(x)\ln(10)}\frac{d}{dx}\sec(x)}{\log_{10}(\sec(x))^2}\\
+                            &=\boxed{\frac{-\tan(x)}{\ln(10)\log_{10}(\sec(x))^2}}.
+                        \end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 7 -->
+            
+            <hr class="mobile" />
+
+            <!-- ↓ beginning of exercise 8 -->
+
+            <div id="exercise-8" class="exercise"> <!-- exercise 8 -->
+                <h3 class="question justify">Q. 8:</h3> <!-- question number -->
+                <div id="math8" class="math derivative center">$$\frac{d}{dx}\left(7-\arcsin\left(\frac{1}{x}\right)\right)^5 \;\;= \;\;\;?$$</div> <!-- derivative statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-8" class="solution justify"> <!-- solution -->
+                    The derivative of arcsine is as follows:
+                        $$\frac{d}{dx}\arcsin(x) = \frac{1}{\sqrt{1-x^2}}.$$
+                        We can then use the power rule, the chain rule, and this computation for the derivative:
+                        $$\begin{align*}&\;\;\;\;\frac{d}{dx}\left(7-\arcsin\left(\frac{1}{x}\right)\right)^5\\
+                        &= 5\left(7-\arcsin\left(\frac{1}{x}\right)\right)^4\left(-\frac{d}{dx}\arcsin\left(\frac{1}{x}\right)\right)\\
+                        &=5\left(7-\arcsin\left(\frac{1}{x}\right)\right)^4\frac{1}{\sqrt{1-\left(\frac{1}{x}\right)^2}}\left(\frac{1}{x^2}\right)\\
+                        &=\boxed{5\left(7-\arcsin\left(\frac{1}{x}\right)\right)^4\frac{1}{x^2\sqrt{1-\left(\frac{1}{x}\right)^2}}}.
+                        \end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 8 -->
+
+        </div>
+
+        <!-- end of the fourth exercise container -->
+
+
+        <hr/>
+
+
+
+        <!-- ↓ beginning of the fifth exercise container -->
+
+        <div class="exercise-container">
+
+            <!-- ↓ beginning of exercise 9 -->
+
+            <div id="exercise-9" class="exercise"> <!--exercise 9 -->
+                <h3 class="question justify">Q. 9:</h3> <!-- question number -->
+                <div id="math9" class="math derivative center">$$\frac{d}{dx}\left(\frac{1}{x}+\frac{2}{x^2}+ \frac{3}{x^3}\right)\;\; = \;\;\;?$$</div> <!-- derivative statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-9" class="solution justify"> <!-- solution -->
+                    We have here some simple power rule applications. Namely,
+                        $$\begin{align*}
+                        &\;\;\;\;\frac{d}{dx}\left(\frac{1}{x}+\frac{2}{x^2}+ \frac{3}{x^3}\right)\\
+                        &= \frac{d}{dx}(x^{-1}+2x^{-2}+3x^{-3})\\
+                        &=\frac{d}{dx}x^{-1} + 2\frac{d}{dx}x^{-2}+3\frac{d}{dx}x^{-3}\\
+                        &=-x^{-2} -4x^{-3}-9x^{-4}\\
+                        &=\boxed{-\frac{1}{x^2}-\frac{4}{x^3}-\frac{9}{x^4}}.
+                        \end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 9 -->
+
+            <hr class="mobile"/>
+
+            <!-- ↓ beginning of exercise 10 -->
+            
+            <div id="exercise-10" class="exercise"> <!--exercise 10 -->
+                <h3 class="question justify">Q. 10:</h3> <!-- question number -->
+                <div id="math10" class="math derivative center">$$\frac{d}{dx}((x+2)^3(x+3)^2)^6\;\; = \;\;\;?$$</div> <!-- derivative statement -->
+                <button class="solution-btn center">Click to reveal solution!</button> <!-- solution button -->
+                <div id="solution-10" class="solution justify"> <!-- solution -->
+                    Here we use several application of the power rule, chain rule, and product rule:
+                    $$\begin{align*}
+                    &\;\;\;\;\frac{d}{dx}((x+2)^3(x+3)^2)^6\\
+                    &= 6((x+2)^3(x+3)^2)^5\frac{d}{dx}[(x+2)^3(x+3)^2]\\
+                    &=6(x+2)^{15}(x+3)^{11}(x+2)^2(x+3)[2(x+2)+3(x+3)]\\
+                    &=\boxed{6\;(x+2)^{17}(x+3)^{11}(5x+13)}.
+                    \end{align*}$$
+                    We could also potentially distribute the outer exponent and use the product rule:
+                    $$\begin{align*}
+                    &\;\;\;\;\frac{d}{dx}((x+2)^3(x+3)^2)^6\\
+                    &= \frac{d}{dx}(x+2)^{18}(x+3)^{12}\\
+                    &=(x+2)^{18}(12)(x+3)^{11} + (x+3)^{12}(18)(x+2)^{17}\\
+                    &=\boxed{6\;(x+2)^{17}(x+3)^{11}(5x+13)}.
+                    \end{align*}$$
+                </div>
+            </div>
+
+            <!-- end of exercise 10 -->
+
+        </div>
+
+        <!-- end of the fifth exercise container -->
+
+
+        <!-- end of the derivative practice section of the page -->
+
+
+        <script async src="app.js"></script> <!-- links the js file which adds actual functionality, like the color toggling and solution hiding/showing -->
+    </body>
+</html>
