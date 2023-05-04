@@ -1,9 +1,9 @@
 /* Bronze Medal Challenge: insert a header using JS */
 /* ------------------------------------------------ */
 
-titleHeader = document.createElement("h1");
+var titleHeader = document.createElement("h1");
 titleHeader.textContent = "Javascript Made This!";
-contributorInfoHeader = document.createElement("h6");
+var contributorInfoHeader = document.createElement("h6");
 contributorInfoHeader.innerHTML = "<span id='name'> Noah </span> wrote the JavaScript.";
 document.body.prepend(titleHeader)
 titleHeader.insertAdjacentElement("afterend", contributorInfoHeader) // new HTML element method I found
@@ -17,12 +17,12 @@ titleHeader.insertAdjacentElement("afterend", contributorInfoHeader) // new HTML
 
 /* Task 1: write JS to automatically change the words of the convo to something fun and good */
 
-leftMessages = document.getElementsByClassName("message left"); // should produce two HTML Collections
-rightMessages = document.getElementsByClassName("message right");
+var leftMessages = document.getElementsByClassName("message left"); // should produce two HTML Collections
+var rightMessages = document.getElementsByClassName("message right");
 
-containerDiv = document.getElementById("main");
+var containerDiv = document.getElementById("main");
 
-fAGMachineExplanation = document.createElement("h6");
+var fAGMachineExplanation = document.createElement("h6");
 fAGMachineExplanation.textContent = "Press and hold the ' f ' key to see the results of the Fun and Good Machine!";
 containerDiv.insertAdjacentElement("beforebegin", fAGMachineExplanation)
 
@@ -57,7 +57,7 @@ window.addEventListener("keyup", boringAndBadMachine)
 
 /* Alternatively (because the above function leaves highlighted bits)... */
 
-messageCollection = document.getElementsByClassName("message");
+var messageCollection = document.getElementsByClassName("message");
 
 function clearConvo () {
     for (i = 0; i < 4; i++ ) {
@@ -65,7 +65,7 @@ function clearConvo () {
     }
 }
 
-clearBtn = document.getElementById("clear-button");
+var clearBtn = document.getElementById("clear-button");
 clearBtn.addEventListener("click", clearConvo)
 
 
@@ -74,7 +74,7 @@ clearBtn.addEventListener("click", clearConvo)
 /* Gold Medal Challenge: write JS that will notice when the drop down has changed and then change the background colors of the messages accordingly */
 /* ------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-themeDropDown = document.getElementById("theme-drop-down");
+var themeDropDown = document.getElementById("theme-drop-down");
 
 function messageThemeChanger() {
     if (themeDropDown.value === "theme-one") {
