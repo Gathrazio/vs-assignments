@@ -1,9 +1,13 @@
 daBoxObj = document.getElementById("da-box");
 
 function backgroundChanger (event) {
+    console.log(event.type)
     switch (event.type) {
         case "mouseover":
             daBoxObj.style.backgroundColor = "blue";
+            break;
+        case "mouseout":
+            daBoxObj.style.backgroundColor = "pink";
             break;
         case "mousedown":
             daBoxObj.style.backgroundColor = "red";
@@ -34,12 +38,17 @@ function backgroundChanger (event) {
                 case "o":
                     daBoxObj.style.backgroundColor = "orange";
             }
+            break;
+        case "keyup":
+            daBoxObj.style.backgroundColor = "pink";
     }
 }
 
 daBoxObj.addEventListener("mouseover", backgroundChanger) // I read that an event object is passed into the function backgroundChanger as a parameter automatically
+daBoxObj.addEventListener("mouseout", backgroundChanger)
 daBoxObj.addEventListener("mousedown", backgroundChanger)
 daBoxObj.addEventListener("mouseup", backgroundChanger)
 daBoxObj.addEventListener("dblclick", backgroundChanger)
 window.addEventListener("wheel", backgroundChanger)
 window.addEventListener("keydown", backgroundChanger)
+window.addEventListener("keyup", backgroundChanger)

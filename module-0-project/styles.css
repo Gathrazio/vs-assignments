@@ -9,6 +9,14 @@
         padding: 0; 
     }
 
+    :root {
+        --blue: rgb(25, 167, 206); /* defining colors to use */
+        --purple: rgb(128, 104, 250);
+        --darkPink: rgb(207, 104, 238);
+        --salmon: rgb(238, 120, 157);
+        --orange: rgb(235, 128, 96);
+    }
+
     html {
         overflow-x: hidden; /* having overflow-x: hidden property on both html and body tags breaks the sticky property! */
     }
@@ -55,26 +63,27 @@
         text-align: center;
         line-height: 60px;
         cursor: pointer;
+        border-radius: 50%;
     }
 
     #color1 { /* styling each color box, children of the color-container, by id */
-        background-color: rgb(235, 128, 96);
+        background-color: var(--orange);
     }
 
     #color2 {
-        background-color: rgb(238, 120, 157);
+        background-color: var(--salmon);
     }
 
     #color3 {
-        background-color: rgb(207, 104, 238);
+        background-color: var(--darkPink);
     }
 
     #color4 {
-        background-color: rgb(128, 104, 250);
+        background-color: var(--purple);
     }
 
     #color5 {
-        background-color: rgb(52, 130, 235);
+        background-color: var(--blue);
     }
 
     #color6 {
@@ -110,6 +119,7 @@
         border: 2px solid black;
         cursor: pointer;
         font-size: large;
+        border-radius: 25px;
     }
 
     .menu-btn:hover { /* determining what the background of a menu button should be if one hovers their mouse over it, along with the associated delay */
@@ -285,6 +295,15 @@
         overflow-x: hidden; 
     }
 
+    :root {
+        --blue: rgb(25, 167, 206); /* defining colors to use */
+        --purple: rgb(128, 104, 250);
+        --darkPink: rgb(207, 104, 238);
+        --salmon: rgb(238, 120, 157);
+        --orange: rgb(235, 128, 96);
+        --cyan: rgb(129, 229, 204);
+    }
+
     * { /* give everything this font family list */
         font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
@@ -323,30 +342,31 @@
         text-align: center;
         line-height: 60px;
         cursor: pointer;
+        border-radius: 50%;
     }
 
     #color1 { /* styling each color box, children of the color-container, by Id */
-        background-color: rgb(235, 128, 96);
+        background-color: var(--orange);
     }
 
     #color2 {
-        background-color: rgb(238, 120, 157);
+        background-color: var(--salmon);
     }
 
     #color3 {
-        background-color: rgb(207, 104, 238);
+        background-color: var(--darkPink);
     }
 
     #color4 {
-        background-color: rgb(128, 104, 250);
+        background-color: var(--purple);
     }
 
     #color5 {
-        background-color: rgb(52, 130, 235);
+        background-color: var(--blue);
     }
 
     #color6 {
-        background-color: rgb(129, 229, 204);
+        background-color: var(--cyan);
     }
 
 
@@ -375,6 +395,7 @@
         border: 4px solid black;
         cursor: pointer;
         font-size: x-large;
+        border-radius: 50px;
     }
 
     #derivatives, #integrals { /* styling these buttons, they are located in the same spot for both pages */
@@ -432,6 +453,7 @@
         font-size: x-large;
         background-color:rgb(217, 190, 172);
         width: 80%;
+        border-radius: 30px;
     }
 
     hr { /* styling the border between collections of exercises */
