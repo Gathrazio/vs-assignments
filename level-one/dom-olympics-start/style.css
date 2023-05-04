@@ -17,13 +17,18 @@
 }
 
 #main {
-    margin: 30px;
+    margin-top: 10px;
+    margin: auto;
     border: 1px solid black;
     padding: 10px;
 }
 
 .message {
     padding: 5px;
+}
+
+.left, .right {
+    border-radius: 15px;
 }
 
 .right {
@@ -38,6 +43,7 @@
 
 :root {
     --salmon: rgb(231, 97, 97);
+    --red: rgb(234, 76, 76);
 }
 
 span#name {
