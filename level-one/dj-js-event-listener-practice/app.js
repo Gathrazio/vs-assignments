@@ -37,7 +37,7 @@ function backgroundChanger (event) {
     }
 }
 
-daBoxObj.addEventListener("mouseover", backgroundChanger, false) // I read that an event object is passed into the function backgroundChanger as a parameter automatically
+daBoxObj.addEventListener("mouseover", backgroundChanger) // I read that an event object is passed into the function backgroundChanger as a parameter automatically
 daBoxObj.addEventListener("mousedown", backgroundChanger)
 daBoxObj.addEventListener("mouseup", backgroundChanger)
 daBoxObj.addEventListener("dblclick", backgroundChanger)
