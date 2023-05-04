@@ -1,0 +1,65 @@
+.header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.name {
+    color: peachpuff;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    margin: 10px 0px;
+    padding: 20px;
+}
+
+#main {
+    margin-top: 10px;
+    margin: auto;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.message {
+    padding: 5px;
+}
+
+.left, .right {
+    border-radius: 15px;
+}
+
+.right {
+    align-self: flex-end;
+    background-color: lightblue;
+}
+
+.left {
+    align-self: flex-start;
+    background-color: burlywood;
+}
+
+:root {
+    --salmon: rgb(231, 97, 97);
+    --red: rgb(234, 76, 76);
+}
+
+span#name {
+    color: var(--salmon);
+}
+
+h1, h6 {
+    text-align: center;
+}
+
+h1 {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+h6 {
+    margin-top: 0px;
+    margin-bottom: 15px;
+}
