@@ -23,9 +23,22 @@ html {
     text-align: center;
 }
 
+.li-form > * {
+    border-radius: 8px;
+}
+
+.li-form > button {
+    cursor: grab;
+}
+
+.li-form > button:hover {
+    background-color: var(--salmon);
+}
+
 #add-btn {
     display: block;
     margin: auto;
+    cursor: grab;
     height: 40px;
     width: 40px;
     border-radius: 50%;
@@ -42,8 +55,9 @@ html {
     
 }
 
-.input {
+#input {
     width: 95%;
+    cursor: grab;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -66,7 +80,7 @@ html {
 }
 
 #list > li{
-    margin-left: 25%;
+    margin-left: 15%;
 }
 
 #list div {
