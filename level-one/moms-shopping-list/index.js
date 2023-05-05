@@ -89,22 +89,6 @@ function generateLI(addedItem) {
     listItemForm.setAttribute("class", "li-form")
     listItem.appendChild(listItemForm)
 
-    /* ↓ creating the clear item button, setting text content for it,
-         setting a value attribute for it, and appending it to the end of 
-         the li-form */
-    const xButton = document.createElement("button");
-    xButton.textContent = "X";
-    xButton.setAttribute("value", "remove")
-    xButton.setAttribute("id", addedItem)
-    listItemForm.appendChild(xButton)
-
-    /* ↓ creating a div, setting the text content for it, setting a class 
-         attribute for it, and appending it to the end of the li-form */
-    const liText = document.createElement("div");
-    liText.textContent = " " + addedItem + " ";
-    liText.setAttribute("class", "li-text")
-    listItemForm.appendChild(liText)
-
     /* ↓ creating the edit button, setting text content for it, setting 
          a value and name attribute for it, and appending it to the end 
          of the li-form */
@@ -113,6 +97,22 @@ function generateLI(addedItem) {
     editButton.setAttribute("value", "edit")
     editButton.setAttribute("name", "edit-btn")
     listItemForm.appendChild(editButton)
+
+    /* ↓ creating a div, setting the text content for it, setting a class 
+         attribute for it, and appending it to the end of the li-form */
+    const liText = document.createElement("div");
+    liText.textContent = " " + addedItem + " ";
+    liText.setAttribute("class", "li-text")
+    listItemForm.appendChild(liText)
+
+    /* ↓ creating the clear item button, setting text content for it,
+         setting a value attribute for it, and appending it to the end of 
+         the li-form */
+    const xButton = document.createElement("button");
+    xButton.textContent = "X";
+    xButton.setAttribute("value", "remove")
+    xButton.setAttribute("id", addedItem)
+    listItemForm.appendChild(xButton)
 
 
     /* ↓ adding a "submit" event listener on the li-form, which
@@ -124,6 +124,27 @@ function generateLI(addedItem) {
              on the value of the button that initiated the submit event
              (i.e., the button that was clicked) */
         switch (e.submitter.value) {
+            case "save": // if it was the Save button (just the re-skinned edit button)
+                
+                /* ↓ generating the list item edit the user wants to save */
+                liText.textContent = " " + listItemForm["edit-input"].value + " ";
+
+                /* ↓ turning the Save button back into the Edit button */
+                editButton.textContent = "Edit";
+                editButton.setAttribute("value", "edit")
+
+                /* ↓ replacing the old item with the edited version in local storage */
+                itemStorage = JSON.parse(sessionStorage.getItem("itemStorage"));
+                replaceIndex = itemStorage.indexOf(xButton.getAttribute("id"));
+                removeItem(replaceIndex)
+                const updatedItemStorage = JSON.parse(sessionStorage.getItem("itemStorage"));
+                updatedItemStorage.splice(replaceIndex, 0, listItemForm["edit-input"].value)
+                sessionStorage.setItem("itemStorage", JSON.stringify(updatedItemStorage))
+                xButton.setAttribute("id", listItemForm["edit-input"].value)
+
+                /* ↓ replacing the edit input form with the modified liText div */
+                listItemForm.replaceChild(liText, listItemForm.childNodes[1])
+                break;
             case "remove": // if it was the X button
                 listItem.style.display = "none"; // remove the list item from the list
 
@@ -164,27 +185,6 @@ function generateLI(addedItem) {
                     e.preventDefault()
                     this["edit-input"].style.width = (this["edit-input"].value.length + 2).toString() + "ch";
                 })
-                break;
-            case "save": // if it was the Save button (just the re-skinned edit button)
-                
-                /* ↓ generating the list item edit the user wants to save */
-                liText.textContent = " " + listItemForm["edit-input"].value + " ";
-
-                /* ↓ turning the Save button back into the Edit button */
-                editButton.textContent = "Edit";
-                editButton.setAttribute("value", "edit")
-
-                /* ↓ replacing the old item with the edited version in local storage */
-                itemStorage = JSON.parse(sessionStorage.getItem("itemStorage"));
-                replaceIndex = itemStorage.indexOf(xButton.getAttribute("id"));
-                removeItem(replaceIndex)
-                const updatedItemStorage = JSON.parse(sessionStorage.getItem("itemStorage"));
-                updatedItemStorage.splice(replaceIndex, 0, listItemForm["edit-input"].value)
-                sessionStorage.setItem("itemStorage", JSON.stringify(updatedItemStorage))
-                xButton.setAttribute("id", listItemForm["edit-input"].value)
-
-                /* ↓ replacing the edit input form with the modified liText div */
-                listItemForm.replaceChild(liText, listItemForm.childNodes[1])
         }
     })
 
