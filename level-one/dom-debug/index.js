@@ -4,6 +4,8 @@ const colors = ["red", "blue", "green"]
     appends a list item (just some <div> element, called henceforth 'sub item') to the <div>
     element which acts as the list */ 
 
+/* easter egg! */
+
 document.getElementById("add").addEventListener("click", function(){
     const subItem = createSubItem(); // creating the list item
     document.getElementById("list").appendChild(subItem) // appending list item to the end of the list
