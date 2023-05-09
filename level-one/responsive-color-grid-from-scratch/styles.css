@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --light-pink: #F5C6D6;
+    --hot-pink: #EE2E84;
+    --light-blue: #85CFD8;
+    --light-green: #8DC63F;
+    --nice-orange: #E76E34;
+}
+
+.container {
+    border: 2px solid blue;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+                    "box1 box1 box1 box1"
+                    "box2 box3 box4 box5"
+                    "box6 box6 box7 box7"
+                    "box8 box8 box8 box9";
+}
+
+.item {
+    border: 4px solid white;
+    border-radius: 15px;
+}
+
+.container > .item.hot-pink {
+    background-color: var(--hot-pink);
+}
+
+.container > .item.light-blue {
+    background-color: var(--light-blue);
+}
+
+.container > .item.light-green {
+    background-color: var(--light-green);
+}
+
+.container > .item.nice-orange {
+    background-color: var(--nice-orange);
+}
+
+.container > #box1 {
+    background-color: var(--light-pink);
+    grid-area: box1;
+}
+
+.container > #box2 {
+    grid-area: box2;
+}
+
+.container > #box3 {
+    grid-area: box3;
+}
+
+.container > #box4 {
+    grid-area: box4;
+}
+
+.container > #box5 {
+    grid-area: box5;
+}
+
+.container > #box6 {
+    grid-area: box6;
+}
+
+.container > #box7 {
+    grid-area: box7;
+}
+
+.container > #box8 {
+    grid-area: box8;
+}
+
+.container > #box9 {
+    grid-area: box9;
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        grid-template-areas:
+            "box1"
+            "box2"
+            "box3"
+            "box4"
+            "box5"
+            "box6"
+            "box7"
+            "box8"
+            "box9";
+        grid-template-columns: 1fr;
+    }
+}
+
+/*
+.container > #box1 {
+    grid-area: 1 / 1 / 2 / 5;
+}
+
+.container > #box2 {
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+.container > #box3 {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.container > #box4 {
+    grid-area: 2 / 3 / 3 / 4;
+}
+
+.container > #box5 {
+    grid-area: 2 / 4 / 3 / 5;
+}
+
+.container > #box6 {
+    grid-area: 3 / 1 / 4 / 3;
+}
+
+.container > #box7 {
+    grid-area: 3 / 3 / 4 / 5;
+}
+
+.container > #box8 {
+    grid-area: 4 / 1 / 5 / 4;
+}
+
+.container > #box9 {
+    grid-area: 4 / 4 / 5 / 5;
+} */
