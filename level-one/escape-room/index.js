@@ -39,16 +39,16 @@ function main () {
     let attemptedDoor = false;
 
     console.log(cyan, "What is your name?")
-    const name = readline.question(magenta, "");
+    const name = readline.question(magenta);
 
     console.log(cyan, "\n\nUnfortunately, it appears that you have been imprisoned in this room.")
     console.log(cyan, "Your options are as follows:\n\nOpen the door (o),\nFind the key (k),\nPut your hand in the mysterious hole in the wall (h).\n")
     console.log(cyan, "Please enter the character corresponding to your decision (o, k, or h).")
-    let decision = readline.question(magenta, cyan + "fdsa")
+    let decision = readline.question(magenta)
 
     while (invalidResponse(decision)) {
         console.log(cyan, "Please enter a valid character (o, k, or h).")
-        decision = readline.question(magenta, "")
+        decision = readline.question(magenta)
     }
 
     while (noKey || doorNotOpened) { // loops while either the player doesn't have the key or they haven't opened the door
@@ -57,14 +57,14 @@ function main () {
                 noKey = false;
                 console.log(green, "\n\nYou now have the key!\n\n")
                 console.log(cyan, "What will you do next (o or h)?")
-                decision = readline.question(magenta, "")
+                decision = readline.question(magenta)
                 while (invalidResponse(decision, noKey)) {
                     if (failedKeygrabAttempt) {
                         console.log(yellow, "\n\nReminder: You already have the key.\n\n")
                         failedKeygrabAttempt = false;
                     }
                     console.log(cyan, "Please enter a valid character (o or h).")
-                    decision = readline.question(magenta, "")
+                    decision = readline.question(magenta)
                 }
                 break;
             case "o":
@@ -72,14 +72,14 @@ function main () {
                     console.log(cyan, "\n\nYou need the key to open the door.\n\n")
                     attemptedDoor = true;
                     console.log(cyan, "What will you do (k or h)?")
-                    decision = readline.question(magenta, "")
+                    decision = readline.question(magenta)
                     while (invalidResponse(decision, noKey, attemptedDoor)) {
                         if (failedDoorAttempt) {
                             console.log(yellow, "\n\nReminder: You have already tried (and failed) to open the door.\n\n")
                             failedDoorAttempt = false;
                         }
                         console.log(cyan, "Please enter a valid character (k or h).")
-                        decision = readline.question(magenta, "");
+                        decision = readline.question(magenta);
                     }
                     break;
                 } else {
