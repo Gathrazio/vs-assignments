@@ -1,7 +1,7 @@
 const readline = require("readline-sync");
 
 let failedKeygrabAttempt = false;
-let failedDoorFailure = false;
+let failedDoorAttempt = false;
 
 const cyan = "\x1b[36m%s\x1b[0m";
 const yellow = "\x1b[33m%s\x1b[0m";
@@ -55,7 +55,7 @@ function main () {
         switch (decision) {
             case "k":
                 noKey = false;
-                console.log(cyan, "\n\nYou now have the key!\n\n")
+                console.log(green, "\n\nYou now have the key!\n\n")
                 console.log(cyan, "What will you do next (o or h)?")
                 decision = readline.question(magenta, "")
                 while (invalidResponse(decision, noKey)) {
