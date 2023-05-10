@@ -1,7 +1,7 @@
 const readline = require("readline-sync");
 
-let keyFailure = false;
-let doorFailure = false;
+let failedKeygrabAttempt = false;
+let failedDoorFailure = false;
 
 const cyan = "\x1b[36m%s\x1b[0m";
 const yellow = "\x1b[33m%s\x1b[0m";
@@ -87,9 +87,9 @@ function main () {
                     break;
                 }
             case "h": // main() is exited if the player sticks their hand in the hole.
-                console.log(white, "\n\n\n|----------------------------------------|\n")
+                console.log(white, "\n\n\n|-----------------------------------------|\n")
                 console.log(red, "Congratulations! You have died instantly.")
-                console.log(white, "\n|----------------------------------------|\n\n\n")
+                console.log(white, "\n|-----------------------------------------|\n\n\n")
                 return;
         }
     }
