@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --woodberry: #7A3E65;
+    --rumpleberry: #A84448;
+    --deep-beige: #E9A178;
+    --light-beige: #fddbab;
+}
+
+.box {
+    border: 6px solid white;
+    border-radius: 20px;
+}
+
+#grid-container {
+    display: grid;
+    height: 100vh;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+            "wb wb wb wb"
+            "rb rb db db"
+            "rb rb lb1 lb2";
+}
+
+
+.woodberry {
+    background-color: var(--woodberry);
+    grid-area: wb;
+}
+
+.rumpleberry {
+    background-color: var(--rumpleberry);
+    grid-area: rb;
+}
+
+.deep-beige {
+    background-color: var(--deep-beige);
+    grid-area: db;
+}
+
+.light-beige1, .light-beige2 {
+    background-color: var(--light-beige);
+}
+
+.light-beige1 {
+    grid-area: lb1;
+}
+
+.light-beige2 {
+    grid-area: lb2;
+}
+
+.llight-beige {
+    background-color: var(--llight-beige);
+    grid-area: llb;
+}

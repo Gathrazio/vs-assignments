@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --dark-teal: #146C94;
+    --teal: #19A7CE;
+    --meta-teal: #48cbef;
+    --light-teal: #AFD3E2;
+    --grey: #d7cece;
+}
+
+.box {
+    border: 6px solid white;
+    border-radius: 20px;
+}
+
+#grid-container {
+    display: grid;
+    height: 100vh;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+            "gbox gbox ltbox ltbox"
+            "mtbox tbox tbox tbox"
+            "dtbox dtbox dtbox dtbox";
+}
+
+
+.dark-teal {
+    background-color: var(--dark-teal);
+    grid-area: dtbox;
+}
+
+.teal {
+    background-color: var(--teal);
+    grid-area: tbox;
+}
+
+.meta-teal {
+    background-color: var(--meta-teal);
+    grid-area: mtbox;
+}
+
+.light-teal {
+    background-color: var(--light-teal);
+    grid-area: ltbox;
+}
+
+.grey {
+    background-color: var(--grey);
+    grid-area: gbox;
+}
