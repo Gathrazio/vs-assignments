@@ -1,0 +1,313 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: var(--grey);
+}
+
+:root {
+    --dark-teal: #146C94;
+    --teal: #19A7CE;
+    --meta-teal: #48cbef;
+    --light-teal: #AFD3E2;
+    --grey: #e0d8d8;
+    --business-yellow: rgb(237, 241, 17);
+    --sea-green: rgb(40, 209, 110);
+    --purple:rgb(105, 128, 172);
+    --nice-purple: rgb(110, 24, 180);
+}
+
+#grid-container {
+    display: grid;
+    height: 100vh;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 27vh 25vh 71vh 8vh;
+    grid-template-areas:
+        "header"
+        "nav"
+        "main"
+        "footer";
+}
+
+button {
+    background-color: var(--sea-green);
+    border-radius: 20px;
+}
+
+button:hover {
+    animation-name: button-flutter;
+    animation-duration: 1s;
+    cursor: pointer;
+    background-color: var(--purple);
+}
+
+.section {
+    border-radius: 18px;
+    border: 4px solid var(--grey);
+}
+
+header {
+    background-color: var(--light-teal);
+    grid-area: header;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    justify-content: center;
+    align-items: center;
+    grid-template-areas:
+        "main-title header-pic";
+}
+
+#main-title {
+    font-family: Optima;
+    padding-left: 3%;
+    grid-area: main-title;
+}
+
+#slogan {
+    display: none;
+}
+
+#header-pic {
+    padding-top: 1vh;
+    height: 16vh;
+    width: 93%;
+    grid-area: header-pic;
+}
+
+nav {
+    background-color: var(--teal);
+    grid-area: nav;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+        "home shop about"
+}
+
+@keyframes button-flutter {
+    from {background-color: var(--sea-green);}
+    to {background-color: var(--purple);}
+}
+
+@keyframes current-button-flutter {
+    from {background-color: var(--nice-purple);}
+    to {background-color: var(--purple);}
+}
+
+.button {
+    color: white;
+    margin: 2px;
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+#home {
+    grid-area: home;
+}
+
+#about {
+    grid-area: about;
+}
+
+#shop {
+    background-color: var(--nice-purple);
+    grid-area: shop;
+}
+
+#shop:hover {
+    animation-name: current-button-flutter;
+    animation-duration: 1s;
+    background-color: var(--purple);
+}
+
+main {
+    border: 4px solid var(--grey);
+    background-color: var(--meta-teal);
+    grid-area: main;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 23.3vh 23.3vh 23.3vh;
+}
+
+main > * {
+    text-align: justify;
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+}
+
+#surfboard-rental-container {
+    background-color: pink;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 23vh;
+    grid-template-areas:
+        "sfb sfbp sfbpr"
+}
+
+#surfboard {
+    grid-area: sfb;
+}
+
+#surfboard-pic-container {
+    grid-area: sfbp;
+}
+
+#surfboard-pic {
+    object-fit: cover;
+    width: 100%;
+    max-height: 100%;
+}
+
+#surfboard-price {
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    grid-area: sfbpr;
+}
+
+#consultation-container {
+    background-color: aquamarine;
+    display: grid;
+    align-items: center;
+    text-align: center;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+        "c s";
+    
+}
+
+#consultation {
+    grid-area: c;
+}
+
+#schedule-button {
+    grid-area: s;
+    margin-left: 30%;
+    margin-right: 30%;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+#jetski-container {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-rows: 23vh;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas:
+        "j ji jp";
+}
+
+#jetski {
+    grid-area: j;
+}
+
+#jetski-image-container {
+    grid-area: ji;
+}
+
+#jetski-image {
+    object-fit: cover;
+    width: 100%;
+    max-height: 100%;
+}
+
+#jetski-price {
+    grid-area: jp;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+
+
+footer {
+    background-color: var(--dark-teal);
+    grid-area: footer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footer-item:hover {
+    cursor: pointer;
+}
+
+.footer-item:nth-child(2) {
+    display: none;
+}
+
+@media only screen and (min-width: 1050px) {
+    #grid-container {
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: 20vh 35vh 35vh 10vh;
+        grid-template-areas:
+            "header header header header header header header header"
+            "nav nav main main main main main main"
+            "nav nav main main main main main main"
+            "footer footer footer footer footer footer footer footer";
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #header-pic {
+        height: 11.5vh;
+        width: 100%;
+    }
+
+    #slogan {
+        display: block;
+        padding-right: 15px;
+    }
+
+    #main-title {
+        padding-left: 10px;
+    }
+
+    nav {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "home"
+            "shop"
+            "about";
+    }
+
+    .button {
+        padding-left: 25%;
+        padding-right: 25%;
+        padding-top: 5vh;
+        padding-bottom: 5vh;
+        margin: 4px;
+    }
+
+    .footer-item:nth-child(2) {
+        display: block;
+    }
+
+    #bondi-beach {
+        width: 100%;
+    }
+}

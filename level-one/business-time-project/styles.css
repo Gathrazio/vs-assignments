@@ -1,0 +1,285 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: var(--grey);
+}
+
+:root {
+    --dark-teal: #146C94;
+    --teal: #19A7CE;
+    --meta-teal: #48cbef;
+    --light-teal: #AFD3E2;
+    --grey: #e0d8d8;
+    --business-yellow: rgb(237, 241, 17);
+    --sea-green: rgb(40, 209, 110);
+    --purple:rgb(105, 128, 172);
+    --nice-purple: rgb(110, 24, 180);
+}
+
+#grid-container {
+    display: grid;
+    height: 100vh;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 27vh 25vh 60vh 8vh;
+    grid-template-areas:
+        "header"
+        "nav"
+        "main"
+        "footer";
+}
+
+.section {
+    border-radius: 18px;
+    border: 4px solid var(--grey);
+}
+
+header {
+    background-color: var(--light-teal);
+    grid-area: header;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    justify-content: center;
+    align-items: center;
+    grid-template-areas:
+        "main-title header-pic";
+}
+
+#main-title {
+    font-family: Optima;
+    padding-left: 3%;
+    grid-area: main-title;
+}
+
+#slogan {
+    display: none;
+}
+
+#header-pic {
+    padding-top: 1vh;
+    height: 16vh;
+    width: 93%;
+    grid-area: header-pic;
+}
+
+nav {
+    background-color: var(--teal);
+    grid-area: nav;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+        "home shop about"
+}
+
+@keyframes button-flutter {
+    from {background-color: var(--sea-green);}
+    to {background-color: var(--purple);}
+}
+
+@keyframes current-button-flutter {
+    from {background-color: var(--nice-purple);}
+    to {background-color: var(--purple);}
+}
+
+.button {
+    color: white;
+    border-radius: 20px;
+    margin: 2px;
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    background-color: var(--sea-green);
+}
+
+.button:hover {
+    animation-name: button-flutter;
+    animation-duration: 1s;
+    cursor: pointer;
+    background-color: var(--purple);
+}
+
+#home {
+    background-color: var(--nice-purple);
+    grid-area: home;
+}
+
+#home:hover {
+    animation-name: current-button-flutter;
+    animation-duration: 1s;
+    background-color: var(--purple);
+}
+
+#about {
+    grid-area: about;
+}
+
+#shop {
+    grid-area: shop;
+}
+
+main {
+    background-color: var(--meta-teal);
+    grid-area: main;
+    grid-gap: 3px;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr;
+
+    grid-template-areas:
+        "lto"
+        "c2"
+        "c3"
+        "c3"
+}
+
+main > * {
+    text-align: justify;
+    margin-left: 3%;
+    margin-right: 3%;
+    border: 2px solid;
+}
+
+.content {
+    border: 2px solid white;
+    border-radius: 14px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+@keyframes lto-wiggle {
+    0%   {background-color:var(--meta-teal);}
+    25%  {background-color:var(--meta-teal);}
+    50% {background-color: violet;}
+    75% {background-color: red;}
+    100%  {background-color:var(--nice-purple);}
+  }
+
+#limited-time-offer {
+    color: var(--business-yellow);
+    padding-left: 3%;
+    padding-right: 3%;
+    grid-area: lto;
+}
+
+#limited-time-offer:hover {
+    animation-name: lto-wiggle;
+    animation-duration: 1s;
+    animation-iteration-count: 2;
+    cursor: crosshair;
+    background-color: var(--nice-purple);
+}
+
+#main-content-2 {
+    padding-left: 3%;
+    padding-right: 3%;
+    grid-area: c2;
+}
+
+#main-content-3 {
+    grid-area: c3;
+    display: grid;
+    text-align: justify;
+    align-items: center;
+    grid-template-columns: 2fr 3fr;
+    grid-template-areas: 
+        "bb bbi"
+
+}
+
+#bondi-beach {
+    margin: auto;
+    border-radius: 12px;
+    grid-area: bb;
+    height: 100%;
+    width: 100%;
+}
+
+#bondi-beach-info {
+    margin-left: 3%;
+    margin-right: 3%;
+    grid-area: bbi;
+}
+
+footer {
+    background-color: var(--dark-teal);
+    grid-area: footer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footer-item:hover {
+    cursor: pointer;
+}
+
+.footer-item:nth-child(2) {
+    display: none;
+}
+
+@media only screen and (min-width: 1050px) {
+    #grid-container {
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: 20vh 35vh 35vh 10vh;
+        grid-template-areas:
+            "header header header header header header header header"
+            "nav nav main main main main main main"
+            "nav nav main main main main main main"
+            "footer footer footer footer footer footer footer footer";
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #header-pic {
+        height: 11.5vh;
+        width: 100%;
+    }
+
+    #slogan {
+        display: block;
+        padding-right: 15px;
+    }
+
+    #main-title {
+        padding-left: 10px;
+    }
+
+    nav {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "home"
+            "shop"
+            "about";
+    }
+
+    #main-content-3 {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        grid-template-areas:
+            "bb bbi"
+    }
+
+    .button {
+        padding-left: 25%;
+        padding-right: 25%;
+        padding-top: 5vh;
+        padding-bottom: 5vh;
+        margin: 4px;
+    }
+
+    .footer-item:nth-child(2) {
+        display: block;
+    }
+
+    #bondi-beach {
+        width: 100%;
+    }
+}
