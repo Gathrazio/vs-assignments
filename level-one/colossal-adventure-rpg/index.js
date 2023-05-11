@@ -124,7 +124,7 @@ function Hero (name, attackPower, healthPoints) {
 
 function mainGame () {
     console.log(cyan, "\n\nGreetings, valiant warrior! The age of glory is upon us.\n\n")
-    console.log(cyan, "\nWhat is your name?")
+    console.log(cyan, "\nWhat is your name, young hero?")
     const userName = readline.question(magenta)
 
     const courage = getRandomInts(5, 11)[0];
@@ -132,7 +132,9 @@ function mainGame () {
 
     const hero = new Hero(userName, courage * 2.5, heroHP)
 
-    console.log(cyan, "\nType and enter the 'w' key to walk. Beware, however, monsters may appear...\n")
+    console.log(cyan + `\nCourageous ${green}${hero.name}${cyan}, you are to set out on an adventure starting now. You have practiced the art of vanquishing your foes all your life, and today will be no different.\n`)
+
+    console.log(cyan, `\nType and enter the 'w' key to walk. Beware, however, ${red}monsters ${cyan}may appear...\n`)
     let walkAttempt = "";
 
     while (true) {
@@ -147,16 +149,17 @@ function mainGame () {
         walkAttempt = "";
         let diceRoll = getRandomInts(0, 3)[0];
         if (diceRoll === 0) {
-            let enemySpecs = enemySpecsGenerator();
+            let [species, mood, drop, hp, ap] = enemySpecsGenerator();
             // Enemy(species, mood, drop, HP, AP)
-            let currentEnemy = new Enemy(enemySpecs[0], enemySpecs[1], enemySpecs[2], enemySpecs[3], enemySpecs[4]);
+            let currentEnemy = new Enemy(species, mood, drop, hp, ap);
 
             let grammarInsert = "";
             if (firstLetterVowel(currentEnemy.mood)) {
                 grammarInsert = "n";
             }
-            console.log(red, `\n\nA${grammarInsert} ${currentEnemy.mood.charAt(0).toLowerCase() + currentEnemy.mood.slice(1)} ${currentEnemy.species} is attacking!\n${yellow}(|Stats|) --- Mood: ${currentEnemy.mood}, HP: ${currentEnemy.healthPoints}, AP: ${currentEnemy.attackPower}\n`)
+            console.log(red, `\n\nYou encountered a${grammarInsert} ${currentEnemy.mood.charAt(0).toLowerCase() + currentEnemy.mood.slice(1)} ${currentEnemy.species} and it is going to attack you!\n${yellow}(|Stats|) -~- AP: ${currentEnemy.attackPower}, HP: ${currentEnemy.healthPoints}\n`)
 
+            console.log(`${green}(|Stats|) -~- Kill Count: ${hero.killCount}, AP: ${hero.attackPower}, HP: ${hero.healthPoints}`)
             console.log(cyan + "What will you do -- attempt to run (r) or fight (f)?")
             let decisionAttempt = readline.question(magenta)
 
@@ -167,10 +170,10 @@ function mainGame () {
 
             if (decisionAttempt === "r") {
                 if (getRandomInts(0, 2)[0] === 0) {
-                    console.log(cyan, "You got away safely! Enter the 'w' key to continue walking.")
+                    console.log(cyan + "\nYou got away safely! Enter the 'w' key to continue walking.")
                     continue;
                 } else {
-                    console.log(hero)
+                    console.log(red + "You failed to run away!")
                     currentEnemy.attack(hero)
                     console.log(currentEnemy)
                     console.log(hero)
