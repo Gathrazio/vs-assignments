@@ -1,26 +1,26 @@
-if (!sessionStorage.getItem("itemStorage")) {
-    sessionStorage.setItem("itemStorage", "[]")
+if (!localStorage.getItem("itemStorage")) {
+    localStorage.setItem("itemStorage", "[]")
 }
 
-// sessionStorage.clear()
+// localStorage.clear()
 
 
 /* ↓ the following two functions storeItem and removeItem help to operate
-     the session storage system for list items */
+     the local storage system for list items */
 function storeItem (item) {
-    var itemStorage = JSON.parse(sessionStorage.getItem("itemStorage"));
+    var itemStorage = JSON.parse(localStorage.getItem("itemStorage"));
     itemStorage.push(item)
-    sessionStorage.setItem("itemStorage", JSON.stringify(itemStorage))
+    localStorage.setItem("itemStorage", JSON.stringify(itemStorage))
 }
 
 function removeItem (itemIndex){
-    var itemStorage = JSON.parse(sessionStorage.getItem("itemStorage"));
+    var itemStorage = JSON.parse(localStorage.getItem("itemStorage"));
     itemStorage.splice(itemIndex, 1)
-    sessionStorage.setItem("itemStorage", JSON.stringify(itemStorage))
+    localStorage.setItem("itemStorage", JSON.stringify(itemStorage))
 }
 
-/* ↓ the following for-loop generates the items held in session storage */
-var itemStorage = JSON.parse(sessionStorage.getItem("itemStorage"));
+/* ↓ the following for-loop generates the items held in local storage */
+var itemStorage = JSON.parse(localStorage.getItem("itemStorage"));
 
 for (i = 0; i < itemStorage.length; i++) {
     const generatedListItem = generateLI(itemStorage[i]);
@@ -50,7 +50,7 @@ addItemForm.addEventListener("submit", e => {
          shopping-item input field */
     const addedItem = addItemForm["shopping-item"].value
 
-    /* ↓ adding addedItem to sessionStorage */
+    /* ↓ adding addedItem to localStorage */
     storeItem(addedItem)
 
     /* ↓ removing the value of the shopping-item input so it looks like
@@ -134,12 +134,12 @@ function generateLI(addedItem) {
                 editButton.setAttribute("value", "edit")
 
                 /* ↓ replacing the old item with the edited version in local storage */
-                itemStorage = JSON.parse(sessionStorage.getItem("itemStorage"));
+                itemStorage = JSON.parse(localStorage.getItem("itemStorage"));
                 replaceIndex = itemStorage.indexOf(xButton.getAttribute("id"));
                 removeItem(replaceIndex)
-                const updatedItemStorage = JSON.parse(sessionStorage.getItem("itemStorage"));
+                const updatedItemStorage = JSON.parse(localStorage.getItem("itemStorage"));
                 updatedItemStorage.splice(replaceIndex, 0, listItemForm["edit-input"].value)
-                sessionStorage.setItem("itemStorage", JSON.stringify(updatedItemStorage))
+                localStorage.setItem("itemStorage", JSON.stringify(updatedItemStorage))
                 xButton.setAttribute("id", listItemForm["edit-input"].value)
 
                 /* ↓ replacing the edit input form with the modified liText div */
@@ -148,8 +148,8 @@ function generateLI(addedItem) {
             case "remove": // if it was the X button
                 listItem.style.display = "none"; // remove the list item from the list
 
-                /* ↓ remove the item from sessionStorage */
-                var itemStorage = JSON.parse(sessionStorage.getItem("itemStorage"));
+                /* ↓ remove the item from localStorage */
+                var itemStorage = JSON.parse(localStorage.getItem("itemStorage"));
                 removeItem(itemStorage.indexOf(xButton.getAttribute("id")))
                 break;
             case "edit": // if it was the Edit button
