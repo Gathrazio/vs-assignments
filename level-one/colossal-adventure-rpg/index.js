@@ -9,6 +9,11 @@ const yellow = ansiPrepend + "[33;1m";
 const white = ansiPrepend + "[37;1m";
 const black = ansiPrepend + "[30;1m"
 
+const whiteBackground = ansiPrepend  + "[47m";
+
+const clearScreen = ansiPrepend + "[2J";
+const styleReset = ansiPrepend + "[0m";
+
 const readline = require("readline-sync");
 const {execSync} = require("child_process");
 
@@ -41,6 +46,12 @@ function invalidPlayAgainResponse (playAgainAttempt) {
     if ((playAgainAttempt != "y") && (playAgainAttempt != "n")) {
         return true;
     }
+}
+
+function printFinalStats(hero) {
+    console.log(`\n\n${white}  Final Stats`)
+    displayStats(hero, whiteBackground)
+    displayInventory(hero, black)
 }
 
 function enemySpecsGenerator () {
@@ -112,6 +123,53 @@ function firstLetterVowel (word) {
     }
 }
 
+function addDropToInventory (hero, enemyDrop) {
+    if (hero.inventory.join()) {
+        let dropIndex = -1;
+        for (i = 0; i < hero.inventory.length; i++) {
+            if (hero.inventory[i].drop === enemyDrop) {
+                dropIndex = i;
+            }
+        }
+        if (dropIndex === -1) {
+            const newEnemyDrop = {
+                drop: enemyDrop,
+                multiplicity: 1
+            }
+            hero.inventory.push(newEnemyDrop)
+        } else {
+            hero.inventory[dropIndex].multiplicity += 1;
+        }
+    } else {
+        const firstEnemyDrop = {
+            drop: enemyDrop,
+            multiplicity: 1
+        }
+        hero.inventory.push(firstEnemyDrop)
+    }
+}
+
+function displayInventory (hero, color = white) {
+    console.log(`${color}-------------------------------------`)
+
+    if (hero.inventory.join()) {
+        for (i = 0; i < hero.inventory.length; i++) {
+            if (i === hero.inventory.length - 1) {
+                console.log(`${color}• ${yellow}${hero.inventory[i].drop} ${color}× ${white}${hero.inventory[i].multiplicity}`)
+            } else {
+                console.log(`${color}• ${yellow}$${hero.inventory[i].drop} ${color}× ${white}${hero.inventory[i].multiplicity}\n`)
+            }
+        }
+    } else {
+        console.log(`${color}|| ${yellow}Inventory is currently empty.`)
+    }
+    console.log(`${color}-------------------------------------`)
+}
+
+function displayStats (hero, background = "") {
+    console.log(`\n${background}${green}Hero ${hero.name}\n(|Stats|) ~ Kill Count: ${hero.killCount}, AP: ${hero.attackPower}, HP: ${hero.healthPoints}\n`)
+}
+
 function Enemy (species, mood, specialDrop, healthPoints, attackPower) {
     this.species = species;
     this.mood = mood;
@@ -121,7 +179,7 @@ function Enemy (species, mood, specialDrop, healthPoints, attackPower) {
 }
 
 Enemy.prototype.attack = function(opponent) {
-    const dealtDamage = getRandomInts(this.attackPower - 2, this.attackPower + 3)[0];
+    let dealtDamage = getRandomInts(this.attackPower - 2, this.attackPower + 3)[0];
     if (dealtDamage < 0) {
         dealtDamage = 0;
     }
@@ -149,7 +207,7 @@ function mainGame () {
     console.log(cyan, "\nWhat is your name, young hero?")
     const userName = readline.question(magenta)
 
-    execSync('sleep 0.5');
+    execSync('sleep 1');
 
     const courage = getRandomInts(5, 11)[0];
     let heroHPStart = getRandomInts(30, 61)[0]
@@ -160,27 +218,45 @@ function mainGame () {
 
     execSync('sleep 2');
 
-    console.log(cyan, `\nType and enter the (w) key to walk. Beware, however, ${red}monsters ${cyan}may appear...`)
+    console.log(cyan, `\nType and enter the (w) key to walk or the (i) key to print your stats and item inventory.`)
+    execSync('sleep 1')
+    console.log(`Beware, however, ${red}monsters ${cyan}may appear...`)
     let walkAttempt = "";
 
     let heroAlive = true;
     let heroHPCurrent = heroHPStart;
+    let recentlyKilledEnemy = false;
 
     while (heroAlive) {
         if (walkAttempt != "w") {
             walkAttempt = readline.question(magenta)
             while (invalidWalkResponse(walkAttempt)) {
-                console.log(yellow, "\nPlease enter the (w) key to walk.")
+                if ((walkAttempt === "i") && !recentlyKilledEnemy) {
+                    execSync("sleep 0.3")
+                    displayStats(hero)
+                    execSync("sleep 0.3")
+                    displayInventory(hero)
+                    execSync("sleep 0.5")
+                    console.log(`${cyan}\nEnter (w) to walk or (i) for inventry and stats.`)
+                    walkAttempt = readline.question(magenta)
+                    continue;
+                } else if (walkAttempt != "w" && recentlyKilledEnemy) {
+                    console.log(yellow, "\nPlease enter (w) to walk.")
+                } else {
+                    console.log(yellow, "\nPlease enter (w) to walk or (i) for inventory and stats.")
+                }
                 walkAttempt = readline.question(magenta)
             }
         }
+
+        recentlyKilledEnemy = false;
 
         walkAttempt = "";
         let diceRoll = getRandomInts(0, 3)[0];
         if (diceRoll === 0) {
             execSync('sleep 1');
             let [species, mood, drop, hp, ap] = enemySpecsGenerator();
-            // Enemy(species, mood, drop, HP, AP)
+
             let currentEnemy = new Enemy(species, mood, drop, hp, ap);
 
             const lowerCaseMood = currentEnemy.mood.charAt(0).toLowerCase() + currentEnemy.mood.slice(1);
@@ -195,16 +271,16 @@ function mainGame () {
             execSync('sleep 1');
             console.log(`${currentEnemy.mood} ${currentEnemy.species}\n${yellow}(|Stats|) ~ AP: ${currentEnemy.attackPower}, HP: ${currentEnemy.healthPoints}\n`)
 
-            console.log(`${green}Hero ${hero.name}\n(|Stats|) ~ Kill Count: ${hero.killCount}, AP: ${hero.attackPower}, HP: ${hero.healthPoints}\n`)
+            displayStats(hero)
             execSync('sleep 0.5');
-            console.log(cyan + "What will you do -- attempt to run (r) or fight (f)?")
+            console.log(cyan + "What will you do -- attempt to run (r) or resolve to fight (f)?")
             let decisionAttempt = readline.question(magenta)
 
             execSync('sleep 0.5');
             let decisionFailCount = 0;
 
             while(invalidDecisionResponse(decisionAttempt)) {
-                console.log(yellow, "\nPlease choose to attempt to run (r) or fight (f).")
+                console.log(yellow, "\nPlease choose to attempt to run (r) or resolve to fight (f).")
                 decisionAttempt = readline.question(magenta)
                 decisionFailCount += 1;
             }
@@ -217,7 +293,7 @@ function mainGame () {
                     execSync("sleep 1")
                     if (getRandomInts(0, 2)[0] === 0) {
 
-                        console.log(cyan + "\nYou got away safely! Enter the (w) key to walk.")
+                        console.log(cyan + "\nYou got away safely! Enter (w) to walk or (i) for inventory and stats.")
                         escapedSafely = true;
                     } else {
                         let heroDamage = currentEnemy.attack(hero)
@@ -251,8 +327,8 @@ function mainGame () {
                         console.log(`${white}You successfully defeated the ${lowerCaseMood} ${currentEnemy.species}!`)
                         if (getRandomInts(0,2)[0] === 0) {
                             execSync('sleep 1');
-                            console.log(`${blue}~${currentEnemy.specialDrop} was added to your inventory~`)
-                            hero.inventory.push(currentEnemy.specialDrop)
+                            console.log(`${blue}${yellow}${currentEnemy.specialDrop} ${blue}was added to your inventory`)
+                            addDropToInventory(hero, currentEnemy.specialDrop)
                         }
                         execSync('sleep 1');
                         console.log(`${white}You rested for a while and your HP returned to normal.\n`)
@@ -261,12 +337,17 @@ function mainGame () {
                         console.log(`${white}But also, your stats increased:\n`)
                         execSync('sleep 1');
                         console.log(`${green}Hero ${hero.name}\n(|Stats|) ~ Kill Count: ${hero.killCount} ${yellow}+ 1${green}, AP: ${hero.attackPower} ${yellow}+ 5${green}, HP: ${hero.healthPoints} + ${yellow}10${green}.\n`)
+                        execSync('sleep 1')
+                        console.log(`${white}Here is your up-to-date inventory:\n`)
+                        execSync('sleep 0.5')
+                        displayInventory(hero, blue)
                         hero.attackPower += 5;
                         hero.healthPoints += 10;
                         heroHPCurrent = hero.healthPoints;
                         hero.killCount += 1;
                         execSync('sleep 0.5');
-                        console.log(`${cyan}Press (w) to continue walking.`)
+                        console.log(`\n${cyan}Press (w) to continue walking.`)
+                        recentlyKilledEnemy = true;
                         continue;
                     }
                     heroDamage = currentEnemy.attack(hero)
@@ -274,10 +355,14 @@ function mainGame () {
                     execSync('sleep 1');
                     if (hero.healthPoints <= 0) {
                         heroAlive = false;
-                        console.log(`${red}You were slaughtered by the ${lowerCaseMood} ${currentEnemy.species}!\n`)
+                        console.log(`${clearScreen}`)
+                        execSync("sleep 1.5")
+                        console.log(`${red}You were slaughtered by the ${lowerCaseMood} ${currentEnemy.species}! :(\n`)
+                        hero.healthPoints = heroHPCurrent;
                         execSync('sleep 1');
-                        console.log(`${cyan}What you collected: ${hero.inventory}\n\n`)
-                        console.log(`${cyan}Would you like to play again? Press (y) or (n).`)
+                        printFinalStats(hero)
+                        console.log(`${styleReset}`)
+                        console.log(`\n${cyan}Would you like to play again? Press (y) or (n).`)
                         let playAgainAttempt = readline.question(magenta)
                         while (invalidPlayAgainResponse(playAgainAttempt)) {
                             console.log(yellow + "\nPlease press (y) or (n) to play again or not.")
@@ -292,7 +377,7 @@ function mainGame () {
                         continue;
                     }
                     console.log(`${red}${currentEnemy.mood} ${currentEnemy.species}\n${yellow}(|Stats|) ~ AP: ${currentEnemy.attackPower}, HP: ${currentEnemy.healthPoints}\n`)
-                    console.log(`${green}Hero ${hero.name}\n(|Stats|) ~ Kill Count: ${hero.killCount}, AP: ${hero.attackPower}, HP: ${hero.healthPoints}\n`)
+                    displayStats(hero)
                     execSync('sleep 0.5');
                     console.log(cyan + "Press (f) to fight.")
                     decisionAttempt = readline.question(magenta)
