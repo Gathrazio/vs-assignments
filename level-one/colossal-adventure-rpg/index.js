@@ -31,11 +31,11 @@ const kingOrcDrops = ["Club of Destiny", "Amulet of Health", "Pork Chop", "Jade 
 // Note: all enemy HP or AP ranges have inclusive endpoints
 
 const enemyHR = [ // enemy health range matrix
-    [20, 100],   // matrix[0] => mutant spider
-    [30, 140],   // matrix[1] => eternal ghast
-    [50, 200],   // matrix[2] => frost drake
-    [110, 450],  // matrix[3] => rock golem
-    [80, 300]   // matrix[4] => king orc
+    [20, 60],   // matrix[0] => mutant spider
+    [30, 70],   // matrix[1] => eternal ghast
+    [50, 110],   // matrix[2] => frost drake
+    [90, 250],  // matrix[3] => rock golem
+    [80, 140]   // matrix[4] => king orc
 ]
 
 const mSAPR = [ // Mutant Spider attack power range matrix, by mood
@@ -67,6 +67,21 @@ const kOAPR = [ // King Orc
     [16, 24],
     [26, 34]
 ]
+
+const heroAPHP = [
+    [[7, 2], [15, 3]], // heroAPHP[0]: early game (AP range: (10, 20), HP range: (30, 60))
+    [[5, 1], [12, 2]], // heroAPHP[1]: mid game (AP range: (21, 35), HP range: (60, 120))
+    [[3, 1], [8, 2]]  // heroAPHP[2]: late game (AP range: 40 +, HP range: 120 +)
+]
+
+/*
+Note that the heroAPHP[i] are themselves matrices, where each row (each heroAPHP[i][j] where j = {0, 1}) is an average AP or HP gain along with an associated margin. For example, heroAPHP[0] is the matrix
+
+[[4, 2],
+ [10, 3]]
+
+which is a collection of information that is only relevant when the hero's AP and HP are in specific ranges. heroAPHP[0][0] is [4, 2], which means an average AP gain of 4, plus or minus 2 points ( really, the new additional AP to be added onto the hero's will be generated via getRandomInts(4 - 2, (4 + 2) + 1)[0]. ). heroAPHP[0][1] is [10, 3], which means an average HP gain of 10, plus or minus 3 points.
+*/
 
 
 function invalidWalkResponse (walkAttempt) {
@@ -117,25 +132,25 @@ function firstLetterVowel (word) { // returns true if the first letter of the wo
 
 
 function generateMood(hero) { // the higher the hero's attack power, the more likely the enemies are to spawn more angry (and thus have more attack power)
-    const raffle = getRandomInts(1, 7)[0];
+    const raffle = getRandomInts(1, 13)[0];
     if (hero.attackPower <= 20) {
-        if (raffle === 6) {
+        if (raffle === 12) {
             return "Enraged";
-        } else if ((raffle === 4) || (raffle === 5)) {
+        } else if ((raffle === 11) || (raffle === 10)) {
             return "Annoyed";
         }
         return "Neutral";
     } else if ((hero.attackPower >= 21) && (hero.attackPower <= 35)) {
-        if ((raffle === 6) || (raffle === 5)) {
+        if ((raffle === 12) || (raffle === 11)) {
             return "Enraged";
-        } else if ((raffle === 3) || (raffle === 4)) {
+        } else if ((raffle >= 8) && (raffle <= 10)) {
             return "Annoyed";
         }
         return "Neutral";
-    } else if ((hero.attackPower >= 36) && (hero.attackPower <= 50)) {
-        if(raffle === 6) {
+    } else if ((hero.attackPower >= 36) && (hero.attackPower <= 60)) {
+        if((raffle >= 1) && (raffle <= 3)) {
             return "Neutral";
-        } else if ((raffle === 4) || (raffle === 5)) {
+        } else if ((raffle >= 4) && (raffle <= 8)) {
             return "Annoyed";
         }
         return "Enraged";
@@ -364,7 +379,7 @@ function gameIntro () {
     execSync('sleep 1');
 
 
-    const courage = getRandomInts(5, 11)[0];
+    const courage = getRandomInts(100, 200)[0];
     let heroHPStart = getRandomInts(30, 61)[0];
     const hero = new Hero(userName, courage * 2, heroHPStart)
 
@@ -461,7 +476,6 @@ function decideRunOrFight () {
 function tryToRun (hero, currentEnemy, lowerCaseMood) {
     execSync("sleep 1")
     if (getRandomInts(0, 2)[0] === 0) {
-
         console.log(`${cyan}\n\n\nYou got away safely! Enter (${white}w${cyan}) to walk or (${white}i${cyan}) for inventory and stats.`)
         return [true, ""];
     } else {
@@ -480,27 +494,53 @@ function tryToRun (hero, currentEnemy, lowerCaseMood) {
 }
 
 function potentiallyAddEnemyDrop (hero, currentEnemy) {
-    if (getRandomInts(0,2)[0] === 0) {
+    if (currentEnemy.mood === "Enraged") {
         execSync('sleep 0.5');
         console.log(`${blue}${yellow}${currentEnemy.specialDrop} ${blue}was added to your inventory.`)
         addDropToInventory(hero, currentEnemy.specialDrop)
+    } else {
+        if (getRandomInts(0,2)[0] === 0) {
+            execSync('sleep 0.5');
+            console.log(`${blue}${yellow}${currentEnemy.specialDrop} ${blue}was added to your inventory.`)
+            addDropToInventory(hero, currentEnemy.specialDrop)
+        }
     }
+}
+
+
+// stat upgrades will change depending on how far into the game the hero is -- and for this we will use the hero's AP. Since the AP and HP gain decreases linearly as the hero grows, we could've potentially used HP. But there isn't really a need to use both as a result!
+function generateUpgradedStats(hero, currentEnemy) {
+    let statChanges = [];
+    if (hero.attackPower <= 20) {
+        statChanges.push(getRandomInts(heroAPHP[0][0][0] - heroAPHP[0][0][1], heroAPHP[0][0][0] + heroAPHP[0][0][1] + 1)[0])
+        statChanges.push(getRandomInts(heroAPHP[0][1][0] - heroAPHP[0][1][1], heroAPHP[0][1][0] + heroAPHP[0][1][1] + 1)[0])
+    } else if ((hero.attackPower >= 21) && (hero.attackPower <= 40)) {
+        statChanges.push(getRandomInts(heroAPHP[1][0][0] - heroAPHP[1][0][1], heroAPHP[1][0][0] + heroAPHP[1][0][1] + 1)[0])
+        statChanges.push(getRandomInts(heroAPHP[1][1][0] - heroAPHP[1][1][1], heroAPHP[1][1][0] + heroAPHP[1][1][1] + 1)[0])
+    } else {
+        statChanges.push(getRandomInts(heroAPHP[2][0][0] - heroAPHP[2][0][1], heroAPHP[2][0][0] + heroAPHP[2][0][1] + 1)[0])
+        statChanges.push(getRandomInts(heroAPHP[2][1][0] - heroAPHP[2][1][1], heroAPHP[2][1][0] + heroAPHP[2][1][1] + 1)[0])
+    }
+    return statChanges;
 }
 
 function upgradeStats (hero, currentEnemy) {
     execSync('sleep 1.5');
     console.log(`${white}But also, your stats ${green}increased${white}:\n`)
     execSync('sleep 0.5');
-    hero.attackPower += 5;
-    hero.healthPoints += 10;
+    [aPIncrease, hPIncrease] = generateUpgradedStats(hero, currentEnemy);
+    console.log(`${green}Hero ${hero.name}\n(|Stats|) ~ Kill Count: ${red}${hero.killCount} ${green}+ ${yellow}1${green}, AP: ${magenta}${hero.attackPower} ${green}+ ${yellow}${aPIncrease}${green}, ${white}[HP: ${white}${hero.healthPoints} + ${yellow}${hPIncrease}${white}]\n`)
+    
     hero.killCount += 1;
-    console.log(`${green}Hero ${hero.name}\n(|Stats|) ~ Kill Count: ${red}${hero.killCount} ${yellow}+ 1${green}, AP: ${magenta}${hero.attackPower} ${yellow}+ 5${green}, HP: ${white}${hero.healthPoints} ${green}+ ${yellow}10${green}\n`)
+    hero.attackPower += aPIncrease;
+    hero.healthPoints += hPIncrease;
+
     execSync('sleep 0.5')
 
     return hero.healthPoints;
 }
 
-function enemyDeath (hero, currentEnemy, heroHPCurrent) {
+function enemyDeath (hero, currentEnemy, heroHPCurrent, enemyAlive, recentlyKilledEnemy) {
     enemyAlive = false;
     recentlyKilledEnemy = true;
 
@@ -511,6 +551,7 @@ function enemyDeath (hero, currentEnemy, heroHPCurrent) {
     execSync('sleep 0.5');
     console.log(`${white}You rested for a while and your HP returned to normal.\n`)
     hero.healthPoints = heroHPCurrent;
+    const newHeroHp = upgradeStats(hero, currentEnemy);
 
     console.log(`${white}Here is your up-to-date inventory:\n`)
     execSync('sleep 0.5')
@@ -518,7 +559,7 @@ function enemyDeath (hero, currentEnemy, heroHPCurrent) {
     execSync('sleep 0.5');
     console.log(`\n\n${cyan}Enter (${white}w${cyan}) to continue walking.`)
 
-    return [false, true, upgradeStats(hero, currentEnemy)]
+    return [enemyAlive, recentlyKilledEnemy, newHeroHp];
 }
 
 function heroAttackEnemy(hero, currentEnemy) {
@@ -538,6 +579,7 @@ function heroDeath(hero, currentEnemy, lowerCaseMood, heroHPCurrent) {
     execSync("sleep 1.5")
     console.log(`\n\n${red}You were slaughtered by the ${lowerCaseMood} ${currentEnemy.species}! :(\n\n\n\n`)
     hero.healthPoints = heroHPCurrent;
+    console.log(hero.healthPoints)
     execSync('sleep 1');
     displayFinalStats(hero)
     execSync("sleep 1")
@@ -564,19 +606,19 @@ function obtainFightResponse() {
     }
 }
 
-function fightToTheDeath (hero, currentEnemy, lowerCaseMood, heroHPCurrent) {
+function fightToTheDeath (hero, currentEnemy, lowerCaseMood, heroHPCurrent, enemyAlive, recentlyKilledEnemy, decisionFailCount) {
     if (decisionFailCount >= 1) { execSync('sleep 0.5'); }
     heroAttackEnemy(hero, currentEnemy)
     if (currentEnemy.healthPoints <= 0) { // if the enemy dies
-        [enemyAlive, recentlyKilledEnemy, heroHPCurrent] = enemyDeath(hero, currentEnemy, heroHPCurrent)
-        return [true, enemyAlive, recentlyKilledEnemy, false];
+        [eAlive, rkEnemy, heroHPC] = enemyDeath(hero, currentEnemy, heroHPCurrent, enemyAlive, recentlyKilledEnemy)
+        return [true, eAlive, rkEnemy, heroHPC, false];
     }
     enemyAttackHero(hero, currentEnemy, lowerCaseMood)
     if (hero.healthPoints <= 0) { // if the hero dies
-        [heroAlive, playAgainDecision] = heroDeath(hero, currentEnemy, lowerCaseMood, heroHPCurrent)
+        [hAlive, playAgainDecision] = heroDeath(hero, currentEnemy, lowerCaseMood, heroHPCurrent)
         if (playAgainDecision === "n") {
             console.log(`\n\n`)
-            return [heroAlive, true, false, true];
+            return [hAlive, true, false, 0, true];
         }
         mainGame()
     }
@@ -586,7 +628,7 @@ function fightToTheDeath (hero, currentEnemy, lowerCaseMood, heroHPCurrent) {
     execSync('sleep 0.5');
     obtainFightResponse()
 
-    return [true, true, false, false];
+    return [true, true, false, heroHPCurrent, false];
 }
 
 
@@ -608,12 +650,26 @@ function mainGame () {
                 [escapedSafely, decisionAttempt] = tryToRun(hero, currentEnemy, lowerCaseMood);
             }
             while ((heroAlive && enemyAlive) && !escapedSafely) {
-                [heroAlive, enemyAlive, recentlyKilledEnemy, gameExitKey] = fightToTheDeath(hero, currentEnemy, lowerCaseMood, heroHPCurrent);
+                [heroAlive, enemyAlive, recentlyKilledEnemy, heroHPCurrent, gameExitKey] = fightToTheDeath(hero, currentEnemy, lowerCaseMood, heroHPCurrent, enemyAlive, recentlyKilledEnemy, decisionFailCount);
                 if (gameExitKey) {
                     return;
                 }
             }
         }
+    }
+}
+
+function testFunction () {
+    let hero = new Hero("Noah", 100, 1000);
+    let currentEnemy = new Enemy("Mutant Spider", "Neutral", "Egg Sac", 10, 2);
+    let lowerCaseMood = "neutral";
+    let heroHPCurrent = 1000;
+    let enemyAlive = true;
+    let recentlyKilledEnemy = false;
+    let decisionFailCount = 0;
+    [heroAlive, enemyAlive, recentlyKilledEnemy, heroHPCurrent, gameExitKey] = fightToTheDeath(hero, currentEnemy, lowerCaseMood, heroHPCurrent, enemyAlive, recentlyKilledEnemy, decisionFailCount);
+    if (gameExitKey) {
+        return;
     }
 }
 
