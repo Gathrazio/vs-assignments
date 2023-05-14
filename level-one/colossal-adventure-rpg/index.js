@@ -550,10 +550,8 @@ function fightToTheDeath (hero, currentEnemy, lowerCaseMood, heroHPCurrent, enem
     return [true, true, false, heroHPCurrent, false];
 }
 
-let recursionCounter = 0;
 
 function mainGame () {
-    recursionCounter++;
     const hero = gameIntro()
     let walkAttempt = "";
     let heroAlive = true;
