@@ -22,11 +22,11 @@ const {execSync} = require("child_process");
 const enemySpeciesArr = ["Mutant Spider", "Eternal Ghast", "Frost Drake",  "Rock Golem", "King Orc"];
 // const enemyMoods = ["Enraged", "Annoyed", "Neutral"];
 
-const mutantSpiderDrops = ["Poison Fang", "Luxurious Silk", "Egg Sac", "Ruby Ring"];
-const eternalGhastDrops = ["Reaper Wrap", "Bottle of Fog", "Dark Core", "Ancient Bone"];
-const frostDrakeDrops = ["Icicle Claw", "Drake Wing", "Clouded Eye", "Tarp Leather"];
-const rockGolemDrops = ["Puppet Twine", "Heavy Heart", "Love of the Ward", "Silver Ingot"];
-const kingOrcDrops = ["Club of Destiny", "Amulet of Health", "Pork Chop", "Jade Chain"];
+const mutantSpiderDrops = ["Luxurious Silk", "Egg Sac"];
+const eternalGhastDrops = ["Reaper Wrap", "Ancient Bone"];
+const frostDrakeDrops = ["Icicle Claw", "Tarp Leather"];
+const rockGolemDrops = ["Heavy Heart", "Love of the Ward"];
+const kingOrcDrops = ["Club of Destiny", "Jade Chain"];
 
 // Note: all enemy HP or AP ranges have inclusive endpoints
 
@@ -69,7 +69,7 @@ const kOAPR = [ // King Orc
 ]
 
 const heroAPHPStart = [
-    [10, 21], // hero's starting AP range
+    [600, 800], // hero's starting AP range
     [40, 60] // hero's starting HP range
 ]
 
@@ -540,9 +540,9 @@ function fightToTheDeath (hero, currentEnemy, lowerCaseMood, heroHPCurrent, enem
     if (hero.healthPoints <= 0) { // if the hero dies
         [hAlive, playAgainDecision] = heroDeath(hero, currentEnemy, lowerCaseMood, heroHPCurrent)
         if (playAgainDecision === "n") {
-            return [hAlive, true, false, 0, true, false];
+            return ["", "", "", "", true, false];
         }
-        return ["", "", "", "", true, true];
+        return ["", "", "", "", true, true]; // when the user wants to restart the game, the computer will hold in memory that this instantiation of the mainGame function has wantToQuit being true. This is necessary because when the user eventually chooses to quit, as the computer tries to loop between the various pairs of if-statements in the main function, the computer remembers each mainGame instantiation's wantToQuit bool value. And since we want to run through the loop between the two if-statements successfully until the original function call, we want wantToQuit to be true for all prior instantiations of mainGame. 
     }
     displayEnemyStats(currentEnemy)
     displayHeroStats(hero)
@@ -562,7 +562,7 @@ function mainGame () {
     let playAgain = "";
     while (heroAlive) {
         [walkAttempt, recentlyKilledEnemy, wantToExit, wantToRestart] = walkReconciler(playAgain, walkAttempt, recentlyKilledEnemy, hero);
-        if (wantToRestart) {
+        if (wantToRestart) { // the following two if statements (along with the other two statements in the innermost while loop) allow the user to effectively exit the game now matter how many times they elected to restart after quitting their current game/dying. The recursion tamers! All bow down.
             mainGame()
         }
         if (wantToExit) {
