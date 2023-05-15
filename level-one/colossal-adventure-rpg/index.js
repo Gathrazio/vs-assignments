@@ -31,48 +31,50 @@ const frostDrakeDrops = ["Icicle Claw", "Tarp Leather"];
 const rockGolemDrops = ["Heavy Heart", "Love of the Ward"];
 const kingOrcDrops = ["Club of Destiny", "Jade Chain"];
 
+const heroHPUpperMarker = 100;
+
 // Note: all enemy HP or AP ranges have inclusive endpoints
 
 const enemyHR = [ // enemy health range matrix
-    [20, 60],   // matrix[0] => mutant spider
-    [30, 70],   // matrix[1] => eternal ghast
-    [50, 110],   // matrix[2] => frost drake
-    [90, 250],  // matrix[3] => rock golem
-    [80, 140]   // matrix[4] => king orc
+    [20, 80],   // matrix[0] => mutant spider
+    [30, 110],   // matrix[1] => eternal ghast
+    [50, 130],   // matrix[2] => frost drake
+    [100, 220],  // matrix[3] => rock golem
+    [80, 180]   // matrix[4] => king orc
 ]
 
 const mSAPR = [ // Mutant Spider attack power range matrix, by mood
     [3, 7],   // matrix[0] => neutral
-    [7, 14],   // matrix[1] => annoyed
-    [10, 17]  // matrix[2] => enraged
+    [8, 14],   // matrix[1] => annoyed
+    [15, 20]  // matrix[2] => enraged
 ]
 
 const eGAPR = [ // Eternal Ghast
     [4, 9],
-    [7, 14],
-    [12, 21]
+    [10, 18],
+    [20, 25]
 ]
 
 const fDAPR = [ // Frost Drake
     [5, 12],
-    [18, 20],
-    [14, 23]
+    [18, 25],
+    [26, 30]
 ]
 
 const rGAPR = [ // Rock Golem
     [2, 5],
     [6, 10],
-    [10, 12]
+    [12, 15]
 ]
 
 const kOAPR = [ // King Orc
-    [10, 14],
+    [8, 14],
     [16, 24],
-    [26, 34]
+    [40, 55]
 ]
 
 const heroAPHPStart = [
-    [600, 800], // hero's starting AP range
+    [5, 15], // hero's starting AP range
     [40, 60] // hero's starting HP range
 ]
 
@@ -141,21 +143,21 @@ function firstLetterVowel (word) { // returns true if the first letter of the wo
 
 function generateMood(hero) { // the higher the hero's attack power, the more likely the enemies are to spawn more angry (and thus have more attack power)
     const raffle = getRandomInts(1, 13)[0];
-    if (hero.attackPower <= 20) {
+    if (hero.attackPower <= 30) {
         if (raffle === 12) {
             return "Enraged";
         } else if ((raffle === 11) || (raffle === 10)) {
             return "Annoyed";
         }
         return "Neutral";
-    } else if ((hero.attackPower >= 21) && (hero.attackPower <= 35)) {
+    } else if ((hero.attackPower >= 31) && (hero.attackPower <= 40)) {
         if ((raffle === 12) || (raffle === 11)) {
             return "Enraged";
         } else if ((raffle >= 8) && (raffle <= 10)) {
             return "Annoyed";
         }
         return "Neutral";
-    } else if ((hero.attackPower >= 36) && (hero.attackPower <= 60)) {
+    } else if ((hero.attackPower >= 41) && (hero.attackPower <= 50)) {
         if((raffle >= 1) && (raffle <= 3)) {
             return "Neutral";
         } else if ((raffle >= 4) && (raffle <= 8)) {
@@ -168,9 +170,9 @@ function generateMood(hero) { // the higher the hero's attack power, the more li
 }
 
 function generateEnemyHP([min, max], hero) {
-    if (hero.healthPoints <= 60) {
+    if (hero.healthPoints <= 80) {
         return getRandomInts(min, min + Math.floor((max - min)/3))[0];
-    } else if ((hero.healthPoints >= 61) || (hero.healthPoints <= 120)) {
+    } else if ((hero.healthPoints >= 81) || (hero.healthPoints <= heroHPUpperMarker)) {
         return getRandomInts(min + Math.floor((max - min)/3), min + Math.floor(2 * (max - min) / 3))[0];
     } else {
         return getRandomInts(min + Math.floor(2 * (max - min) / 3), max + 1)[0];
@@ -288,40 +290,67 @@ function addDropToInventory (hero, enemyDrop) {
 
 
 function displayFinalStats(hero) {
-    execSync(tPS)
-    console.log(`\n\n\n${white}Final Stats`)
+    execSync('sleep 0.25')
+    console.log('')
+    execSync('sleep 0.25')
+    console.log('')
+    execSync('sleep 0.25')
+    console.log('')
+    execSync('sleep 0.25')
+    console.log(`${white}Final Stats`)
 
     execSync('sleep 1.3')
     console.log(`${yellow}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}|`)
 
-    execSync('sleep 0.2')
+    execSync('sleep 0.1')
     console.log('')
+    execSync('sleep 0.1')
     displayHeroStats(hero)
-    execSync('sleep 0.4')
+    execSync('sleep 0.3')
     displayInventory(hero)
 
-    execSync('sleep 0.5')
+    execSync('sleep 0.1')
     console.log('')
+    execSync('sleep 0.1')
     console.log(`${yellow}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}|`)
 }
 
-function displayInventory (hero, color = white) {
-    execSync(dPS)
-    console.log(`\n${color}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}`)
-    if (hero.inventory.length > 0) {
+function displayInventory (hero, color = white,) {
+    let dynamicDelay = Number((0.6 / (hero.inventory.length + 1)).toFixed(2));
+    execSync('sleep 0.25')
+    console.log('')
+    execSync('sleep 0.25')
+    console.log(`${color}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}`)
+    if (hero.inventory.length >= 1) {
         for (i = 0; i < hero.inventory.length; i++) {
-            execSync(dPS)
+            execSync('sleep ' + dynamicDelay.toString())
             if (i === hero.inventory.length - 1) {
                 console.log(`${color}• ${yellow}${hero.inventory[i].drop} ${color}× ${white}${hero.inventory[i].multiplicity}`)
             } else {
-                console.log(`${color}• ${yellow}${hero.inventory[i].drop} ${color}× ${white}${hero.inventory[i].multiplicity}\n`)
+                console.log(`${color}• ${yellow}${hero.inventory[i].drop} ${color}× ${white}${hero.inventory[i].multiplicity}`)
+                execSync('sleep ' + dynamicDelay.toString())
+                console.log('')
             }
         }
+        execSync('sleep ' + dynamicDelay.toString())
     } else {
-        execSync(dPS)
+        execSync('sleep 0.3')
         console.log(`${color}|| ${yellow}Inventory is empty.`)
+        execSync('sleep 0.3')
     }
-    execSync(dPS)
+    if (hero.inventory.length === 10){
+        execSync('sleep 0.2')
+        console.log('')
+        execSync('sleep 0.2')
+        console.log('')
+        execSync('sleep 0.2')
+        console.log(`${blue}~~ACHIEVEMENT~~`)
+        execSync('sleep 0.2')
+        console.log('')
+        execSync('sleep 0.2')
+        console.log(`${cyan}♣ ${green}Avid Collector`)
+        execSync('sleep 0.2')
+    }
     console.log(`${color}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}`)
 }
 
@@ -339,8 +368,12 @@ function displayEnemyStats (currentEnemy) {
         horizontalBar = `${horizontalBar}\u2015`;
     }
 
-    execSync(tPS)
-    console.log(`\n\n${red}[${white}[ ${red}${currentEnemy.mood} ${currentEnemy.species}${white} ]${red}]`)
+    execSync('sleep 0.33')
+    console.log('')
+    execSync('sleep 0.33')
+    console.log('')
+    execSync('sleep 0.33')
+    console.log(`${red}[${white}[ ${red}${currentEnemy.mood} ${currentEnemy.species}${white} ]${red}]`)
 
     execSync(dPS)
     console.log(`${red}(${white}|${yellow}Stats${white}|${red}) ${yellow}~ AP: ${magenta}${currentEnemy.attackPower}${yellow}, ${horizontalBar} ${white}[HP: ${currentEnemy.healthPoints}]`)
@@ -379,16 +412,27 @@ Hero.prototype.attack = Enemy.prototype.attack;
 
 
 function gameIntro () {
-    execSync('sleep 1')
-    console.log(`${blue}\n\n\n\n|-----${yellow}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${blue}-----|`)
+    execSync('sleep 0.2')
+    console.log('')
+    execSync('sleep 0.2')
+    console.log('')
+    execSync('sleep 0.2')
+    console.log('')
+    execSync('sleep 0.2')
+    console.log('')
+    execSync('sleep 0.2')
+    console.log(`${blue}|-----${yellow}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${blue}-----|`)
 
     execSync(dPS)
     console.log(`${cyan}  Greetings, valiant warrior! The age of glory is upon us.`)
 
     execSync(dPS)
-    console.log(`${blue}|-----${yellow}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${blue}-----|\n\n`)
-
-    execSync(tPS)
+    console.log(`${blue}|-----${yellow}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${h}${blue}-----|`)
+    execSync('sleep 0.33')
+    console.log('')
+    execSync('sleep 0.33')
+    console.log('')
+    execSync('sleep 0.33')
     console.log(`${cyan}What is your name, young hero?`)
 
     const userName = readline.question(magenta)
@@ -396,11 +440,15 @@ function gameIntro () {
     let heroHPStart = getRandomInts(heroAPHPStart[1][0], heroAPHPStart[1][0])[0];
     const hero = new Hero(userName, heroAPStart, heroHPStart)
 
-    execSync(tPS)
-    console.log(`\n${cyan}Courageous ${green}${hero.name}${cyan}, you are to set out on an ${white}adventure ${cyan}starting now.`)
+    execSync('sleep 0.5')
+    console.log('')
+    execSync('sleep 0.5')
+    console.log(`${cyan}Courageous ${green}${hero.name}${cyan}, you are to set out on an ${white}adventure ${cyan}starting now.`)
 
-    execSync(tPS)
-    console.log(`${cyan}\nEnter the (${white}w${cyan}) key to walk, the (${white}i${cyan}) key for your item inventory and personal statistics, or the (${white}q${cyan}) to quit the current game. Beware, however, ${red}monsters ${cyan}may appear...`)
+    execSync('sleep 0.5')
+    console.log('')
+    execSync('sleep 0.5')
+    console.log(`${cyan}Enter the (${white}w${cyan}) key to walk, the (${white}i${cyan}) key for your item inventory and personal statistics, or the (${white}q${cyan}) to quit the current game. Beware, however, ${red}monsters ${cyan}may appear...`)
     return hero;
 }
 
@@ -409,25 +457,37 @@ function walkReconciler(playAgain, walkAttempt, recentlyKilledEnemy, hero) {
         walkAttempt = readline.question(magenta)
         while (invalidWalkResponse(walkAttempt)) {
             if ((walkAttempt === "i") && !recentlyKilledEnemy) {
-                execSync('sleep 0.2')
-                console.log(`\n`)
+                execSync('sleep 0.07')
+                console.log('')
+                execSync('sleep 0.07')
+                console.log('')
+                execSync('sleep 0.07')
                 displayHeroStats(hero)
 
-                execSync('sleep 0.2')
+                execSync('sleep 0.1')
+                console.log('')
+                execSync('sleep 0.1')
+
                 displayInventory(hero)
 
-                execSync('sleep 0.5')
-                console.log(`\n\n${cyan}Enter (${white}w${cyan}) to walk, (${white}i${cyan}) for inventory and stats, or (${white}q${cyan}) to quit the current game.`)
+                execSync('sleep 0.07')
+                console.log('')
+                execSync('sleep 0.07')
+                console.log('')
+                execSync('sleep 0.07')
+                console.log(`${cyan}Enter (${white}w${cyan}) to walk, (${white}i${cyan}) for inventory and stats, or (${white}q${cyan}) to quit the current game.`)
                 walkAttempt = readline.question(magenta)
                 continue;
             } else if ((walkAttempt != "w") && (walkAttempt != "q") && recentlyKilledEnemy) {
-                execSync(tPS)
                 console.log(`${yellow}Please enter (${white}w${yellow}) to walk or (${white}q${yellow}) to quit the current game.`)
             } else if (walkAttempt === "q") {
                 displayFinalStats(hero)
                 playAgain = playAgainPrompt();
                 if (playAgain === "n") {
-                    console.log('\n')
+                    execSync('sleep 0.07')
+                    console.log('')
+                    execSync('sleep 0.07')
+                    console.log('')
                     return ["", "", true, false];
                 }
                 return ["", "", true, true];
@@ -447,12 +507,17 @@ function encounterEnemy (hero) {
     let grammarInsert = "";
     if (firstLetterVowel(currentEnemy.mood)) { grammarInsert = "n"; }
 
-    execSync(tPS)
-    console.log(`\n${red}You encountered a${grammarInsert} ${lowerCaseMood} ${currentEnemy.species} and it is going to ${yellow}ATTACK ${red}you!`)
+    execSync('sleep 0.5')
+    console.log('')
+    execSync('sleep 0.5')
+    console.log(`${red}You encountered a${grammarInsert} ${lowerCaseMood} ${currentEnemy.species} and it is going to ${yellow}ATTACK ${red}you!`)
     displayEnemyStats(currentEnemy)
 
-    execSync(dPS)
-    console.log(`\n`)
+    execSync('sleep 0.1')
+    console.log(``)
+    execSync('sleep 0.1')
+    console.log(``)
+    execSync('sleep 0.1')
     displayHeroStats(hero)
     return [currentEnemy, true, lowerCaseMood, grammarInsert];
 }
@@ -463,41 +528,50 @@ function noEncounterNotif() {
 }
 
 function decideRunOrFight () {
-    execSync(tPS)
-    console.log(`\n\n${cyan}What will you do -- attempt to run (${white}r${cyan}) or resolve to fight (${white}f${cyan})?`)
+    execSync('sleep 0.33')
+    console.log('')
+    execSync('sleep 0.33')
+    console.log('')
+    execSync('sleep 0.33')
+    console.log(`${cyan}What will you do -- attempt to run (${white}r${cyan}) or resolve to fight (${white}f${cyan})?`)
     let decisionAttempt = readline.question(magenta)
-    let decisionFailCount = 0;
     while(invalidDecisionResponse(decisionAttempt)) {
         console.log(`${yellow}Please choose to attempt to run (${white}r${yellow}) or resolve to fight (${white}f${yellow}).`)
         decisionAttempt = readline.question(magenta)
-        decisionFailCount += 1;
     }
-    return [decisionAttempt, decisionFailCount];
+    return decisionAttempt;
 }
 
 function tryToRun (hero, currentEnemy, lowerCaseMood) {
     if (getRandomInts(0, 2)[0] === 0) {
         execSync(tPS)
-        console.log(`\n${cyan}You got away safely! Enter (${white}w${cyan}) to walk, (${white}i${cyan}) for inventory and stats, or (${white}q${cyan}) to quit the current game.`)
+        console.log('')
+        console.log(`${cyan}You got away safely! Enter (${white}w${cyan}) to walk, (${white}i${cyan}) for inventory and stats, or (${white}q${cyan}) to quit the current game.`)
         return [true, ""];
     } else {
         let heroDamage = currentEnemy.attack(hero)
 
         execSync('sleep 1.5')
-        console.log(`\n${red}You failed to run away!`)
+        console.log('')
+        console.log(`${red}You failed to run away!`)
 
-        execSync(tPS)
-        console.log(`\nThe ${lowerCaseMood} ${currentEnemy.species} attacked you anyways and did ${white}${heroDamage} ${red}health points of damage.`)
+        execSync('sleep 0.5')
+        console.log('')
+        execSync('sleep 0.5')
+        console.log(`The ${lowerCaseMood} ${currentEnemy.species} attacked you anyways and did ${white}${heroDamage} ${red}health points of damage.`)
         displayEnemyStats(currentEnemy)
-        execSync(dPS)
-        console.log(`\n`)
+        execSync('sleep 0.1')
+        console.log('')
+        execSync('sleep 0.1')
+        console.log('')
+        execSync('sleep 0.1')
         displayHeroStats(hero)
         return [false, obtainFightResponse()];
     }
 }
 
 function potentiallyAddEnemyDrop (hero, currentEnemy) {
-    execSync(tPS)
+    execSync('sleep 0.8')
     if (currentEnemy.mood === "Enraged") {
         console.log(`${blue}${yellow}${currentEnemy.specialDrop} ${blue}was added to your inventory.`)
         addDropToInventory(hero, currentEnemy.specialDrop)
@@ -527,12 +601,16 @@ function generateUpgradedStats(hero) {
 }
 
 function upgradeStats (hero) {
-    execSync('sleep 1.5')
-    console.log(`\n${white}But also, your stats ${green}increased${white}:`)
+    execSync(tPS)
+    console.log(`${white}Also, your stats ${green}increased${white}:`)
     let [aPIncrease, hPIncrease] = generateUpgradedStats(hero);
 
-    execSync('sleep 0.7')
-    console.log(`\n\n${green}Hero ${blue}[${white}[ ${green}${hero.name} ${white}]${blue}]`)
+    execSync('sleep 0.23')
+    console.log('')
+    execSync('sleep 0.23')
+    console.log('')
+    execSync('sleep 0.23')
+    console.log(`${green}Hero ${blue}[${white}[ ${green}${hero.name} ${white}]${blue}]`)
 
     execSync(dPS)
     console.log(`${blue}(${white}|${green}Stats${white}|${blue}) ${green}~ Kill Count: ${red}${hero.killCount} ${green}+ ${yellow}1${green}, AP: ${magenta}${hero.attackPower} ${green}+ ${yellow}${aPIncrease}${green}, ${white}[HP: ${white}${hero.healthPoints} + ${yellow}${hPIncrease}${white}]`)
@@ -546,41 +624,74 @@ function enemyDeath (hero, currentEnemy, heroHPCurrent, enemyAlive, recentlyKill
     enemyAlive = false;
     recentlyKilledEnemy = true;
 
-    execSync('sleep 2')
-    console.log(`\n\n\n${white}You ${green}successfully ${white}defeated the ${red}${lowerCaseMood} ${currentEnemy.species}${white}!`)
+    execSync('sleep 0.3')
+    console.log('')
+    execSync('sleep 0.3')
+    console.log('')
+    execSync('sleep 0.3')
+    console.log('')
+    execSync('sleep 0.3')
+    console.log(`${white}You ${green}successfully ${white}defeated the ${red}${lowerCaseMood} ${currentEnemy.species}${white}!`)
     potentiallyAddEnemyDrop(hero, currentEnemy)
 
-    execSync(tPS)
+    execSync('sleep 0.8')
     console.log(`${white}You rested for a while and your HP returned to normal.`)
     hero.healthPoints = heroHPCurrent;
     const newHeroHp = upgradeStats(hero);
 
-    execSync(tPS)
-    console.log(`\n\n${white}Here is your up-to-date inventory:`)
+    execSync('sleep 0.33')
+    console.log('')
+    execSync('sleep 0.33')
+    console.log('')
+    execSync('sleep 0.33')
+    console.log(`${white}Here is your up-to-date inventory:`)
 
-    execSync('sleep 0.7')
-    console.log(``)
+    execSync('sleep 0.35')
+    console.log('')
+    execSync('sleep 0.35')
     displayInventory(hero, blue)
 
-    execSync(tPS)
-    console.log(`\n\n${cyan}Enter (${white}w${cyan}) to continue walking or (${white}q${cyan}) to quit the current game.`)
+    execSync('sleep 0.33')
+    console.log('')
+    execSync('sleep 0.33')
+    console.log('')
+    execSync('sleep 0.33')
+    console.log(`${cyan}Enter (${white}w${cyan}) to continue walking or (${white}q${cyan}) to quit the current game.`)
     return [enemyAlive, recentlyKilledEnemy, newHeroHp];
 }
 
 function heroAttackEnemy(hero, currentEnemy) {
     let enemyDamage = hero.attack(currentEnemy)
 
-    execSync(tPS)
-    console.log(`\n${cyan}You attacked and did ${white}${enemyDamage} ${cyan}health points of damage.`)
+    execSync('sleep 0.5')
+    console.log('')
+    execSync('sleep 0.5')
+    console.log(`${cyan}You attacked and did ${white}${enemyDamage} ${cyan}health points of damage.`)
 }
 
 function enemyAttackHero(hero, currentEnemy) {
+    if (getRandomInts(0, 4)[0] === 0) {
+        execSync('sleep 0.5')
+        console.log('')
+        execSync('sleep 0.5')
+        console.log(`${red}The ${lowerCaseMood} ${currentEnemy.species} tried to attack you but missed!`)
+        return;
+    }
     const heroDamage = currentEnemy.attack(hero)
+    execSync('sleep 0.5')
+    console.log('')
+    execSync('sleep 0.5')
     console.log(`${red}The ${lowerCaseMood} ${currentEnemy.species} attacked you and did ${white}${heroDamage} ${red}health points of damage.`)
 }
 
 function heroDeath(hero, currentEnemy, lowerCaseMood, heroHPCurrent) {
-    execSync('sleep 2')
+    execSync('sleep 0.5')
+    console.log('')
+    execSync('sleep 0.5')
+    console.log('')
+    execSync('sleep 0.5')
+    console.log('')
+    execSync('sleep 0.5')
     console.log(`${red}You were slaughtered by the ${lowerCaseMood} ${currentEnemy.species}!`)
     hero.healthPoints = heroHPCurrent;
     displayFinalStats(hero)
@@ -588,8 +699,12 @@ function heroDeath(hero, currentEnemy, lowerCaseMood, heroHPCurrent) {
 }
 
 function playAgainPrompt () {
-    execSync(tPS)
-    console.log(`\n\n${cyan}Would you like to play again? Enter (${white}y${cyan}) or (${white}n${cyan}).`)
+    execSync('sleep 0.33')
+    console.log('')
+    execSync('sleep 0.33')
+    console.log('')
+    execSync('sleep 0.33')
+    console.log(`${cyan}Would you like to play again? Enter (${white}y${cyan}) or (${white}n${cyan}).`)
     let playAgainAttempt = readline.question(magenta)
     while (invalidPlayAgainResponse(playAgainAttempt)) {
         console.log(`${yellow}Please Enter (${white}y${yellow}) or (${white}n${yellow}) to play again or not.`)
@@ -599,8 +714,12 @@ function playAgainPrompt () {
 }
 
 function obtainFightResponse() {
-    execSync(tPS)
-    console.log(`\n\n${cyan}Enter (${white}f${cyan}) to fight.`)
+    execSync('sleep 0.33')
+    console.log('')
+    execSync('sleep 0.33')
+    console.log('')
+    execSync('sleep 0.33')
+    console.log(`${cyan}Enter (${white}f${cyan}) to fight.`)
     decisionAttempt = readline.question(magenta)
     while (invalidFightResponse(decisionAttempt)) {
         console.log(`${yellow}Please Enter (${white}f${yellow}) to fight.`)
@@ -608,8 +727,7 @@ function obtainFightResponse() {
     }
 }
 
-function fightToTheDeath (hero, currentEnemy, lowerCaseMood, heroHPCurrent, enemyAlive, recentlyKilledEnemy, decisionFailCount) {
-    // if (decisionFailCount >= 1) { execSync('sleep 0.5'); }
+function fightToTheDeath (hero, currentEnemy, lowerCaseMood, heroHPCurrent, enemyAlive, recentlyKilledEnemy) {
     heroAttackEnemy(hero, currentEnemy)
     if (currentEnemy.healthPoints <= 0) { // if the enemy dies
         [eAlive, rkEnemy, heroHPC] = enemyDeath(hero, currentEnemy, heroHPCurrent, enemyAlive, recentlyKilledEnemy)
@@ -619,17 +737,24 @@ function fightToTheDeath (hero, currentEnemy, lowerCaseMood, heroHPCurrent, enem
     if (hero.healthPoints <= 0) { // if the hero dies
         [hAlive, playAgainDecision] = heroDeath(hero, currentEnemy, lowerCaseMood, heroHPCurrent)
         if (playAgainDecision === "n") {
-            console.log('\n')
+            execSync('sleep 0.07')
+            console.log('')
+            execSync('sleep 0.07')
+            console.log('')
+            execSync('sleep 0.07')
             return ["", "", "", "", true, false];
         }
         return ["", "", "", "", true, true]; // when the user wants to restart the game, the computer will hold in memory that this instantiation of the mainGame function has wantToQuit being true. This is necessary because when the user eventually chooses to quit, as the computer tries to loop between the various pairs of if-statements in the main function, the computer remembers each mainGame instantiation's wantToQuit bool value. And since we want to run through the loop between the two if-statements successfully until the original function call, we want wantToQuit to be true for all prior instantiations of mainGame. 
     }
     displayEnemyStats(currentEnemy)
-    execSync(dPS)
-    console.log(`\n`)
+    execSync('sleep 0.1')
+    console.log('')
+    execSync('sleep 0.1')
+    console.log('')
+    execSync('sleep 0.1')
     displayHeroStats(hero)
     obtainFightResponse()
-    return [true, true, false, heroHPCurrent, false];
+    return [true, true, false, heroHPCurrent, false, false];
 }
 
 
@@ -654,13 +779,13 @@ function mainGame () {
             noEncounterNotif()
         } else {
             [currentEnemy, enemyAlive, lowerCaseMood, grammarInsert] = encounterEnemy(hero);
-            [decision, decisionFailCount] = decideRunOrFight();
+            let decision = decideRunOrFight();
             let escapedSafely = false;
             if (decision === "r") { // if hero chooses to run initially
                 [escapedSafely, decisionAttempt] = tryToRun(hero, currentEnemy, lowerCaseMood);
             }
             while (heroAlive && enemyAlive && !escapedSafely) {
-                [heroAlive, enemyAlive, recentlyKilledEnemy, heroHPCurrent, wantToExit, wantToRestart] = fightToTheDeath(hero, currentEnemy, lowerCaseMood, heroHPCurrent, enemyAlive, recentlyKilledEnemy, decisionFailCount); // hAlive, true, false, 0, true, false
+                [heroAlive, enemyAlive, recentlyKilledEnemy, heroHPCurrent, wantToExit, wantToRestart] = fightToTheDeath(hero, currentEnemy, lowerCaseMood, heroHPCurrent, enemyAlive, recentlyKilledEnemy); // true, true, false, heroHPCurrent, false, false
                 if (wantToRestart) {
                     mainGame()
                 }
