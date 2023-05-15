@@ -289,7 +289,7 @@ function addDropToInventory (hero, enemyDrop) {
 
 
 
-function displayFinalStats(hero) {
+function displayFinalStats(hero, currentEnemy) {
     execSync('sleep 0.25')
     console.log('')
     execSync('sleep 0.25')
@@ -355,11 +355,15 @@ function displayInventory (hero, color = white,) {
 }
 
 function displayHeroStats (hero, background = "") {
+    let horizontal = `${h}${h}`;
+    if (hero.killCount < 10) {
+        horizontal += "\u2015"
+    }
     execSync(dPS)
     console.log(`${background}${green}Hero ${blue}[${white}[ ${green}${hero.name} ${white}]${blue}]`)
 
     execSync(dPS)
-    console.log(`${blue}(${white}|${green}Stats${white}|${blue}) ${green}~ Kill Count: ${red}${hero.killCount}${green}, AP: ${magenta}${hero.attackPower}${green}, ${h}${h}\u2015 ${white}[HP: ${hero.healthPoints}]`)
+    console.log(`${blue}(${white}|${green}Stats${white}|${blue}) ${green}~ Kill Count: ${red}${hero.killCount}${green}, AP: ${magenta}${hero.attackPower}${green}, ${horizontal} ${white}[HP: ${hero.healthPoints}]`)
 }
 
 function displayEnemyStats (currentEnemy) {
