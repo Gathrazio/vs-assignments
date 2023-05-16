@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario Pest Control</title>
+    <link href="styles.css" rel="stylesheet"/>
+</head>
+<body>
+    <div id="highlight-container">
+        <div id="highlight-sub-container">
+            <header id="title-container">
+                <h1>Mario Pest Control</h1>
+            </header>
+            <div id="goomba-container" class="enemy-container">
+                <div id="goomba-pic-container"><img src="images/Goomba.png" id="goomba-pic"></div>
+                <div id="goomba-price-container" class="info-block"><h2>Goomba: 5 Coins Per</h2></div>
+                <div id="goomba-total-caught" class="info-block"><h2>Total Caught</h2></div>
+                <div id="goomba-input-container" class="info-block"> <input type="number" min="0" step="1" name="goomba-input" id="goomba-input" value="0"></div>
+            </div>
+            <div id="bobombs-container" class="enemy-container">
+                <div id="bobomb-pic-container"><img src="images/bob-omb.webp" id="bobomb-pic"></div>
+                <div id="bobomb-price-container" class="info-block"><h2>Bob-Bombs: 7 Coins Per</h2></div>
+                <div id="bobomb-total-caught" class="info-block"><h2>Total Caught</h2></div>
+                <div id="bobomb-input-container" class="info-block"><input type="number" min="0" step="1" name="bobomb-input" id="bobomb-input" value="0"></div>
+            </div>
+            <div id="cheepcheeps-container" class="enemy-container">
+                <div id="cheepcheep-pic-container"><img src="images/cheep-cheep.webp" id="cheepcheep-pic"></div>
+                <div id="cheepcheep-price-container" class="info-block"><h2>Cheep-Cheeps: 11 Coins Per</h2></div>
+                <div id="cheepcheep-total-caught" class="info-block"><h2>Total Caught</h2></div>
+                <div id="cheepcheep-input-container" class="info-block"><input type="number" min="0" step="1" name="cheepcheep-input" id="cheepcheep-input" value="0"></div>
+            </div>
+            <div id="total-cost-container">
+                <div id="total-cost-text-container"><h2>Total Cost</h2></div><div id="total-cost-amount-container"><h2 id="total">0 Coins</h2></div>
+            </div>
+            <footer>
+                <div id="email" class="footer">mario@mushroomkdm.com</div>
+                <div id="company" class="footer">Mushroom Plumbing LLC</div>
+                <div id="physical-address" class="footer">123 Portabella Dr.</div>
+            </footer>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

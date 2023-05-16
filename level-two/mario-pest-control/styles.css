@@ -1,0 +1,265 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-color: var(--pastel-maroon);
+}
+
+@keyframes button-depress {
+    from {background-color: var(--meta-teal);}
+    to {background-color: var(--purple);}
+}
+
+:root {
+    --deep-pastel-maroon: #643843;
+    --pastel-maroon: #99627A;
+    --dark-teal: #146C94;
+    --light-pastel-maroon: #C88EA7;
+    --lilac: #8787e8;
+    --teal: #146C94;
+    --orange: #E9A178;
+    --meta-teal: #48cbef;
+    --light-teal: #AFD3E2;
+    --grey: #d7cece;
+    --purple: #725596;
+    --orange-red: rgb(223, 75, 59);
+}
+
+#highlight-container {
+    display: flex;
+    border: 2px solid black;
+    height: 100%;
+    width: 100%;
+    margin: 2%;
+    border-radius: 12px;
+    background-color: var(--orange);
+}
+
+#highlight-sub-container {
+    display: grid;
+    width: 100%;
+    grid-gap: 1%;
+    margin: 2%;
+    grid-template-rows: 1fr 9fr 9fr 9fr 1fr 0.8fr;
+    grid-template-areas:
+        "header"
+        "g-container"
+        "b-container"
+        "c-container"
+        "t-c-container"
+        "footer";
+}
+
+header {
+    grid-area: header;
+    border-radius: 15px;
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid black;
+}
+
+#goomba-container {
+    grid-area: g-container;
+    grid-template-areas:
+        "goomba-pic goomba-pic"
+        "goomba-price goomba-price"
+        "goomba-tc goomba-i";
+}
+
+#bobombs-container {
+    grid-area: b-container;
+    display: grid;
+    grid-template-rows: 6fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "bobomb-pic bobomb-pic"
+        "bobomb-price bobomb-price"
+        "bobomb-tc bobomb-i";
+}
+
+#cheepcheeps-container {
+    grid-area: c-container;
+    display: grid;
+    grid-template-rows: 6fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "cheepcheep-pic cheepcheep-pic"
+        "cheepcheep-price cheepcheep-price"
+        "cheepcheep-tc cheepcheep-i";
+}
+
+#total-cost-container {
+    grid-area: t-c-container;
+    display: grid;
+    border: 4px solid black;
+    justify-content: center;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "tct-container tca-container";
+}
+
+#total-cost-amount-container {
+    grid-area: tca-container;
+    background-color: #06d78b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1%;
+    border-left: 4px solid black;
+}
+
+#total-cost-text-container {
+    grid-area: tct-container;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--orange-red);
+}
+
+footer {
+    grid-area: footer;
+    display: flex;
+    border: 4px solid black;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 15px;
+    background-color: green;
+}
+
+
+
+.enemy-container {
+    background-color: var(--orange-red);
+    border: 4px solid black;
+    display: grid;
+    grid-template-rows: 6fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+#goomba-pic-container {
+    grid-area: goomba-pic;
+    border-bottom: 4px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#goomba-price-container {
+    grid-area: goomba-price;
+    border-bottom: 4px solid black;
+}
+
+#goomba-total-caught {
+    grid-area: goomba-tc;
+    border-right: 4px solid black;
+}
+
+#goomba-input-container {
+    grid-area: goomba-i;
+}
+
+input[type="number"], textarea {
+    background-color : #06d78b; 
+    font-size: 24px;
+    border-radius: 10px;
+    padding: 4%;
+    width: 50%;
+    text-align: center;
+    border: 4px solid black;
+}
+
+
+
+#bobomb-pic-container {
+    grid-area: bobomb-pic;
+    border-bottom: 4px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#bobomb-price-container {
+    grid-area: bobomb-price;
+    border-bottom: 4px solid black;
+}
+
+#bobomb-total-caught {
+    grid-area: bobomb-tc;
+    border-right: 4px solid black;
+}
+
+
+.info-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cheepcheep-pic-container {
+    grid-area: cheepcheep-pic;
+    border-bottom: 4px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cheepcheep-price-container {
+    grid-area: cheepcheep-price;
+    border-bottom: 4px solid black;
+}
+
+#cheepcheep-total-caught {
+    grid-area: cheepcheep-tc;
+    border-right: 4px solid black;
+}
+
+#cheepcheep-input {
+    grid-area: cheepcheep-i;
+}
+
+
+
+img {
+    height: 80%;
+    width: 80%;
+}
+
+
+@media only screen and (min-width: 800px) {
+    .enemy-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 33vh;
+    }
+
+    #goomba-container {
+        grid-template-areas:
+            "goomba-pic goomba-price goomba-tc goomba-i";
+    }
+    
+    #bobombs-container {
+        grid-template-areas:
+        "bobomb-pic bobomb-price bobomb-tc bobomb-i";
+    }
+    
+    #cheepcheeps-container {
+        grid-area: c-container;
+        display: grid;
+        grid-template-rows: 6fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "cheepcheep-pic cheepcheep-pic"
+            "cheepcheep-price cheepcheep-price"
+            "cheepcheep-tc cheepcheep-i";
+    }
+}
