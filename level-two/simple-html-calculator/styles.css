@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --dark-teal: #146C94;
+    --teal: #19A7CE;
+    --meta-teal: #48cbef;
+    --light-teal: #AFD3E2;
+    --grey: #d7cece;
+    --purple: #725596;
+}
+
+@keyframes button-depress {
+    from {background-color: var(--meta-teal);}
+    to {background-color: var(--purple);}
+}
+
+body {
+    display: grid;
+    height: 100vh;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "add"
+        "subtract"
+        "multiply";
+}
+
+input {
+    border-radius: 5px;
+    text-align: center;
+    padding: 2%;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.highlight-container {
+    border: 2px solid black;
+    border-radius: 24px;
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    padding: 2%;
+    background-color: var(--dark-teal);
+}
+
+button {
+    margin-right: 5%;
+    padding: 2%;
+    border-radius: 10px;
+    background-color: var(--meta-teal);
+}
+
+button:hover {
+    cursor: pointer;
+    animation-name: button-depress;
+    animation-duration: 1s;
+    background-color: var(--purple);
+}
+
+.operation-section {
+    background-color: var(--teal);
+    display: flex;
+    border: 8px solid white;
+    border-radius: 24px;
+    justify-content: center;
+    align-items: center;
+}
+
+.result-container {
+    padding: 2%;
+    border-radius: 10px;
+    background-color: var(--light-teal);
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.result-container, .clear-button {
+    display: none;
+}
+
+.first-field, .second-field {
+    margin-right: 5%;
+    width: 15%;
+}
+
+.second-field {
+    margin-left: 5%;
+}
+
+#add-section {
+    grid-area: add;
+}
+
+#subtract-section {
+    grid-area: subtract;
+}
+
+#multiply-section {
+    grid-area: multiply;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet"/>
+    <title>Simple HTML Calculator</title>
+</head>
+<body>
+    <div id="add-section" class="operation-section">
+        <div class="highlight-container">
+            <form id="add-form" name="add-form">
+                <button name="add-button">Calculate</button>
+                <input type="number" step="0.00000001" name="add-first-field" class="first-field" required/>
+                <span> + </span>
+                <input type="number" step="0.00000001" name="add-second-field" class="second-field" required/>
+                <span> = </span>
+                <span id="add-result-container" class="result-container"></span>
+            </form>
+            <button id="add-clear" class="clear-button">Clear</button>
+        </div>
+    </div>
+    <div id="subtract-section" class="operation-section">
+        <div class="highlight-container">
+            <form id="subtract-form" name="subtract-form">
+                <button name="subtract-button">Calculate</button>
+                <input type="number" step="0.00000001" name="subtract-first-field" class="first-field" required/>
+                <span> - </span>
+                <input type="number" step="0.00000001" name="subtract-second-field" class="second-field" required/>
+                <span> = </span>
+                <span id="subtract-result-container" class="result-container"></span>
+            </form>
+            <button id="subtract-clear" class="clear-button">Clear</button>
+        </div>
+    </div>
+    <div id="multiply-section" class="operation-section">
+        <div class="highlight-container">
+            <form id="multiply-form" name="multiply-form">
+                <button name="multiply-button">Calculate</button>
+                <input type="number" step="0.00000001" name="multiply-first-field" class="first-field" required/>
+                <span> × </span>
+                <input type="number" step="0.00000001" name="multiply-second-field" class="second-field" required/>
+                <span> = </span>
+                <span id="multiply-result-container" class="result-container"></span>
+            </form>
+            <button id="multiply-clear" class="clear-button">Clear</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
