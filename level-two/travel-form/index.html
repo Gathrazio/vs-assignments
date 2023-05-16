@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Form</title>
+    <link href="styles.css" rel="stylesheet"\>
+</head>
+<body>
+    <div id="highlight-container">
+        <form id="travel-form" name="travel-form">
+            <div id="first-name-div" class="container">
+                <div class="first-last-age-text">First Name</div><input type="text" name="firstName" id="firstName" required/>
+            </div>
+            <div id="last-name-div" class="container">
+                <div class="first-last-age-text">Last Name</div> <input type="text" name="lastName" id="lastName" required/>
+            </div>
+            <div id="age-div" class="container">
+                <div class="first-last-age-text">Age</div><input type="number" min="0" step="1" name="age" id="age" required/>
+            </div>
+            <div id="gender-container" class="container">
+                <input type="radio" name="gender" value="male" required/>
+                <div class="gender-label-div">Male</div>
+                <input type="radio" name="gender" value="female" required/>
+                <div class="gender-label-div">Female</div>
+            </div>
+            <div id="location-container" class="container">
+                <select name="location" id="location-select">
+                        <option value="Toronto">Toronto</option>
+                        <option value="Berlin">Berlin</option>
+                        <option value="Hong Kong">Hong Kong</option>
+                        <option value="Osaka">Osaka</option>
+                </select>
+            </div>
+            <div id="dietary-restrictions-container" class="container">
+                    <input type="checkbox" name="diet" value="vegan"></input> <div class="diet-options">Vegan</div>
+                    <input type="checkbox" name="diet" value="vegetarian"></input> <div class="diet-options">Vegetarian</div>
+                    <input type="checkbox" name="diet" value="gluten-free"></input> <div class="diet-options">Gluten Free</div>
+            </div>
+            <div class="container" id="button-container">
+                <button>Submit</button>
+            </div>
+        </form>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

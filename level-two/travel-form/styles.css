@@ -1,0 +1,175 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "h-cont";
+    height: 100vh;
+    width: 100%;
+    background-color: var(--pastel-maroon);
+}
+
+form {
+    display: grid;
+    grid-gap: 2vh;
+    height: 100%;
+    width: 100%;
+    padding: 5%;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(7, 1fr);
+    grid-template-areas:
+        "f-name"
+        "l-name"
+        "age"
+        "gender"
+        "diet"
+        "location";
+}
+
+@keyframes button-depress {
+    from {background-color: var(--meta-teal);}
+    to {background-color: var(--purple);}
+}
+
+:root {
+    --deep-pastel-maroon: #643843;
+    --pastel-maroon: #99627A;
+    --dark-teal: #146C94;
+    --light-pastel-maroon: #C88EA7;
+    --lilac: #8787e8;
+    --teal: #146C94;
+    --orange: #E9A178;
+    --meta-teal: #48cbef;
+    --light-teal: #AFD3E2;
+    --grey: #d7cece;
+    --purple: #725596;
+}
+
+input {
+    border-radius: 10px;
+    width: 15%;
+}
+
+#highlight-container {
+    grid-area: h-cont;
+    border-radius: 10px;
+    margin: 3%;
+    border: 3px solid var(--pastel-maroon);
+    background-color: var(--light-pastel-maroon);
+}
+
+#first-name-div {
+    grid-area: f-name;
+}
+
+#last-name-div {
+    grid-area: l-name;
+}
+
+#age-div {
+    grid-area: age;
+}
+
+.container {
+    border: 2px solid var(--grey);
+    border-radius: 7px;
+    background-color: var(--deep-pastel-maroon);
+    padding: 2%;
+}
+
+#button-container {
+    background-color: var(--orange);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#first-name-div, #last-name-div, #age-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gender-container {
+    grid-area: gender;
+}
+
+#dietary-restrictions-container, #gender-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#dietary-restrictions-container {
+    grid-area: diet;
+}
+
+#location-container {
+    grid-area: location;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#location-select {
+    border-radius: 10px;
+}
+
+.first-last-age-text {
+    margin-right: 5%;
+}
+
+.first-last-age-text, #gender-container > div, .diet-options, #location-select {
+    background-color: var(--lilac);
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 2%;
+    padding-bottom: 2.5%;
+}
+
+.first-last-age-text, #gender-container > div, .diet-options {
+    max-height: 90%;
+}
+
+#gender-container > div {
+    padding: 2%;
+    border: 2px solid black;
+}
+
+#firstName, #lastName, #age {
+    text-align: center;
+    padding: 2%;
+    max-height: 80%;
+}
+
+input[type='radio'], input[type='checkbox'] {
+    transform: scale(2);
+}
+
+input[type='radio']:hover, input[type='checkbox']:hover {
+    cursor: pointer;
+}
+
+button {
+    border-radius: 10px;
+    padding: 3%;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+button:hover {
+    cursor: pointer;
+    animation-name: button-depress;
+    animation-duration: 1s;
+    background-color: var(--purple);
+}
+
+select:hover {
+    cursor: pointer;
+}
