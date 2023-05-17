@@ -31,6 +31,12 @@ body {
     background-color: black;
 }
 
+audio {
+    border: 4px solid blueviolet;
+    border-radius: 15px;
+    background-color: blueviolet;
+}
+
 
 .box {
     padding: 15%;
