@@ -1,0 +1,283 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'sans-serif';
+}
+
+:root {
+    --green-bar: #18444c;
+    --text-color: rgb(97, 97, 100);
+    --bamboo: #c1d9cc;
+}
+
+body {
+    height: 100%;
+}
+
+@font-face {
+    font-family: verdeModerna;
+    src: url("resources/verdemoderna.woff")
+}
+
+@font-face {
+    font-family: julius;
+    src: url("resources/juliussansone-regular-webfont.woff");
+}
+
+#container {
+    height: 100%;
+    width: 100%;
+    background-color: blueviolet;
+    display: grid;
+    grid-template-areas:
+    "top-b"
+    "title-c"
+    "title-c"
+    "pt"
+    "st"
+    "tt"
+    "footer-c"
+    "footer-c"
+    "a"
+    "l";
+}
+
+
+.header-below {
+    margin-top: 34px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-family: julius;
+}
+
+.header {
+    font-size: 20px;
+    font-family: julius;
+}
+
+.paragraph-bottom {
+    margin-top: 9px;
+}
+
+.main-block {
+    background-color: rgb(223, 98, 31);
+}
+
+#top-bar {
+    grid-area: top-b;
+    height: 10px;
+    background-color: var(--green-bar);
+}
+
+#title-container {
+    grid-area: title-c;
+    background-image: url("resources/gridlines.png"), url("resources/contours-opaque.png"), url("resources/huntington.jpg");
+    background-attachment: fixed, fixed, scroll;
+    background-position: center;
+    background-size: auto, auto, cover;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "titlei"
+        "titlel";
+
+}
+
+#enso-img {
+    transform: scale(0.17);
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+    margin-bottom: -115px;
+    margin-top: -127px;
+    opacity: 60%;
+}
+
+#title {
+    font-family: julius;
+    font-size: 1.9em;
+    color: white;
+}
+
+#slogan {
+    font-family: 'sans-serif';
+    font-size: 1.35em;
+    color: white;
+    font-style: italic;
+    margin-top: 5px;
+    opacity: 60%;
+}
+
+#title-text-container {
+    height: 70px;
+    text-align: center;
+}
+
+
+#title-items {
+    grid-area: titlei;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 170px;
+}
+
+#title-items > * {
+    display: inline-block;
+}
+
+#title-link-container {
+    grid-area: titlel;
+    background-color: rgba(255, 255, 255, 0.243);
+    height: 70px;
+    display: grid;
+    grid-template-columns: 70px auto 70px;
+    grid-template-areas:
+        ". tlt wrc";
+}
+
+#title-link-text-container {
+    grid-area: tlt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#title-link-text {
+    font-family: julius;
+    color: white;
+    opacity: 60%;
+}
+
+#wrc-container {
+    grid-area: wrc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#white-right-clip {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    opacity: 60%;
+}
+
+.text-section {
+    color: var(--text-color);
+    padding-top: 30px;
+    padding-bottom: 35px;
+    padding-left: 60px;
+    padding-right: 60px;
+    /*transform: scale(1.06,1);*/
+    font-size: 15.8px;
+    line-height: 1.68;
+}
+
+#primary-text {
+    background-color: white;
+    grid-area: pt;
+}
+
+#authors {
+    grid-area: a;
+}
+
+#secondary-text {
+    grid-area: st;
+    background-image: url("resources/gridlines.png"), url("resources/contours-opaque.png"), url("resources/bamboo.png");
+    background-attachment: scroll, scroll, fixed;
+    background-position: center;
+    background-size: auto, auto, cover;
+    background-color:var(--bamboo);
+}
+
+#links {
+    grid-area: l;
+}
+
+#tertiary-text {
+    grid-area: tt;
+    background-color: white;
+}
+
+#footer-container {
+    grid-area: footer-c;
+}
+
+#primary-footer {
+    grid-area: pft;
+}
+
+#secondary-footer {
+    grid-area: sft;
+}
+
+
+.authors {
+    background-color: lightcoral
+}
+.links {
+    background-color: lightpink
+}
+
+.footer {
+    width: 100%;
+    background-color: aquamarine;
+}
+
+@media (max-width: 320px) {
+
+}
+
+@media (max-width: 500px) {
+
+}
+
+@media (max-width: 600px) {
+
+}
+
+@media (max-width: 900px){
+    /* #container {
+        grid-template-columns: 2fr 1.05fr;
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-areas: 
+            "title-c title-c"
+            "pt a"
+            "st l"
+            "tt ."
+            "footer-c footer-c"
+            "footer-c footer-c";
+    } */
+    /* .authors {
+         
+    }
+    .links {
+
+    } */
+    /* container could use some help so that it's children are full screen width */
+    /* .container {
+        
+    } */
+}
+
+/* FLEX */
+/* use flexbox to make the icons behave like css zen garden's social icons */
+/* .icons {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+}
+
+.icons > div {
+    width: 30px;
+    height: 30px;
+    background-color: black;
+    border-radius: 50%;
+} */
