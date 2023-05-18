@@ -11,7 +11,7 @@
     --bamboo: #c1d9cc;
     --deeper-bamboo: #b2d0c1;
     --link-color: rgb(49, 153, 162);
-    --intro-opaque-white: rgba(255, 255, 255, 0.152);
+    --intro-opaque-white: rgba(255, 255, 255, 0.083);
     --slightly-lighter-intro-opaque-white: rgba(246, 246, 246, 0.089);
     --primary-footer-text: rgba(190, 188, 188, 0.768);
     --author-background: #e9ecea;
@@ -653,7 +653,7 @@ a, a:visited, a:link {
         width: 80%;
         background-color: var(--intro-opaque-white);
         height: 87px;
-        margin-top: -30px;
+        margin-top: 140px;
         margin-left: 18%;
         display: grid;
         grid-template-columns: 80px auto 80px;
@@ -761,6 +761,12 @@ a, a:visited, a:link {
             "faq"
             "submit"
             "translations";
+    }
+
+    #title-link-container-container {
+        height: 100%;
+        width: 100%;
+        background-color: rgba(63, 96, 107, 0.343);
     }
 
     .link {
