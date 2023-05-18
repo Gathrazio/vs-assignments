@@ -9,6 +9,8 @@
     --green-bar: #18444c;
     --text-color: rgb(97, 97, 100);
     --bamboo: #c1d9cc;
+    --link-color: rgb(49, 153, 162);
+    --intro-opaque-white: rgba(255, 255, 255, 0.243);
 }
 
 body {
@@ -25,10 +27,24 @@ body {
     src: url("resources/juliussansone-regular-webfont.woff");
 }
 
+@font-face {
+    font-family: libreBaskerville;
+    src: url("resources/librebaskerville-regular-webfont.woff");
+}
+
+@font-face {
+    font-family: libreBaskervilleItalic;
+    src: url("resources/librebaskerville-italic-webfont.woff");
+}
+
+@font-face {
+    font-family: libreBaskervilleBold;
+    src: url("resources/librebaskerville-bold-webfont.woff");
+}
+
 #container {
     height: 100%;
     width: 100%;
-    background-color: blueviolet;
     display: grid;
     grid-template-areas:
     "top-b"
@@ -45,9 +61,9 @@ body {
 
 
 .header-below {
-    margin-top: 34px;
+    margin-top: 32px;
     margin-bottom: 5px;
-    font-size: 20px;
+    font-size: 19.5px;
     font-family: julius;
 }
 
@@ -68,6 +84,27 @@ body {
     grid-area: top-b;
     height: 10px;
     background-color: var(--green-bar);
+}
+
+#primary-footer-text {
+    font-family: libreBaskervilleItalic;
+    color: rgba(190, 188, 188, 0.768);
+    padding-top: 30px;
+    text-align: center;
+    font-style: italic;
+    padding-bottom: 35px;
+    padding-left: 60px;
+    padding-right: 60px;
+    letter-spacing: 0.3px;
+    transform: scale(1.03, 1);
+    font-size: 22.5px;
+    line-height: 1.68;
+}
+
+.lighter-footer-text {
+    color: rgba(255, 255, 255, 0.681);
+    font-style: normal;
+    font-family: libreBaskerville;
 }
 
 #title-container {
@@ -131,7 +168,7 @@ body {
 
 #title-link-container {
     grid-area: titlel;
-    background-color: rgba(255, 255, 255, 0.243);
+    background-color: var(--intro-opaque-white);
     height: 70px;
     display: grid;
     grid-template-columns: 70px auto 70px;
@@ -146,10 +183,21 @@ body {
     align-items: center;
 }
 
+#title-link-text-container:hover, #wrc-container:hover {
+    background-color: rgba(255, 255, 255, 0.361);
+    transition: background-color 0.3s ease-out 0s;
+    cursor: pointer;
+}
+
+#title-link-text-container:hover > div, #wrc-container:hover > img {
+    transition: opacity 0.1s ease-out 0s;
+    opacity: 100%;
+}
+
 #title-link-text {
     font-family: julius;
     color: white;
-    opacity: 60%;
+    opacity: 75%;
 }
 
 #wrc-container {
@@ -172,7 +220,8 @@ body {
     padding-bottom: 35px;
     padding-left: 60px;
     padding-right: 60px;
-    /*transform: scale(1.06,1);*/
+    letter-spacing: 0.3px;
+    transform: scale(1.03, 1);
     font-size: 15.8px;
     line-height: 1.68;
 }
@@ -184,6 +233,15 @@ body {
 
 #authors {
     grid-area: a;
+}
+
+.dotted {
+    text-decoration: underline dotted !important;
+}
+
+a, a:visited, a:link {
+    color: var(--link-color);
+    text-decoration: none;
 }
 
 #secondary-text {
@@ -210,10 +268,16 @@ body {
 
 #primary-footer {
     grid-area: pft;
+    background-image: url("resources/gridlines.png"), url("resources/contours-opaque.png"), url("resources/koi.jpg");
+    background-attachment: fixed, fixed, scroll;
+    background-position: center;
+    background-size: auto, auto, cover;
+    padding: 20px;
 }
 
 #secondary-footer {
     grid-area: sft;
+    font-family: verdeModerna;
 }
 
 
