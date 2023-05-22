@@ -1,0 +1,67 @@
+{
+    "appetizers": [
+        {
+            "name": "Wonton Bonton",
+            "ingredients": ["Cream Cheese", "Flour", "Vegetable Oil"],
+            "description": "A dough droplet with cream cheese on the interior which is deep fried."
+        },
+        {
+            "name": "Onion Ringlets",
+            "ingredients": ["Onions", "Breading", "Vegetable Oil"],
+            "description": "Rings of onions breaded and deep fried in vegetable oil."
+        },
+        {
+            "name": "Bread Saber",
+            "ingredients": ["Whole Wheat Bread", "Garlic", "Spices", "Butter"],
+            "description": "Sticks of bread dough which are slathered with chopped garlic, various Italian spices, and butter prior to cooking in an oven and promptly set on fire like light saber."
+        }
+    ],
+    "coldSandwiches": [
+        {
+            "name": "The Terminator",
+            "ingredients": ["White Bread", "Tomato", "Onion", "Pastrami", "Balsamic Vinegar", "Programmer's Tears"],
+            "description": "Our classic Italian sandwich with a JSON twist."
+        },
+        {
+            "name": "Elf Island",
+            "ingredients": ["Pita Bread", "Guacamole", "Hummus", "Cottage Cheese", "Strawberry Vinaigrette"],
+            "description": "A cold strawberry-infused sandwich even the elves themselves would jump for joy over."
+        }
+    ],
+    "hotSandwiches": [
+        {
+            "name": "Reuben Reuben",
+            "ingredients": ["Rye Bread", "Corned Beef", "Swiss Cheese", "Big Mac Sauce", "Cabbage"],
+            "description": "Corned beef and swiss cheese meet their maker in the oven with a glorious Big Mac sauce finisher."
+        },
+        {
+            "name": "Taco El Encante",
+            "ingredients": ["Flour Tortilla", "Chili Verde", "Roasted Pulled Pork", "Japaleno Rings", "Cheese"],
+            "description": "A grilled taco so fresh and savory you truly won't believe it."
+        }
+    ],
+    "desserts": [
+        {
+            "name": "Midnight",
+            "ingredients": ["Chocolate Ganache", "Flour", "Baking Soda", "Betty Crocker's Traditional Brownie Mix"],
+            "description": "Betty Crocker's Traditional Brownie Mix but with just enough extra steps for us to be able to call it our own."
+        },
+        {
+            "name": "Plump King Pie",
+            "ingredients": ["Pumpkin", "Flour", "Vegetable Oil", "Whipped Cream", "Cherries"],
+            "description": "A pumpkin pie for a plump king."
+        }
+    ],
+    "drinks": [
+        {
+            "name": "White Mystery",
+            "ingredients": ["White Mystery Flavored AirHead Candy", "Sprite", "Maple Syrup"],
+            "description": "It tastes like the 'White Mystery' Airheads flavor, just slightly worse."
+        },
+        {
+            "name": "Lemonaid",
+            "ingredients": ["Lemons", "Sugar", "Academic Test Preparation Serum"],
+            "description": "A hit among students -- just one glass and you're sure to ace your next test."
+        }
+    ]
+}
