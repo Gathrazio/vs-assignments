@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>AXIOS Todo Project</title>
+</head>
+<body>
+    <div id="content-container">
+        <div id="title-container" class="content-block"><h1 id="title">TODO</h1></div>
+        <div id="form-container" class="content-block">
+            <form name="todo-form">
+                <div id="input-container">
+                    <input type="text" id="title-input" name="title-input" placeholder="Title (required)" required>
+                    <input type="text" id="description-input" name="description-input" placeholder="Description">
+                    <input type="url" id="image-input" name="image-input" placeholder="Image URL">
+                </div>
+                <div class="button-container">
+                    <button id="submit-todo-button"><h2>Submit TODO</h2></button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
