@@ -8,12 +8,13 @@
     <title>AXIOS Todo Project</title>
 </head>
 <body>
-    <div id="content-container">
-        <div id="title-container" class="content-block"><h1 id="title">TODO</h1></div>
+    <div id="intro-container">
+        <!-- <div id="title-container" class="content-block"><h1 id="title">TODO</h1></div> -->
         <div id="form-container" class="content-block">
             <form name="todo-form">
                 <div id="input-container">
                     <input type="text" id="title-input" name="title-input" placeholder="Title (required)" required>
+                    <input type="number" id="price-input" name="price-input" placeholder="Price">
                     <input type="text" id="description-input" name="description-input" placeholder="Description">
                     <input type="url" id="image-input" name="image-input" placeholder="Image URL">
                 </div>
@@ -23,6 +24,9 @@
             </form>
         </div>
         </div>
+    </div>
+    <div id="todo-container-container">
+        <div id="todo-container"></div>
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="app.js"></script>

@@ -233,7 +233,7 @@ body {
 #title-link-text {
     font-family: julius;
     color: white;
-    font-size: 1em;
+    font-size: 0.8em;
     opacity: 75%;
 }
 
@@ -483,6 +483,12 @@ a, a:visited, a:link {
 #translations {
     border-top: 1px solid var(--barrier);
     grid-area: translations;
+}
+
+@media only screen and (min-width: 312px) {
+    #title-link-text {
+        font-size: 1em;
+    }
 }
 
 @media only screen and (min-width: 321px){
@@ -758,7 +764,7 @@ a, a:visited, a:link {
         text-align: center;
         line-height: 50px;
         height: 50px;
-        width:55px;
+        width:50px;
     }
 
     .icon:hover {
@@ -773,10 +779,10 @@ a, a:visited, a:link {
     #authors {
         background-color: var(--author-background);
         grid-area: a;
-        height: 290px;
+        height: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 80px 65px 65px 80px;
+        grid-template-rows: 85px 65px 65px 85px;
         grid-template-areas:
             "lohman mall"
             "knoeller walton"
@@ -786,57 +792,77 @@ a, a:visited, a:link {
 
     #lohman {
         grid-area: lohman;
+        border-bottom: 1px solid var(--barrier-light);
     }
 
     #mall {
         grid-area: mall;
+        margin-top: -18px;
+        border-bottom: 1px solid var(--barrier-light);
     }
 
     #knoeller {
         grid-area: knoeller;
-        border-top: 1px solid var(--barrier-light);
+        border-top: none;
+        border-bottom: 1px solid var(--barrier-light);
     }
 
     #walton {
-        border-top: 1px solid var(--barrier-light);
+        border-bottom: 1px solid var(--barrier-light);
+        border-top: none !important;
         grid-area: walton;
     }
 
     #stocks {
-        border-top: 1px solid var(--barrier-light);
+        border-top: none;
+        border-bottom: 1px solid var(--barrier-light);
         grid-area: stocks;
     }
 
     #carlson {
-        border-top: 1px solid var(--barrier-light);
+        border-top: none;
+        border-bottom: 1px solid var(--barrier-light);
         grid-area: carlson;
     }
 
     #meltmedia {
-        border-top: 1px solid var(--barrier-light);
+        border-top: none;
+        border-bottom: none !important;
+        margin-top: -5px;
         grid-area: meltmedia;
     }
 
     #shea {
-        border-top: 1px solid var(--barrier-light);
+        border-top: none;
+        margin-top: -8px;
         grid-area: shea;
     }
 
-    .author{
-        padding-left: 10%;
-        padding-top: 10px;
-        max-height: 80px;
+    .author {
+        all: revert;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 8%;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-right: 15px !important;
+        margin-top: 0px;
+        margin-bottom: 0px;
         padding-right: 0px;
     }
 
-    .author{
-        height: 100%;
-    }
-
     .link {
-        padding-left: 10%;
-        padding-top: 16px;
-        max-height: 80px;
+        all: revert;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 8%;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-right: 15px !important;
+        margin-top: 0px;
+        margin-bottom: 0px;
         padding-right: 0px;
     }
 
@@ -850,7 +876,7 @@ a, a:visited, a:link {
         display: grid;
         height: 100%;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 70px 70px 50px;
+        grid-template-rows: 67px 67px 54px;
         grid-template-areas:
             "view-design resources"
             "faq submit"
@@ -858,21 +884,28 @@ a, a:visited, a:link {
     }
 
     #view-design {
-        grid-area: view-design;
+        border-top: none;
+        border-bottom: 1px solid var(--barrier);
     }
 
     #css-resources {
-        grid-area: resources;
+        margin-top: -19px;
+        border-top: none;
+        border-bottom: 1px solid var(--barrier);
     }
 
     #faq {
-        border-top: 1px solid var(--barrier);
+        margin-top: -12px;
+        border-top: none !important;
+    }
+
+    #faq {
         grid-area: faq;
         border-bottom: 1px solid var(--barrier);
     }
 
     #submit-design {
-        border-top: 1px solid var(--barrier);
+        border-top: none;
         grid-area: submit;
         border-bottom: 1px solid var(--barrier);
     }
@@ -898,6 +931,70 @@ a, a:visited, a:link {
     }
 }
 
+@media only screen and (min-width: 344px) {
+    #shea {
+        margin-top: -24.5px;
+    }
+}
+
+@media only screen and (min-width: 349px) {
+    #links {
+        grid-template-rows: 67px 54px 54px;
+    }
+    #faq {
+        margin-top: 0px;
+    }
+}
+
+@media only screen and (min-width: 460px) {
+
+    #shea {
+        margin-top: 0px;
+    }
+    #lohman {
+        margin-top: 0px;
+    }
+
+    #mall {
+        margin-top: 0px;
+    }
+
+    #meltmedia {
+        margin-top: 0px;
+    }
+
+    #authors {
+        grid-template-rows: 65px 65px 65px 65px;
+    }
+}
+
+@media only screen and (min-width: 462px) {
+    #css-resources {
+        margin-top: 0px;
+    }
+    #links {
+        grid-template-rows: 54px 54px 54px;
+    }
+}
+
+@media only screen and (min-width: 500px) {
+    #icon-box > * {
+        font-size: 44px;
+    }
+
+    #icon-box {
+        height: 120px;
+        padding-top: 22px;
+        padding-bottom: 18px;
+    }
+    
+    .icon {
+        text-align: center;
+        line-height: 70px;
+        height: 70px;
+        width: 70px;
+    }
+}
 
 
 @media only screen and (min-width: 501px) {
@@ -939,58 +1036,55 @@ a, a:visited, a:link {
         margin-top: 33px;
     }
 
-    #icon-box > * {
-        font-size: 50px;
-    }
-
-    #icon-box {
-        height: 120px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-    
-    .icon {
-        text-align: center;
-        line-height: 70px;
-        height: 70px;
-        width: 87px;
-    }
-
     #links {
-        grid-template-rows: 80px 80px 50px;
-        height: 205;
-    }
-
-    #lohman {
-        padding-top: 30px;
-    }
-
-    .author {
-        padding-left: 20%;
-        padding-top: 23px;
-        margin-bottom: 10px;
-        max-height: 90px;
-        padding-right: 30px;
+        grid-template-rows: 80px 65px 65px;
     }
 
     .link {
+        padding-right: 50px !important;
         padding-left: 20%;
-        padding-top: 30px;
-        margin-bottom: 10px;
-        max-height: 90px;
-        padding-right: 30px;
+    }
+
+    #css-resources {
+        margin-top: -18px;
+    }
+
+    #mall {
+        border-top: none;
     }
 
     #authors {
-        grid-template-rows: 94px 84px 84px 94px;
-        height: 352px;
+        grid-template-rows: 94px 85px 85px 94px;
+        height: 100%;
     }
 
-    #translations {
-        padding-top: 10px;
+    .author {
+        all: revert;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 20%;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding-right: 60px !important;
+    }
+
+    #mall {
+        margin-top: -17px;
+    }
+
+    #shea {
+        margin-top: 0px;
     }
 }
 
+@media only screen and (min-width: 508px) {
+    #shea {
+        margin-top: -17px;
+    }
+}
 
 
 @media only screen and (min-width: 601px) {
@@ -1039,7 +1133,25 @@ a, a:visited, a:link {
     }
 
     .icon {
-        width: 108px;
+        width: 90px;
+    }
+}
+
+@media only screen and (min-width: 619px) {
+    #links {
+        grid-template-rows: 65px 65px 65px;
+    }
+    #view-design, #css-resources {
+        margin-top: 0px;
+    }
+}
+
+@media only screen and (min-width: 641px) {
+    #authors {
+        grid-template-rows: 85px 85px 85px 85px;
+    }
+    #mall, #shea, #lohman {
+        margin-top: 0px;
     }
 }
 
@@ -1083,7 +1195,7 @@ a, a:visited, a:link {
         object-fit: cover;
         margin-bottom: -95px;
         margin-top: -220px;
-        margin-left: 26px;
+        margin-left: 5.7%;
         opacity: 100%;
     }
 
@@ -1129,13 +1241,13 @@ a, a:visited, a:link {
 
     #title-link-container {
         grid-area: titlel;
-        width: 67%;
+        width: 72%;
         background-color: var(--intro-opaque-white);
         height: 70px;
         padding: 0;
         margin-top: 105px;
-        margin-left: 92px;
-        margin-right: 20px;
+        margin-left: 20%;
+        margin-right: 15px;
         display: grid;
         grid-template-columns: 80px auto 80px;
         grid-template-areas:
@@ -1154,13 +1266,6 @@ a, a:visited, a:link {
         border-left: 1px solid rgba(0, 0, 0, 0.193);
     }
 
-    .author, .link {
-        padding-left: 20%;
-        padding-top: 25px;
-        margin-bottom: 10px;
-        max-height: 90px;
-        padding-right: 20px;
-    }
 
     #blank-space {
         grid-area: b-s;
@@ -1241,13 +1346,27 @@ a, a:visited, a:link {
         height: 100%;
         width: 100%;
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 80px);
+        grid-template-rows: 34px 110px 100px 100px 100px 100px;
         grid-template-areas:
+            "."
             "view-design"
             "resources"
             "faq"
             "submit"
             "translations";
+    }
+
+    .link {
+        all: revert;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 20%;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding-right: 100px !important;
     }
 
     #title-link-container-container {
@@ -1256,55 +1375,35 @@ a, a:visited, a:link {
         background-color: rgba(63, 96, 107, 0.343);
     }
 
-    .link {
-        all: initial;
-        padding-left: 50px;
-        padding-top: 30px;
-        padding-right: 100px;
-        font-size: 22px;
-        margin-top: 90px;
-        align-items: center;
-    }
-
     #view-design {
-        padding-top: 20px;
-        grid-area: view-design;
+        border-bottom: 1px solid var(--barrier)
     }
     
     #css-resources {
-        border-top: 1px solid var(--barrier);
-        grid-area: resources;
+        border-top: none;
     }
     
     #faq {
         border-top: 1px solid var(--barrier);
-        grid-area: faq;
-        padding-top: none;
-        padding-bottom: none;
         border-bottom: none;
     }
     
     #submit-design {
         border-top: 1px solid var(--barrier);
-        grid-area: submit;
-        padding-top: 30px;
         border-bottom: none;
     }
     
     
     #translations {
         border-top: 1px solid var(--barrier);
-        grid-area: translations;
-        padding-bottom: 55px;
-        padding-top: 35px;
-        border-bottom: 1px solid var(--barrier);
     }
 
     #authors {
         height: 100%;
         grid-template-columns: 1fr;
-        grid-template-rows: 110px 110px 110px 110px 110px 110px 110px 110px;
+        grid-template-rows: 35px 110px 100px 100px 100px 100px 100px 110px 100px 100px;
         grid-template-areas:
+            "."
             "lohman"
             "mall"
             "knoeller"
@@ -1312,50 +1411,52 @@ a, a:visited, a:link {
             "stocks"
             "carlson"
             "meltmedia"
-            "shea";
+            "shea"
+            ".";
     }
     
+    #lohman {
+        border-bottom: 1px solid var(--barrier-light)
+    }
     
     #mall {
-        border-top: 1px solid var(--barrier)
+        border-top: none;
     }
     
     #knoeller {
-        border-top: 1px solid var(--barrier)
+        border-top: none;
     }
     
     #walton {
-        border-top: 1px solid var(--barrier)
+        border-top: 1px solid var(--barrier-light);
     }
     
     #stocks {
-        border-top: 1px solid var(--barrier)
+        border-top: none;
     }
     
     #carlson {
-        border-top: 1px solid var(--barrier)
+        border-top: none;
+    }
+    #meltmedia {
+        border-bottom: 1px solid var(--barrier-light) !important;
     }
     
     #shea {
-        border-top: 1px solid var(--barrier)
+        border-top: none;
     }
 
     .author {
-        all: initial;
-        padding-left: 50px;
-        padding-top: 30px;
-        padding-right: 100px;
-        font-size: 22px;
-        margin-top: 35px;
-        align-items: center;
-    }
-
-    #lohman {
-        margin-top: 20px;
-    }
-
-    #shea {   
-        margin-top: 50px;
+        all: revert;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 20%;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding-right: 100px !important;
     }
 
     .author-grammar {
@@ -1388,5 +1489,20 @@ a, a:visited, a:link {
 
     .icon {
         width: 200px;
+    }
+}
+
+@media only screen and (min-width: 1260px) {
+    #authors {
+        grid-template-rows: 35px repeat(9, 100px);
+    }
+    #lohman, #meltmedia {
+        margin-top: 0;
+    }
+}
+
+@media only screen and (min-width: 1265px) {
+    #links {
+        grid-template-rows: 34px repeat(5, 100px);
     }
 }
