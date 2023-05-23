@@ -217,6 +217,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.2s ease-out 0s;
 }
 
 #title-link-text-container:hover, #wrc-container:hover {
@@ -238,6 +239,7 @@ body {
 }
 
 #wrc-container {
+    transition: background-color 0.2s ease-out 0s;
     grid-area: wrc;
     display: flex;
     justify-content: center;
