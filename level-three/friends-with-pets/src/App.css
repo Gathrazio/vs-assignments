@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Ysabeau'
+}
+
+:root {
+  --box-width: 400px;
+}
+
+.friend-list {
+  width: 100%;
+  background-color: rgb(137, 137, 228);
+  display: flex;
+  gap: 20px;
+  overflow-x: scroll;
+}
+
+.friend-box {
+  border-radius: 10px;
+  width: var(--box-width);
+  background-color: antiquewhite;
+  flex: 0 0 auto;
+  margin: 10px;
+}
+
+.friend-name-age {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.friend-name {
+  font-size: 3rem;
+  margin-left: 30px;
+}
+
+.friend-age {
+  font-size: 2rem;
+  margin-right: 30px;
+}
+
+.pets {
+  height: 50px;
+  width: 100%;
+  background-color: brown;
+  text-align: center;
+  line-height: 50px;
+  font-size: 1.4rem;
+}
+
+.pet-box {
+  margin: 30px;
+  background-color:rgb(7, 201, 130);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.pet-name, .pet-breed {
+  font-size: 1.2rem;
+}
+
+.pet-name-text {
+  font-style: italic;
+  font-size: 1.5rem;
+}
