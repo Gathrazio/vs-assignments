@@ -1,0 +1,9 @@
+.block {
+  height: 400px;
+  width: 400px;
+  background-color: aquamarine;
+  text-align: center;
+  font-size: 2rem;
+  margin: auto;
+  margin-top: 50px;
+}
