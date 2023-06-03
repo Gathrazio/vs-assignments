@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.dice-box {
+  width: 500px;
+  height: 100px;
+  background-color: aqua;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.5rem;
+  border-radius: 12px;
+  margin-top: 50px;
+}
+
+.dice-box-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dice-box-native {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+}
+
+button {
+  padding: 10px;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+  transition: 0.5s;
+  border: none;
+  background-size: 200% auto;
+}
+
+button:hover {
+  cursor: pointer;
+  background-position: right center;
+}
