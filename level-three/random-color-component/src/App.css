@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.rand-component {
+  height: 300px;
+  width: 300px;
+  border-radius: 12px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+button {
+  margin-top: 10px;
+  margin-left: 110px;
+  padding: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+}
