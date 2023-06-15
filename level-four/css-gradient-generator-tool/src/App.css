@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
+}
+
+.app-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  min-height: 41vh;
+}
+
+.block {
+  width: 30%;
+}
+
+.main-title {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 3rem;
+}
+
+.title, .hex, .angle-block {
+  font-size: 1.3rem;
+}
+
+.left-block-wrapper {
+  border: 4px solid black;
+}
+
+.right-block-wrapper {
+  border: 4px solid black;
+  border-left: none;
+}
+
+.text {
+  font-family: 'Roboto Mono', monospace;
+  width: 100%;
+  height: 20%;
+  border: none;
+  padding-left: 5px;
+  padding-top: 5px;
+}
+
+.gradient {
+  height: 80%;
+}
+
+.gradient-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.options {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  margin-left: 5px;
+}
+
+.angle-input {
+  margin-left: 5px;
+  text-align: center;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  color: white;
+  background-color: rgb(37, 106, 197);
+  padding: 6px;
+}
+
+.alteration-block {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+button {
+  border-radius: 8px;
+  margin-left: 5px;
+  line-height: 2rem;
+  border: none;
+  font-size: 2rem;
+  padding-left: 12px;
+  padding-right: 12px;
+  background-color: black;
+  color: white;
+}
+
+button:hover {
+  cursor: pointer;
+  transition: 0.1s linear;
+  background-color: rgb(70, 127, 108);
+}
+
+.button-block {
+  margin-right: 5px;
+}
