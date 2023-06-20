@@ -1,0 +1,71 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.navbar-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 13vh;
+}
+
+.navbar-wrapper > * {
+  font-size: 1.5rem;
+  font-family: 'Barlow', sans-serif;
+}
+
+.mainblob-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.2rem;
+}
+
+.mainblob-wrapper > * {
+  padding: 10px;
+  margin: 10px;
+}
+
+button {
+  width: 130px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: 'Overlock', cursive;
+  font-weight: 600;
+}
+
+.footer-wrapper {
+  height: 7vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: 'Barlow', sans-serif;
+}
+
+.light {
+  background-color: rgb(199, 199, 199);
+  color: rgb(58, 63, 78);
+}
+
+.dark {
+  background-color: rgb(81, 81, 81);
+  color: rgb(218, 223, 240);
+}
+
+button.light, .navbar-wrapper.light, .footer-wrapper.light {
+  background-color: rgb(234, 234, 234);
+}
+
+button.dark, .navbar-wrapper.dark, .footer-wrapper.dark {
+  background-color: rgb(116, 116, 116);
+}
+
+button:hover {
+  cursor: pointer;
+}
