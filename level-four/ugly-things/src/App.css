@@ -3,3 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.titlebar-wrapper {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+}
