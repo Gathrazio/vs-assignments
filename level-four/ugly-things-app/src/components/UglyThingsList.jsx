@@ -11,7 +11,7 @@ export default function UglyThingsList () {
 
     return (
         <div className="uglythingslist-wrapper">
-            {weave(uglyThingElements)}
+            {uglyThingElements}
         </div>
     )
 }

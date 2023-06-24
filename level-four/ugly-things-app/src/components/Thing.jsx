@@ -1,5 +1,6 @@
 import {UglyContext} from '../uglyContext'
 import {useContext} from 'react'
+import '../App.css'
 
 export default function Thing (props) {
 
@@ -14,12 +15,15 @@ export default function Thing (props) {
                 <input className="edit-img-url-input" name={`imgUrl${props.thing._id}`} value={props.fluidThings[`imgUrl${props.thing._id}`]} onChange={updateThing}></input>
                 <input className="edit-description-input" name={`description${props.thing._id}`} value={props.fluidThings[`description${props.thing._id}`]} onChange={updateThing}></input>
             </div> : <div className="content-wrapper">
-                <h1>{props.thing.title}</h1>
-                <img src={props.thing.imgUrl} />
-                <h3>{props.thing.description}</h3>
+                <h1 className="thing-title">{props.thing.title}</h1>
+                <img className="thing-image" src={props.thing.imgUrl} />
+                <h3 className="thing-description">{props.thing.description}</h3>
             </div>}
-            <button onClick={displayCondition(props.thing._id) ? () => putUglyThing(props.thing._id) : () => initializeEdit(props.thing._id)}>{displayCondition(props.thing._id) ? "Save" : "Edit"}</button>
-            <button onClick={() => deleteUglyThing(props.thing._id)}>Delete</button>
+            <div className="alteration-buttons-wrapper">
+                <button onClick={displayCondition(props.thing._id) ? () => putUglyThing(props.thing._id) : () => initializeEdit(props.thing._id)}>{displayCondition(props.thing._id) ? "Save" : "Edit"}</button>
+                <button onClick={() => deleteUglyThing(props.thing._id)} className="delete-button">Delete</button>
+            </div>
+            
         </div>
     )
 }

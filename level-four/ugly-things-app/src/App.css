@@ -4,8 +4,112 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: rgb(196, 213, 189);
+}
+
 .titlebar-wrapper {
-  width: 80%;
   display: flex;
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: 'Quicksand', sans-serif;
   justify-content: space-around;
+  align-items: center;
+  height: 100px;
+  background: linear-gradient(0deg, #c4c4c4, #529cb7);
+}
+
+.interface-wrapper {
+  background: linear-gradient(180deg, #c4c4c4, #529cb7);
+}
+
+.interface-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.interface-image, .interface-description {
+  margin-left: 5px;
+}
+
+input, button {
+  border-radius: 10px;
+  padding: 8px;
+  border: none;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.interface-submit {
+  margin: 10px 0px 10px 0px;
+}
+
+button {
+  border: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.thing-wrapper {
+  width: 400px;
+  margin: 5px;
+  font-family: 'Quicksand', sans-serif;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #c4c4c4;
+  flex: 0 0 auto;
+}
+
+.thing-title, .thing-description {
+  padding: 5px;
+}
+
+.thing-title {
+  font-weight: 500;
+}
+
+.thing-description {
+  font-weight: 400;
+}
+
+.thing-image {
+  height: 400px;
+  width: 400px;
+}
+
+.uglythingslist-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: scroll;
+}
+
+.alteration-buttons-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0px 10px 0px;
+}
+
+.delete-button {
+  margin-left: 5px;
+}
+
+.edit-input-wrapper {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-img-url-input {
+  margin: 10px 0px 10px 0px;
 }

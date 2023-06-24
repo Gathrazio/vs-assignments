@@ -13,13 +13,13 @@ export default function Interface () {
 
     return (
         <div className="interface-wrapper">
-            <form name="interface-form" onSubmit={handleFormSubmit}>
+            <form name="interface-form" className="interface-form" onSubmit={handleFormSubmit}>
                 <div className="input-wrapper">
-                    <input type="text" placeholder="Title" value={currentThing.title} name="title" onChange={updateThing} />
-                    <input type="url" placeholder="Image Url" value={currentThing.imgUrl} name="imgUrl" onChange={updateThing}  />
-                    <input type="text" placeholder="Description" value={currentThing.description} name="description" onChange={updateThing}  />
+                    <input type="text" placeholder="Title" value={currentThing.title} name="title" onChange={updateThing} className="interface-title"/>
+                    <input type="url" placeholder="Image Url" value={currentThing.imgUrl} name="imgUrl" onChange={updateThing} className="interface-image" />
+                    <input type="text" placeholder="Description" value={currentThing.description} name="description" onChange={updateThing} className="interface-description" />
                 </div>
-                <button>Submit Thing</button>
+                <button className="interface-submit">Submit Thing</button>
             </form>
         </div>
     )
