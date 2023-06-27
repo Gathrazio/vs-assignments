@@ -1,0 +1,153 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.app-wrapper {
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.navbar-wrapper {
+  position: sticky;
+  top: 0;
+  padding: 30px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-gap: 10px;
+  align-items: center;
+  background-color: rgb(138, 138, 138);;
+}
+
+.footer-wrapper {
+  height: 100px;
+  height: 10vh;
+}
+
+.link {
+  width: 95%;
+}
+.nav-button-lettering {
+  display: inline;
+  height: 100%;
+  font-size: 1.4rem;
+}
+
+.home-lettering {
+  margin-left: 45px;
+}
+
+.product-lettering{
+  margin-left: 10px;
+}
+
+.cart-lettering{
+  margin-left: 60px;
+}
+
+.react-icons {
+  font-size: 2.1rem;
+  margin-bottom: -10px;
+}
+
+.nav-button {
+  padding: 5px 5px 7px 5px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.1rem;
+  width: 100%;
+  border: 2px solid rgb(186, 186, 186) !important;
+  background-color: rgb(186, 186, 186);
+  border-radius: 8px;
+  border: none;
+}
+
+
+
+button:hover {
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  transition: 0.2s;
+}
+
+.title {
+  padding: 30px 20px 0px 20px;
+  font-weight: 500;
+  text-align: left;
+  font-size: 2rem;
+  font-family: 'Overlock', cursive;
+}
+
+.under {
+  padding: none;
+  padding-bottom: 20px;
+}
+
+.shop-title {
+  font-family: 'Julius Sans One', sans-serif;
+  font-size: 2.9rem;
+  margin: 30px 10% 0px 10%;
+  /* background-color: rgb(190, 164, 129); */
+  font-weight: 500;
+  text-align: center;
+  color: white;
+}
+
+.home-text {
+  padding: 0px 20px 20px 20px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.2rem;
+}
+
+.main {
+  background-color: rgb(193, 193, 193);
+  overflow-y: scroll;
+}
+
+.footer-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(138, 138, 138);
+}
+
+.footer-item {
+  font-size: 1rem;
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.categorysnapshot-pic {
+  width: 300px;
+}
+
+.category-title {
+  text-align: center;
+  font-family: 'Barlow', sans-serif;
+  padding: 10px;
+  font-weight: 500;
+}
+
+.category-blurb {
+  font-family: 'Quicksand', sans-serif;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 10px;
+}
+
+.categorysnapshot-wrapper {
+  width: 300px;
+  border-radius: 8px;
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+  background-color: rgb(151, 192, 216);
+  margin: auto;
+}
+
+.categorysnapshot-wrapper:hover {
+  cursor: pointer;
+}
