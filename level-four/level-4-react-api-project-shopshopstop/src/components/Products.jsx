@@ -4,7 +4,7 @@ import jewelry from '../assets/jewelry.jpeg'
 import electronics from '../assets/electronics.jpg'
 import CategorySnapshot from './CategorySnapshot'
 
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Products (props) {
 
@@ -18,7 +18,7 @@ export default function Products (props) {
                 blurb="Find all the latest styles for him."
                 handleClick={() => {
                     props.handleClick()
-                    navigate("/mensclothing")
+                    navigate("mensclothing")
                 }}
             />
             <CategorySnapshot 
@@ -27,7 +27,7 @@ export default function Products (props) {
                 blurb="Find all the latest styles for her."
                 handleClick={() => {
                     props.handleClick()
-                    navigate("/womensclothing")
+                    navigate("womensclothing")
                 }}
             />
             <CategorySnapshot 
@@ -36,7 +36,7 @@ export default function Products (props) {
                 blurb="Everyone loves shiny things!"
                 handleClick={() => {
                     props.handleClick()
-                    navigate("/jewelry")
+                    navigate("jewelry")
                 }}
             />
             <CategorySnapshot 
@@ -45,7 +45,7 @@ export default function Products (props) {
                 blurb="Everyone loves sparky things!"
                 handleClick={() => {
                     props.handleClick()
-                    navigate("/electronics")
+                    navigate("electronics")
             }}
             />
         </div>

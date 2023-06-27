@@ -36,41 +36,67 @@ export default function App () {
     window.scroll(0, 0);
   }
 
+  const data = [
+    mensClothingItems,
+    jewelryItems,
+    electronicsItems,
+    womensClothingItems
+  ].flat();
+
+
   return (
     <div className="app-wrapper">
       <Router>
-      <Navbar handleClick={handleNavClick}/> 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products handleClick={handleNavClick}/>} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/mensclothing" element={<MensClothing 
-            handleClick={handleNavClick}
-            items={mensClothingItems}/>}
-            />
+        <div className="router-wrapper">
+          <Navbar handleClick={handleNavClick}/> 
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
 
-          <Route path="/womensclothing" element={<WomensClothing 
-            handleClick={handleNavClick}
-            items={womensClothingItems}/>}
-            />
+            <Route path="/products" element={<Products 
+              handleClick={handleNavClick}/>}
+              />
+            
+            <Route path="products/mensclothing" element={<MensClothing 
+              handleClick={handleNavClick}
+              items={mensClothingItems}/>}
+              />
 
-          <Route path="/jewelry" element={<Jewelry 
-            handleClick={handleNavClick}
-            items={jewelryItems}/>}
-            />
+            <Route path="products/womensclothing" element={<WomensClothing 
+              handleClick={handleNavClick}
+              items={womensClothingItems}/>}
+              />
 
-          <Route path="/electronics" element={<Electronics 
-            handleClick={handleNavClick}
-            items={electronicsItems}/>} 
-            />
+            <Route path="products/jewelry" element={<Jewelry 
+              handleClick={handleNavClick}
+              items={jewelryItems}/>}
+              />
 
-          <Route path="/productdetails:productId" 
-            element={<ProductDetails />}
-            />
-        </Routes>
+            <Route path="products/electronics" element={<Electronics 
+              handleClick={handleNavClick}
+              items={electronicsItems}/>} 
+              />
+
+            <Route path="products/mensclothing/:productId" 
+              element={<ProductDetails data={data} handleClick={handleNavClick}/>}
+              />
+
+            <Route path="products/womensclothing/:productId" 
+              element={<ProductDetails data={data} handleClick={handleNavClick}/>}
+              />
+
+            <Route path="products/jewelry/:productId" 
+              element={<ProductDetails data={data} handleClick={handleNavClick}/>}
+              />
+
+            <Route path="products/electronics/:productId" 
+              element={<ProductDetails data={data} handleClick={handleNavClick}/>}
+              />
+          </Routes>
+          <Footer />
+        </div>
       </Router>
-      <Footer />
     </div>
   )
 }
