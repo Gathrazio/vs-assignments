@@ -6,7 +6,7 @@ import CategorySnapshot from './CategorySnapshot'
 
 import { Navigate, useNavigate } from 'react-router-dom';
 
-export default function Products () {
+export default function Products (props) {
 
     const navigate = useNavigate();
 
@@ -16,25 +16,37 @@ export default function Products () {
                 picture={maleClothing}
                 name="Men's Clothing"
                 blurb="Find all the latest styles for him."
-                handleClick={() => navigate("/mensclothing")}
+                handleClick={() => {
+                    props.handleClick()
+                    navigate("/mensclothing")
+                }}
             />
             <CategorySnapshot 
                 picture={femaleClothing}
                 name="Women's Clothing"
                 blurb="Find all the latest styles for her."
-                handleClick={() => navigate("/womensclothing")}
+                handleClick={() => {
+                    props.handleClick()
+                    navigate("/womensclothing")
+                }}
             />
             <CategorySnapshot 
                 picture={jewelry}
                 name="Jewelry"
                 blurb="Everyone loves shiny things!"
-                handleClick={() => navigate("/jewelry")}
+                handleClick={() => {
+                    props.handleClick()
+                    navigate("/jewelry")
+                }}
             />
             <CategorySnapshot 
                 picture={electronics}
                 name="Electronics"
                 blurb="Everyone loves sparky things!"
-                handleClick={() => navigate("/electronics")}
+                handleClick={() => {
+                    props.handleClick()
+                    navigate("/electronics")
+            }}
             />
         </div>
     )
