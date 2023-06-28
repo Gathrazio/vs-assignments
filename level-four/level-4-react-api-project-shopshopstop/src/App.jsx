@@ -25,6 +25,8 @@ export default function App () {
   const [cartInitialized, setCartInitialized] = useState(false);
   const [currentUsernameText, setCurrentUsernameText] = useState("");
   const [utilizedUsername, setUtilizedUsername] = useState("z");
+  const [costArray, setCostArray] = useState([]);
+  const [cartToggle, setCartToggle] = useState([])
 
   useEffect(() => {
     axios.get("https://fakestoreapi.com/products/category/men's%20clothing")
@@ -70,7 +72,10 @@ export default function App () {
             description: name, // item id
             imgUrl: ghostCart[Number(name) - 1].toString() // quantity
           }).then(() => load())
+    setCartToggle(prev => [...prev, false])
   }
+
+  console.log("cart toggle: ", cartToggle)
 
   let ghostCartStart = [];
 
@@ -99,10 +104,16 @@ export default function App () {
 
   function load () {
       axios.get(`https://api.vschool.io/${utilizedUsername}/thing`)
-          .then(res => setCart(res.data))
+          .then(res => {
+            setCart(res.data)
+            setCartToggle(Array.from({length: res.data.length}, (_, index) => false))
+            return res.data})
   }
 
-  console.log(cart)
+  useEffect(() => {
+    setCostArray([])
+    cart.forEach(item => appendCostArray((Number(item.imgUrl) * data[Number(item.description) - 1].price).toFixed(2)))
+  }, [cart])
 
   function postItem () {
       fetch(`https://api.vschool.io/${utilizedUsername}/thing`, {
@@ -146,8 +157,15 @@ export default function App () {
     setCartInitialized(true)
   }
 
-  function deleteCartItem (id) {
+  console.log(cart)
 
+  function deleteCartItem (id) {
+    axios.delete(`https://api.vschool.io/${utilizedUsername}/thing/${id}`)
+    .then(() => load())
+  }
+
+  function appendCostArray (value) {
+    setCostArray(prev => [...prev, value])
   }
 
 
@@ -158,7 +176,7 @@ export default function App () {
           <Navbar handleClick={handleNavClick} cartInitialized={cartInitialized}/> 
           <Routes>
             <Route path="/" element={<Home currentUsernameText={currentUsernameText} handleChange={handleUsernameInputChange} handleSubmit={handleUsernameSubmit} cartInitialized={cartInitialized} utilizedUsername={utilizedUsername}/>} />
-            <Route path="/cart" element={<Cart cartInitialized={cartInitialized} data={data} cart={cart} deleteItem={deleteCartItem} handleClick={handleNavClick}/>} />
+            <Route path="/cart" element={<Cart cartInitialized={cartInitialized} data={data} cart={cart} deleteItem={deleteCartItem} handleClick={handleNavClick} costArray={costArray} appendCostArray={appendCostArray} utilizedUsername={utilizedUsername} cartToggle={cartToggle}/>} />
             <Route path="/checkout" element={<Checkout />} />
 
             <Route path="/products" element={<Products 
@@ -169,33 +187,41 @@ export default function App () {
             <Route path="products/mensclothing" element={<MensClothing 
               handleClick={handleNavClick}
               handleCartAdd={handleCartAdd}
+              cartInitialized={cartInitialized}
               ghostCart={ghostCart}
               updateGhostCart={updateGhostCart}
-              items={mensClothingItems}/>}
+              items={mensClothingItems}
+              cart={cart}/>}
               />
 
             <Route path="products/womensclothing" element={<WomensClothing 
               handleClick={handleNavClick}
               handleCartAdd={handleCartAdd}
+              cartInitialized={cartInitialized}
               updateGhostCart={updateGhostCart}
               ghostCart={ghostCart}
-              items={womensClothingItems}/>}
+              items={womensClothingItems}
+              cart={cart}/>}
               />
 
             <Route path="products/jewelry" element={<Jewelry 
               handleClick={handleNavClick}
               handleCartAdd={handleCartAdd}
+              cartInitialized={cartInitialized}
               updateGhostCart={updateGhostCart}
               ghostCart={ghostCart}
-              items={jewelryItems}/>}
+              items={jewelryItems}
+              cart={cart}/>}
               />
 
             <Route path="products/electronics" element={<Electronics 
               handleClick={handleNavClick}
               handleCartAdd={handleCartAdd}
+              cartInitialized={cartInitialized}
               updateGhostCart={updateGhostCart}
               ghostCart={ghostCart}
-              items={electronicsItems}/>} 
+              items={electronicsItems}
+              cart={cart}/>} 
               />
 
             <Route path="products/mensclothing/:productId" 

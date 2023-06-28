@@ -24,7 +24,8 @@
   justify-content: center;
   grid-gap: 10px;
   align-items: center;
-  background-color: rgb(138, 138, 138);;
+  background-color: rgb(138, 138, 138);
+  z-index: 1000;
 }
 
 .router-wrapper {
@@ -186,7 +187,7 @@ button:hover {
   font-family: 'Barlow', sans-serif;
   display: flex;
   justify-content: space-between;
-  padding: 5px 10px 5px 10px;
+  padding: 10px 10px 10px 10px;
 }
 
 .item-wrapper {
@@ -237,6 +238,7 @@ button:hover {
   position: sticky;
   position: -webkit-sticky;
   top: 228px;
+  z-index: 1000;
 }
 
 .back-from-category {
@@ -407,4 +409,84 @@ button:hover {
 
 .cart-wrapper {
   padding: 0;
+}
+
+.cart-quantity {
+  font-size: 1.2rem;
+  padding: 10px;
+}
+
+.cart-stats-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-total-wrapper {
+  height: 150px;
+  background-color: rgb(76, 196, 170);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-total-text {
+  font-size: 1.5rem;
+  font-family: 'Barlow', 'sans-serif';
+  font-weight: 700;
+  padding-left: 20px;
+}
+
+.checkout-button {
+  height: 80%;
+  margin-right: 30px;
+  width: 150px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.5rem;
+  font-family: 'Barlow', 'sans-serif';
+  background-color: rgb(186, 186, 186);
+}
+
+.cart-tag {
+  position: absolute;
+  background-color: rgb(185, 232, 221);
+  padding: 20px;
+  margin: 10px 0px 0px 10px;
+  box-shadow: 10px 5px 5px rgb(73, 73, 73);
+  border-radius: 12px;
+  font-family: 'Barlow';
+  font-weight: 700;
+}
+
+.cart-item-button-wrapper {
+  height: 100px;
+  display: flex;
+  background-color: rgb(132, 197, 212);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-save-quantity, .delete-cart-item {
+  height: 80%;
+  width: 120px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgb(186, 186, 186);
+  font-family: 'Barlow';
+  font-size: 1.5rem;
+}
+
+.edit-save-quantity {
+  margin-left: 20px;
+}
+
+.delete-cart-item {
+  margin-right: 20px;
+}
+
+.go-shop-wrapper {
+  height: calc(100vh - 590px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
