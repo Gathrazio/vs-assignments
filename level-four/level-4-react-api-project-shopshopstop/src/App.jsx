@@ -106,8 +106,9 @@ export default function App () {
       axios.get(`https://api.vschool.io/${utilizedUsername}/thing`)
           .then(res => {
             setCart(res.data)
-            setCartToggle(Array.from({length: res.data.length}, (_, index) => false))
-            return res.data})
+            if (res.data.length) {
+              setCartToggle(Array.from({length: res.data.length}, (_, index) => ({toggle: false, quantity: Number(res.data[index].imgUrl)})))
+            }})
   }
 
   useEffect(() => {
@@ -115,31 +116,10 @@ export default function App () {
     cart.forEach(item => appendCostArray((Number(item.imgUrl) * data[Number(item.description) - 1].price).toFixed(2)))
   }, [cart])
 
-  function postItem () {
-      fetch(`https://api.vschool.io/${utilizedUsername}/thing`, {
-          method: "POST",
-          body: JSON.stringify(currentThing),
-          headers: {
-              "Content-Type": "application/json"
-          },
-      }).then(() => load())
-  }
-
-  function putItem (id) {
-    fetch(`https://api.vschool.io/${utilizedUsername}/thing/${id}`, {
-        method: "PUT",
-        body: JSON.stringify({
-            title: fluidThings[`title${id}`],
-            imgUrl: fluidThings[`imgUrl${id}`],
-            description: fluidThings[`description${id}`]
-        }),
-        headers: { "Content-Type": "application/json" }
-    }).then(() => load())
-  }
-
-  function deleteItem (id) {
-    fetch(`https://api.vschool.io/${utilizedUsername}/thing/${id}`, {method: "DELETE"})
-    .then(() => load())
+  function updateCartItem (index) {
+    axios.put(`https://api.vschool.io/${utilizedUsername}/thing/${cart[index]._id}`, {imgUrl: cartToggle[index].quantity})
+      .then(() => load())
+      .then(() => toggleEditToggle(index))
   }
 
   useEffect(function () {
@@ -168,6 +148,15 @@ export default function App () {
     setCostArray(prev => [...prev, value])
   }
 
+  function toggleEditToggle (index) {
+    setCartToggle(prev => prev.toSpliced(index, 1, {...prev[index], toggle: !prev[index].toggle}))
+  }
+
+  function updateCartToggleQuantity(e, index) {
+    const {value} = e.target;
+    setCartToggle(prev => prev.toSpliced(index, 1, {toggle: prev[index].toggle, quantity: value}))
+  }
+
 
   return (
     <div className="app-wrapper">
@@ -175,8 +164,11 @@ export default function App () {
         <div className="router-wrapper">
           <Navbar handleClick={handleNavClick} cartInitialized={cartInitialized}/> 
           <Routes>
+
             <Route path="/" element={<Home currentUsernameText={currentUsernameText} handleChange={handleUsernameInputChange} handleSubmit={handleUsernameSubmit} cartInitialized={cartInitialized} utilizedUsername={utilizedUsername}/>} />
-            <Route path="/cart" element={<Cart cartInitialized={cartInitialized} data={data} cart={cart} deleteItem={deleteCartItem} handleClick={handleNavClick} costArray={costArray} appendCostArray={appendCostArray} utilizedUsername={utilizedUsername} cartToggle={cartToggle}/>} />
+
+            <Route path="/cart" element={<Cart cartInitialized={cartInitialized} data={data} cart={cart} deleteItem={deleteCartItem} handleClick={handleNavClick} costArray={costArray} appendCostArray={appendCostArray} utilizedUsername={utilizedUsername} cartToggle={cartToggle} toggleEditToggle={toggleEditToggle} updateCartToggleQuantity={updateCartToggleQuantity} updateCartItem={updateCartItem} />} />
+
             <Route path="/checkout" element={<Checkout />} />
 
             <Route path="/products" element={<Products 

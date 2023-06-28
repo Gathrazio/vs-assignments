@@ -458,6 +458,11 @@ button:hover {
   font-weight: 700;
 }
 
+.cart-quantity {
+  font-family: 'Barlow';
+  font-size: 1.2rem;
+}
+
 .cart-item-button-wrapper {
   height: 100px;
   display: flex;
@@ -489,4 +494,11 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.toggled-input {
+  padding: 5px;
+  width: 40px;
+  margin-left: 20px;
+  font-size: 1.3rem;
 }

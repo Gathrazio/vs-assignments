@@ -5,7 +5,17 @@ import { useEffect } from 'react';
 export default function Cart (props) {
 
     /*
-    cartInitialized={cartInitialized} data={data} cart={cart} deleteItem={deleteCartItem}
+    cartInitialized={cartInitialized}
+    data={data} 
+    cart={cart}
+    deleteItem={deleteCartItem}
+    handleClick={handleNavClick}
+    costArray={costArray}
+    appendCostArray={appendCostArray}
+    utilizedUsername={utilizedUsername}
+    cartToggle={cartToggle}
+    toggleEditToggle={toggleEditToggle}
+    updateCartToggleQuantity={updateCartToggleQuantity}
     */
 
     const navigate = useNavigate();
@@ -23,23 +33,30 @@ export default function Cart (props) {
         }
     }
 
+    function handleSave (index) {
+        props.updateCartItem(index)
+    }
+    
+
+
     const cartItems = props.cart.map((item, index) => {
-        // props.appendCostArray((Number(item.imgUrl) * props.data[Number(item.description) - 1].price).toFixed(2))
         return (<CartItem key={Number(item.description)}>
             <img src={props.data[Number(item.description) - 1].image} className="item-pic" />
             <h2 className="item-title" onClick={() => handleClick(Number(item.description))}>{item.title}</h2>
             <div className="cart-stats-wrapper">
                 <div className="cart-quantity">
-                    Quantity: {item.imgUrl}
+                    Quantity: {props.cartToggle[index].toggle ?
+                        <input className="toggled-input" value={props.cartToggle[index].quantity} type="number" min="1" step="1" onChange={(e) => props.updateCartToggleQuantity(e, index)}></input> :
+                        item.imgUrl}
                 </div>
                 <div className="cart-quantity">
                     Total Cost: ${(Number(item.imgUrl) * props.data[Number(item.description) - 1].price).toFixed(2)}
                 </div>
             </div>
             <div className="cart-item-button-wrapper">
-                {props.cartToggle[Number(index)] ? 
-                    <button className="edit-save-quantity">Save Quantity</button> :
-                    <button className="edit-save-quantity">Edit Quantity</button>}
+                {props.cartToggle[Number(index)].toggle ? 
+                    <button className="edit-save-quantity" onClick={() => handleSave(index)}>Save Quantity</button> :
+                    <button className="edit-save-quantity" onClick={() => props.toggleEditToggle(index)}>Edit Quantity</button>}
                 <button className="delete-cart-item" onClick={() => props.deleteItem(item._id)}>Delete All</button>
             </div>
         </CartItem>)})
