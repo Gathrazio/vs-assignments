@@ -1,4 +1,3 @@
-
 export default function CategorySnapshot (props) {
     return (
         <div className="categorysnapshot-wrapper" onClick={props.handleClick}>

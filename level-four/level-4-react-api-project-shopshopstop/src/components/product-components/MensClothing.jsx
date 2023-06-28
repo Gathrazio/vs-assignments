@@ -1,14 +1,13 @@
-import Item from './Item'
+import Item from '../item-components/Item'
 import { IconContext } from 'react-icons'
 import { IoArrowBack } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
 
-export default function Jewelry (props) {
-
-    const jewelryElements = props.items.map(item => <Item
+export default function MensClothing (props) {
+    const mensClothingElements = props.items.map(item => <Item
         key={item.id}
         id={item.id}
-        category="jewelry"
+        category="mensclothing"
         name={item.title}
         picture={item.image}
         price={item.price}
@@ -21,23 +20,23 @@ export default function Jewelry (props) {
         cart={props.cart}
     />)
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     return (
         <>
             <div className="category-title-wrapper">
                 <button className="back-from-category" onClick={() => {
-                        props.handleClick()
-                        navigate(-1)
-                    }}>
+                    props.handleClick()
+                    navigate(-1)
+                }}>
                     <IconContext.Provider value={{ className: 'react-icons back' }}>
                         <IoArrowBack />
                     </IconContext.Provider>
-                    </button>
-                    <div className="category-title-text">Jewelry</div>
+                </button>
+                <div className="category-title-text">Men's Clothing</div>
             </div>
-            <div className="jewelry-wrapper main">
-                {props && jewelryElements}
+            <div className="mensclothing-wrapper main">
+                {props && mensClothingElements}
             </div>
         </>
     )

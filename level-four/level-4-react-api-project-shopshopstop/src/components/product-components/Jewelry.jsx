@@ -1,13 +1,14 @@
-import Item from './Item'
+import Item from '../item-components/Item'
 import { IconContext } from 'react-icons'
 import { IoArrowBack } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
 
-export default function womensClothing (props) {
-    const womensClothingElements = props.items.map(item => <Item
+export default function Jewelry (props) {
+
+    const jewelryElements = props.items.map(item => <Item
         key={item.id}
         id={item.id}
-        category="womensclothing"
+        category="jewelry"
         name={item.title}
         picture={item.image}
         price={item.price}
@@ -20,7 +21,7 @@ export default function womensClothing (props) {
         cart={props.cart}
     />)
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     return (
         <>
@@ -33,10 +34,10 @@ export default function womensClothing (props) {
                         <IoArrowBack />
                     </IconContext.Provider>
                     </button>
-                    <div className="category-title-text">Women's Clothing</div>
-                </div>
-            <div className="womensclothing-wrapper main">
-                {props && womensClothingElements}
+                    <div className="category-title-text">Jewelry</div>
+            </div>
+            <div className="jewelry-wrapper main">
+                {props && jewelryElements}
             </div>
         </>
     )

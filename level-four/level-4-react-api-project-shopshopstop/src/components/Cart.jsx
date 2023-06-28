@@ -1,29 +1,34 @@
 import { useNavigate } from 'react-router-dom';
-import CartItem from './CartItem'
+import CartItem from './item-components/CartItem'
 import { useEffect } from 'react';
 
 export default function Cart (props) {
 
     /*
-    cartInitialized={cartInitialized}
-    data={data} 
-    cart={cart}
-    deleteItem={deleteCartItem}
-    handleClick={handleNavClick}
-    costArray={costArray}
-    appendCostArray={appendCostArray}
-    utilizedUsername={utilizedUsername}
-    cartToggle={cartToggle}
-    toggleEditToggle={toggleEditToggle}
-    updateCartToggleQuantity={updateCartToggleQuantity}
+        data={data}
+        cart={cart}
+        costArray={costArray}
+        cartToggle={cartToggle}
+        cartInitialized={cartInitialized}
+        utilizedUsername={utilizedUsername}
+        deleteItem={deleteCartItem}
+        handleClick={handleNavClick}
+        updateCartItem={updateCartItem}
+        appendCostArray={appendCostArray}
+        toggleEditToggle={toggleEditToggle}
+        updateCartToggleQuantity={updateCartToggleQuantity}
     */
 
     const navigate = useNavigate();
+
+    // determines what happens when the user clicks on an item title somewhere inside /products/...
 
     function handleClick (id) {
         props.handleClick()
         navigate(`${id}`)
     }
+
+    // determines what the cart total display div renders, as Array.reduce() breaks when the array has length 1
 
     const cartTotalDisplay = (cart) => {
         if (cart.length === 1) {
@@ -33,11 +38,13 @@ export default function Cart (props) {
         }
     }
 
+    // saves the cart item's updated quantity and effectively performs toggleEditToggle but inside <App />
+
     function handleSave (index) {
         props.updateCartItem(index)
     }
-    
 
+    // generating the cart items
 
     const cartItems = props.cart.map((item, index) => {
         return (<CartItem key={Number(item.description)}>
@@ -60,6 +67,8 @@ export default function Cart (props) {
                 <button className="delete-cart-item" onClick={() => props.deleteItem(item._id)}>Delete All</button>
             </div>
         </CartItem>)})
+
+    // returning the Cart element
 
     return (
         <div className={`cart-wrapper main ${props.cartInitialized ? '' : `wrapper-not-initialized`}`}>

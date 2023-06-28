@@ -26,7 +26,7 @@ export default function ProductDetails (props) {
                         <IoArrowBack />
                     </IconContext.Provider>
                     </button>
-                    <div className="category-title-text">Item Details</div>
+                    <div className="category-title-text">Product Details</div>
             </div>
             <div className="productdetails-wrapper partition">
                 <div className="productdetails-wrapper-interior">

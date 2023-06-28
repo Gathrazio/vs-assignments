@@ -77,11 +77,6 @@
   border: none;
 }
 
-/* img {
-  object-fit: fill;
-} */
-
-
 button:hover {
   cursor: pointer;
   background-color: rgb(255, 255, 255);
@@ -105,7 +100,6 @@ button:hover {
   font-family: 'Julius Sans One', sans-serif;
   font-size: 2.9rem;
   margin: 30px 10% 0px 10%;
-  /* background-color: rgb(190, 164, 129); */
   font-weight: 500;
   text-align: center;
   color: white;
@@ -255,7 +249,7 @@ span {
   background-color: cadetblue;
   position: sticky;
   position: -webkit-sticky;
-  top: 228px;
+  top: 239px;
   z-index: 1000;
 }
 
@@ -326,10 +320,6 @@ span {
 .pd-input {
   margin-left: 20px;
 }
-
-/* body {
-  background-color: red;
-} */
 
 .cart-initialization {
   text-align: center;

@@ -1,8 +1,8 @@
-import maleClothing from '../assets/male-clothing.jpg'
-import femaleClothing from '../assets/female-clothing.webp'
-import jewelry from '../assets/jewelry.jpeg'
-import electronics from '../assets/electronics.jpg'
-import CategorySnapshot from './CategorySnapshot'
+import maleClothing from '../../assets/male-clothing.jpg';
+import femaleClothing from '../../assets/female-clothing.webp';
+import jewelry from '../../assets/jewelry.jpeg'
+import electronics from '../../assets/electronics.jpg'
+import CategorySnapshot from '../../item-components/CategorySnapshot'
 
 import { useNavigate } from 'react-router-dom';
 

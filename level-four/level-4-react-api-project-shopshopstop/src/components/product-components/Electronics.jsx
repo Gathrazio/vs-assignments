@@ -1,24 +1,34 @@
-import Item from './Item'
+import Item from '../item-components/Item'
 import { IconContext } from 'react-icons'
 import { IoArrowBack } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
 
 export default function Electronics (props) {
 
+    /*
+        cart={cart}
+        ghostCart={ghostCart}
+        items={electronicsItems}
+        cartInitialized={cartInitialized}
+        handleClick={handleNavClick}
+        handleCartAdd={handleCartAdd}
+        updateGhostCart={updateGhostCart}
+    */
+
     const electronicsElements = props.items.map(item => <Item
         key={item.id}
         id={item.id}
-        category="electronics"
         name={item.title}
-        picture={item.image}
+        cart={props.cart}
         price={item.price}
+        picture={item.image}
+        category="electronics"
         rating={item.rating.rate}
+        ghostCart={props.ghostCart}
         handleClick={props.handleClick}
         handleCartAdd={props.handleCartAdd}
-        ghostCart={props.ghostCart}
         updateGhostCart={props.updateGhostCart}
         cartInitialized={props.cartInitialized}
-        cart={props.cart}
     />)
 
     const navigate = useNavigate();

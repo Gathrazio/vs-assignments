@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
-import Home from './components/Home'
+import Home from './components/top-navigable-components/Home'
 import Footer from './components/Footer'
-import Products from './components/Products'
+import Products from './components/top-navigable-components/Products'
 import Cart from './components/Cart'
 import Checkout from './components/Checkout'
-import MensClothing from './components/MensClothing'
-import WomensClothing from './components/WomensClothing'
-import Jewelry from './components/Jewelry'
-import Electronics from './components/Electronics'
-import ProductDetails from './components/ProductDetails'
+import MensClothing from './components/product-components/MensClothing'
+import WomensClothing from './components/product-components/WomensClothing'
+import Jewelry from './components/product-components/Jewelry'
+import Electronics from './components/product-components/Electronics'
+import ProductDetails from './components/item-components/ProductDetails'
 import './App.css'
 
 export default function App () {
@@ -36,8 +36,6 @@ export default function App () {
   const [cartToggle, setCartToggle] = useState([]);
 
   
-
-
 
   // data array which is essentially a piece of state
 
