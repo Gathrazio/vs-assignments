@@ -3,12 +3,14 @@ import { IconContext } from "react-icons";
 import { AiFillHome } from 'react-icons/ai';
 import { BiSolidPurchaseTag } from 'react-icons/bi';
 import { HiShoppingCart } from 'react-icons/hi';
+import { useLocation } from "react-router-dom";
 
 export default function Navbar (props) {
+    const location = useLocation();
     return (
         <nav className="navbar-wrapper">
             <Link to="/" className="link">
-                <button className={`nav-button home`} value="home" onClick={props.handleClick}>
+                <button className={`nav-button ${location.pathname === "/" ? "bordered" : ""}`} value="home" onClick={props.handleClick}>
                 <div className="navbutton-interior-container">
                     <IconContext.Provider value={{ className: 'react-icons' }}>
                         <AiFillHome />
@@ -18,7 +20,7 @@ export default function Navbar (props) {
                 </button>
             </Link>
             <Link to="/products" className="link">
-                <button className={`nav-button products`} value="products" onClick={props.handleClick}>
+                <button className={`nav-button ${location.pathname === "/products" ? "bordered" : ""}`} value="products" onClick={props.handleClick}>
                 <div className="navbutton-interior-container">
                     <IconContext.Provider value={{ className: 'react-icons' }}>
                         <BiSolidPurchaseTag />
@@ -28,7 +30,7 @@ export default function Navbar (props) {
                 </button>
             </Link>
             <Link to="/cart" className="link">
-                <button className={`nav-button cart${props.cartInitialized ? "" : " not-initialized"}`} value="cart" onClick={props.handleClick}>
+                <button className={`nav-button ${props.cartInitialized ? "" : " not-initialized"} ${location.pathname === "/cart" ? "bordered" : ""}`} value="cart" onClick={props.handleClick}>
                 <div className="navbutton-interior-container">
                     <IconContext.Provider value={{ className: 'react-icons' }}>
                         <HiShoppingCart />

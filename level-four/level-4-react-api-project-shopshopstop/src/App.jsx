@@ -75,8 +75,6 @@ export default function App () {
     setCartToggle(prev => [...prev, false])
   }
 
-  console.log("cart toggle: ", cartToggle)
-
   let ghostCartStart = [];
 
   useEffect(() => {
@@ -136,8 +134,6 @@ export default function App () {
     setUtilizedUsername(currentUsernameText)
     setCartInitialized(true)
   }
-
-  console.log(cart)
 
   function deleteCartItem (id) {
     axios.delete(`https://api.vschool.io/${utilizedUsername}/thing/${id}`)

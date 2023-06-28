@@ -62,7 +62,7 @@ export default function Cart (props) {
         </CartItem>)})
 
     return (
-        <div className={`cart-wrapper main ${props.cartInitialized ?'' : `wrapper-not-initialized`}`}>
+        <div className={`cart-wrapper main ${props.cartInitialized ? '' : `wrapper-not-initialized`}`}>
             {props.cartInitialized ? 
                 <div className="cart">
                     <div className="cart-text-wrapper">

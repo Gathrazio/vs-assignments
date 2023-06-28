@@ -71,7 +71,7 @@
   font-family: 'Barlow', sans-serif;
   font-size: 1.1rem;
   width: 100%;
-  border: 2px solid rgb(186, 186, 186) !important;
+  border: 4px solid rgb(186, 186, 186) !important;
   background-color: rgb(186, 186, 186);
   border-radius: 8px;
   border: none;
@@ -120,7 +120,7 @@ button:hover {
 .main {
   background-color: rgb(193, 193, 193);
   overflow-y: scroll;
-  min-height: calc(100vh - 380px);
+  min-height: calc(100vh - 389px) !important;
 }
 
 .footer-wrapper {
@@ -149,6 +149,10 @@ button:hover {
   font-weight: 500;
 }
 
+.bottom-para {
+  margin-bottom: 20px;
+}
+
 .category-blurb {
   font-family: 'Quicksand', sans-serif;
   text-align: center;
@@ -171,7 +175,7 @@ button:hover {
 }
 
 .categorysnapshot-wrapper {
-  background-color: rgb(151, 192, 216);
+  background-color: rgb(69, 167, 224);
 }
 
 .categorysnapshot-wrapper:hover {
@@ -207,9 +211,19 @@ button:hover {
 
 .quantity-input {
   font-family: 'Barlow', sans-serif;
-  padding: 5px;
+  padding: 10px;
   width: 40px;
+  border-radius: 8px;
+  border: none;
   font-size: 1rem;
+}
+
+span {
+  font-family: 'Julius Sans One', sans-serif;
+}
+
+.quantity {
+  margin-top: 7px;
 }
 
 .quantity-input-wrapper {
@@ -402,6 +416,10 @@ button:hover {
   background-color: rgb(147, 116, 190);
 }
 
+.cart {
+  height: calc(100vh - 389px);
+}
+
 .cart-text {
   width: 100%;
   text-align: center;
@@ -432,14 +450,16 @@ button:hover {
 .cart-total-text {
   font-size: 1.5rem;
   font-family: 'Barlow', 'sans-serif';
+  width: 100%;
   font-weight: 700;
-  padding-left: 20px;
+  padding: 0px 20px 0px 20px;
+  text-align: center;
 }
 
 .checkout-button {
   height: 80%;
-  margin-right: 30px;
-  width: 150px;
+  margin-right: 20px;
+  width: 200px !important;
   border-radius: 8px;
   border: none;
   font-size: 1.5rem;
@@ -501,4 +521,8 @@ button:hover {
   width: 40px;
   margin-left: 20px;
   font-size: 1.3rem;
+}
+
+.bordered {
+  border: 4px solid black !important;
 }

@@ -42,7 +42,7 @@ export default function Products (props) {
             <CategorySnapshot 
                 picture={electronics}
                 name="Electronics"
-                blurb="Everyone loves sparky things!"
+                blurb="All modern essentials available!"
                 handleClick={() => {
                     props.handleClick()
                     navigate("electronics")
