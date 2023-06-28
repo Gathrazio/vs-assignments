@@ -123,6 +123,10 @@ button:hover {
   min-height: calc(100vh - 389px) !important;
 }
 
+.main::-webkit-scrollbar {
+  display: none;
+}
+
 .footer-wrapper {
   display: flex;
   flex-direction: column;
