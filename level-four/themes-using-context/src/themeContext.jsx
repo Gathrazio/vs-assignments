@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import { useState, createContext } from 'react'
 
-const ThemeContext = React.createContext()
+const ThemeContext = createContext()
 
 function ThemeContextProvider (props) {
 
