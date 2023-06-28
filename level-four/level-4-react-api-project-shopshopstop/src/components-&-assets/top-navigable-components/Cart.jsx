@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import CartItem from './item-components/CartItem'
+import CartItem from '../item-components/CartItem'
 import { useEffect } from 'react';
 
 export default function Cart (props) {

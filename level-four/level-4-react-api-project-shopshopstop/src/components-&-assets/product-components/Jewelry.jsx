@@ -5,20 +5,30 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Jewelry (props) {
 
+    /*
+        cart={cart}
+        items={jewelryItems}
+        ghostCart={ghostCart}
+        cartInitialized={cartInitialized}
+        handleClick={handleNavClick}
+        handleCartAdd={handleCartAdd}
+        updateGhostCart={updateGhostCart}
+    */
+
     const jewelryElements = props.items.map(item => <Item
-        key={item.id}
         id={item.id}
-        category="jewelry"
+        key={item.id}
+        cart={props.cart}
         name={item.title}
-        picture={item.image}
+        category="jewelry"
         price={item.price}
+        picture={item.image}
         rating={item.rating.rate}
+        ghostCart={props.ghostCart}
+        cartInitialized={props.cartInitialized}
         handleClick={props.handleClick}
         handleCartAdd={props.handleCartAdd}
-        ghostCart={props.ghostCart}
         updateGhostCart={props.updateGhostCart}
-        cartInitialized={props.cartInitialized}
-        cart={props.cart}
     />)
 
     const navigate = useNavigate()
