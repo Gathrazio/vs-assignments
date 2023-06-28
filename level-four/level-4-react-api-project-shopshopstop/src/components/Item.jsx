@@ -17,15 +17,15 @@ export default function Item (props) {
                 <p>Price: ${props.price} </p>
                 <p>Rating: {props.rating}/5 </p>
             </div>
-            <div className="cart-interface-wrapper">
+            <form className="cart-interface-wrapper" name={props.id} onSubmit={props.handleCartAdd}>
                 <button className="add-cart-button pd-button">Add to Cart</button>
                 <div className="quantity-input-wrapper">
                     <div className="quantity">
                         Quantity:
                     </div>
-                    <input className="quantity-input pd-input" type="number" min="0" step="1" />
+                    <input className="quantity-input pd-input" name={`#${props.id}`} type="number" min="0" step="1" required value={props.ghostCart[Number(props.id) - 1]} onChange={props.updateGhostCart}/>
                 </div>
-            </div>
+            </form>
         </div>
     )
 }

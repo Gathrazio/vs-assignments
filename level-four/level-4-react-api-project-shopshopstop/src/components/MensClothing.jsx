@@ -13,6 +13,9 @@ export default function MensClothing (props) {
         price={item.price}
         rating={item.rating.rate}
         handleClick={props.handleClick}
+        handleCartAdd={props.handleCartAdd}
+        ghostCart={props.ghostCart}
+        updateGhostCart={props.updateGhostCart}
     />)
 
     const navigate = useNavigate();

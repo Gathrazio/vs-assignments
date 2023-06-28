@@ -36,15 +36,6 @@ export default function ProductDetails (props) {
                         <p className="pd-description">{displayCondition && thisProduct.description}</p>
                         <p className="pd-price">Current Price: ${displayCondition && thisProduct.price}</p>
                         <p className="pd-rating">Average rating: {displayCondition && thisProduct.rating.rate} out of 5, from a total of {displayCondition && thisProduct.rating.count} reviews.</p>
-                        <div className="cart-interface-wrapper">
-                            <button className="add-cart-button pd-button">Add to Cart</button>
-                            <div className="quantity-input-wrapper">
-                                <div className="quantity">
-                                    Quantity:
-                                </div>
-                                <input className="quantity-input pd-input" type="number" min="0" step="1" />
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

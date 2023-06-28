@@ -51,25 +51,22 @@
   font-size: 1.4rem;
 }
 
-.home-lettering {
-  margin-left: 45px;
-}
-
-.product-lettering{
-  margin-left: 10px;
-}
-
-.cart-lettering{
-  margin-left: 60px;
-}
-
 .react-icons {
   font-size: 2.1rem;
-  margin-bottom: -10px;
+}
+
+.navbutton-interior-container {
+  width: 60%;
+  border-radius: 3px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-button {
   padding: 5px 5px 7px 5px;
+  
   font-family: 'Barlow', sans-serif;
   font-size: 1.1rem;
   width: 100%;
@@ -122,7 +119,7 @@ button:hover {
 .main {
   background-color: rgb(193, 193, 193);
   overflow-y: scroll;
-  min-height: calc(100vh - 361px);
+  min-height: calc(100vh - 380px);
 }
 
 .footer-wrapper {
@@ -239,7 +236,7 @@ button:hover {
   background-color: cadetblue;
   position: sticky;
   position: -webkit-sticky;
-  top: 210px;
+  top: 228px;
 }
 
 .back-from-category {
@@ -313,3 +310,101 @@ button:hover {
 /* body {
   background-color: red;
 } */
+
+.cart-initialization {
+  text-align: center;
+  font-size: 2rem;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  height: 150px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  background-color: rgb(147, 116, 190);
+  top: 210px;
+}
+
+.cart-initialization-text {
+  font-size: 1.1rem;
+  margin-top: -5px;
+}
+
+.cart-initialization-package {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px;
+  padding: 0px 20px 0px 20px;
+}
+
+.cart-initialization-input {
+  margin-top: 10px;
+  border-radius: 6px;
+  border: none;
+  padding: 10px;
+  font-size: 1rem;
+  font-family: 'Barlow', 'sans-serif';
+}
+
+.not-initialized {
+  background-color: rgb(233, 233, 233);
+  color: rgba(0, 0, 0, 0.502);
+}
+
+.add-user {
+  padding: 8px;
+  height: 90px;
+  width: 20%;
+  margin-left: 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(190, 190, 190);
+}
+
+.user-greeting-wrapper {
+  text-align: center;
+  font-size: 1.5rem;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(120, 132, 223);
+  top: 210px;
+}
+
+.please-initialize {
+  margin: 50px;
+  font-size: 2rem;
+  text-align: center;
+  font-family: 'Quicksand', 'sans-serif';
+}
+
+.wrapper-not-initialized {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-text-wrapper {
+  font-size: 2rem;
+  width: 100%;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  height: 100px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  background-color: rgb(147, 116, 190);
+}
+
+.cart-text {
+  width: 100%;
+  text-align: center;
+}
+
+.cart-wrapper {
+  padding: 0;
+}

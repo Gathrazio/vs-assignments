@@ -11,15 +11,20 @@ import WomensClothing from './components/WomensClothing'
 import Jewelry from './components/Jewelry'
 import Electronics from './components/Electronics'
 import ProductDetails from './components/ProductDetails'
-import ScrollToTop from './components/ScrollToTop'
 import './App.css'
 
 export default function App () {
+
+  // fake store api related state and functions
 
   const [mensClothingItems, setMensClothingItems] = useState([]);
   const [womensClothingItems, setWomensClothingItems] = useState([]);
   const [jewelryItems, setJewelryItems] = useState([]);
   const [electronicsItems, setElectronicsItems] = useState([]);
+
+  const [cartInitialized, setCartInitialized] = useState(false);
+  const [currentUsernameText, setCurrentUsernameText] = useState("");
+  const [utilizedUsername, setUtilizedUsername] = useState("z");
 
   useEffect(() => {
     axios.get("https://fakestoreapi.com/products/category/men's%20clothing")
@@ -43,38 +48,153 @@ export default function App () {
     womensClothingItems
   ].flat();
 
+  // cart related state
+
+  const [cart, setCart] = useState([])
+  //  {
+  //    name: "item name",
+  //    id: 1-20,
+  //    quantity: n
+  //  },
+  //  ...
+
+  useEffect (() => {
+    load()
+  }, [utilizedUsername])
+
+  function handleCartAdd (e) {
+    e.preventDefault()
+    const {name} = e.target;
+    axios.post(`https://api.vschool.io/${utilizedUsername}/thing`, { // bootstrapping the shit out of this API
+            title: data[Number(name) - 1].title, // item name
+            description: name, // item id
+            imgUrl: ghostCart[Number(name) - 1].toString() // quantity
+          }).then(() => load())
+  }
+
+  let ghostCartStart = [];
+
+  useEffect(() => {
+    for (let i = 0; i < 20; i++) {
+      ghostCartStart.push(1)
+    }
+  }, [])
+
+  const [ghostCart, setGhostCart] = useState(ghostCartStart)
+
+  function updateGhostCart (e) {
+    const {value, name} = e.target;
+    setGhostCart(prev => prev.toSpliced(Number(name.slice(1)) - 1, 1, Number(value)))
+  }
+
+  function updateThing (e) {
+      const {name, value} = e.target;
+      if (name.length > 11) {
+          setFluidThings(prev => ({
+              ...prev,
+              [name]: value
+          }))
+      }
+  }
+
+  function load () {
+      axios.get(`https://api.vschool.io/${utilizedUsername}/thing`)
+          .then(res => setCart(res.data))
+  }
+
+  console.log(cart)
+
+  function postItem () {
+      fetch(`https://api.vschool.io/${utilizedUsername}/thing`, {
+          method: "POST",
+          body: JSON.stringify(currentThing),
+          headers: {
+              "Content-Type": "application/json"
+          },
+      }).then(() => load())
+  }
+
+  function putItem (id) {
+    fetch(`https://api.vschool.io/${utilizedUsername}/thing/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({
+            title: fluidThings[`title${id}`],
+            imgUrl: fluidThings[`imgUrl${id}`],
+            description: fluidThings[`description${id}`]
+        }),
+        headers: { "Content-Type": "application/json" }
+    }).then(() => load())
+  }
+
+  function deleteItem (id) {
+    fetch(`https://api.vschool.io/${utilizedUsername}/thing/${id}`, {method: "DELETE"})
+    .then(() => load())
+  }
+
+  useEffect(function () {
+      load()
+  }, [])
+
+  function handleUsernameInputChange (e) {
+    const {value} = e.target;
+    setCurrentUsernameText(value)
+  }
+
+  function handleUsernameSubmit (e) {
+    e.preventDefault()
+    setUtilizedUsername(currentUsernameText)
+    setCartInitialized(true)
+  }
+
+  function deleteCartItem (id) {
+
+  }
+
 
   return (
     <div className="app-wrapper">
       <Router>
         <div className="router-wrapper">
-          <Navbar handleClick={handleNavClick}/> 
+          <Navbar handleClick={handleNavClick} cartInitialized={cartInitialized}/> 
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route path="/" element={<Home currentUsernameText={currentUsernameText} handleChange={handleUsernameInputChange} handleSubmit={handleUsernameSubmit} cartInitialized={cartInitialized} utilizedUsername={utilizedUsername}/>} />
+            <Route path="/cart" element={<Cart cartInitialized={cartInitialized} data={data} cart={cart} deleteItem={deleteCartItem} handleClick={handleNavClick}/>} />
             <Route path="/checkout" element={<Checkout />} />
 
             <Route path="/products" element={<Products 
-              handleClick={handleNavClick}/>}
+              handleClick={handleNavClick}
+              />}
               />
             
             <Route path="products/mensclothing" element={<MensClothing 
               handleClick={handleNavClick}
+              handleCartAdd={handleCartAdd}
+              ghostCart={ghostCart}
+              updateGhostCart={updateGhostCart}
               items={mensClothingItems}/>}
               />
 
             <Route path="products/womensclothing" element={<WomensClothing 
               handleClick={handleNavClick}
+              handleCartAdd={handleCartAdd}
+              updateGhostCart={updateGhostCart}
+              ghostCart={ghostCart}
               items={womensClothingItems}/>}
               />
 
             <Route path="products/jewelry" element={<Jewelry 
               handleClick={handleNavClick}
+              handleCartAdd={handleCartAdd}
+              updateGhostCart={updateGhostCart}
+              ghostCart={ghostCart}
               items={jewelryItems}/>}
               />
 
             <Route path="products/electronics" element={<Electronics 
               handleClick={handleNavClick}
+              handleCartAdd={handleCartAdd}
+              updateGhostCart={updateGhostCart}
+              ghostCart={ghostCart}
               items={electronicsItems}/>} 
               />
 
@@ -91,6 +211,10 @@ export default function App () {
               />
 
             <Route path="products/electronics/:productId" 
+              element={<ProductDetails data={data} handleClick={handleNavClick}/>}
+              />
+
+            <Route path="cart/:productId" 
               element={<ProductDetails data={data} handleClick={handleNavClick}/>}
               />
           </Routes>
