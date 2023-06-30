@@ -97,14 +97,14 @@ function UglyContextProvider (props) {
 
     return (
         <UglyContext.Provider value={{
-            uglyThings: uglyThings,
-            currentThing: currentThing,
-            fluidThings: fluidThings,
-            updateThing: updateThing,
-            postUglyThing: postUglyThing,
-            putUglyThing: putUglyThing,
-            deleteUglyThing: deleteUglyThing,
-            initializeEdit: initializeEdit
+            uglyThings,
+            currentThing,
+            fluidThings,
+            updateThing,
+            postUglyThing,
+            putUglyThing,
+            deleteUglyThing,
+            initializeEdit
         }} >
             {props.children}
         </UglyContext.Provider>
