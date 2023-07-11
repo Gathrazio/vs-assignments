@@ -4,25 +4,25 @@ const {v4: uuidv4} = require('uuid');
 
 let bounties = [
     {
-        fname: "Smokin'",
-        lname: "Joe",
-        living: true,
+        firstName: "Smokin'",
+        lastName: "Joe",
+        isAlive: true,
         price: 8000,
         type: "Sith",
         _id: uuidv4()
     },
     {
-        fname: "Slingin'",
-        lname: "Sandy",
-        living: true,
+        firstName: "Slingin'",
+        lastName: "Sandy",
+        isAlive: true,
         price: 490990,
         type: "Jedi", 
         _id: uuidv4()
     },
     {
-        fname: "The",
-        lname: "Wendingo",
-        living: true,
+        firstName: "The",
+        lastName: "Wendingo",
+        isAlive: false,
         price: 1,
         type: "Sith", 
         _id: uuidv4()
@@ -35,9 +35,10 @@ bountyRouter.route('/')
     })
     .post((req, res) => { // post one
         const newBounty = req.body; // we will just hope req.body is in the correct format
+        console.log(req.body)
         newBounty._id = uuidv4();
         bounties.push(newBounty)
-        res.send(`Successfully added ${newBounty.fname} ${newBounty.lname} to the bounty list.`) // notification of successful post
+        res.send(`Successfully added ${newBounty.firstName} ${newBounty.lastName} to the bounty list.`) // notification of successful post
     })
 
 bountyRouter.route('/:bountyId')
@@ -49,8 +50,8 @@ bountyRouter.route('/:bountyId')
         let deletedLName;
         bounties = bounties.filter(bounty => { // re-assigning bounties array to eliminate the need for messy splicing
             if (bounty._id === req.params.bountyId) {
-                deletedFName = bounty.fname;
-                deletedLName = bounty.lname;
+                deletedFName = bounty.firstName;
+                deletedLName = bounty.lastName;
             }
             return bounty._id !== req.params.bountyId; // will return true for everything but the element that we are wanting to delete
         })
