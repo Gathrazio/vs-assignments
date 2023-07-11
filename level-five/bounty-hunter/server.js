@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
+const morgan = require('morgan');
 
 // middleware for every request
 
-app.use(express.json()) // looks for a request body and turns it into req.body
+app.use(express.json())
+app.use(morgan('dev'))
 
-app.use('/bounties', require('./routes/bountyRouter.js'))
+app.use('/api/bounties', require('./routes/bountyRouter.js'))
 
 app.listen(8999)
