@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function InfoForm (props) {
     const defaultValues = {
@@ -17,9 +17,17 @@ export default function InfoForm (props) {
 
     function handleSubmit (e) {
         e.preventDefault()
-        props.submitAction(inputValues)
-        setInputValues(defaultValues)
+        if (props.firstName) {
+            props.submitAction(inputValues, props._id)
+        } else {
+            props.submitAction(inputValues)
+            setInputValues(defaultValues)
+        }
     }
+
+    useEffect(() => {
+        setInputValues(defaultValues)
+    }, [props.currentBounties])
 
     return (
         <form className="infoform-wrapper" name="info-form" onSubmit={handleSubmit}>
@@ -37,7 +45,7 @@ export default function InfoForm (props) {
             
             <div className="inputs-row2">
                 <div className="price-wrapper">
-                    <label htmlFor="price">Bounty Amount: $</label>
+                    <label htmlFor="price">Bounty: $</label>
                     <input type="number" min="0" step="1" value={inputValues.price} name="price" className="text-num-input num-input" onChange={handleChange} />
                 </div>
                 <div className="type-wrapper">

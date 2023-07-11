@@ -1,8 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import InfoForm from './InfoForm'
 
 export default function Bounty (props) {
-    const [editToggle, setEditToggle] = useState(true)
+    const [editToggle, setEditToggle] = useState(true);
+
+    useEffect(() => {
+        setEditToggle(true)
+    }, [props.currentBounties])
+
     return (
         <div className="bounty-wrapper">
             {editToggle ?
@@ -14,14 +19,14 @@ export default function Bounty (props) {
                     <h3 className="thing-description">Bounty: ${props.price}</h3>
                 </div>
                 <div className="button-wrapper">
-                    <button className="block-button edit" onClick={() => setEditToggle(prev => !prev)}>Edit</button>
-                    <button className="block-button delete">Delete</button>
+                    <button className="block-button edit" onClick={() => setEditToggle(false)}>Edit</button>
+                    <button className="block-button delete" onClick={() => props.deleteBounty(props._id)}>Delete</button>
                 </div>
             </>
             :
             <>
                 <div className="info-form-wrapper">
-                    <InfoForm btnText="Save" submitAction={props.submitAction} {...props} />
+                    <InfoForm btnText="Save" submitAction={props.submitAction} {...props} currentBounties={props.currentBounties}/>
                 </div>
             </>
             }

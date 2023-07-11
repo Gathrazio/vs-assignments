@@ -35,7 +35,6 @@ bountyRouter.route('/')
     })
     .post((req, res) => { // post one
         const newBounty = req.body; // we will just hope req.body is in the correct format
-        console.log(req.body)
         newBounty._id = uuidv4();
         bounties.push(newBounty)
         res.send(`Successfully added ${newBounty.firstName} ${newBounty.lastName} to the bounty list.`) // notification of successful post

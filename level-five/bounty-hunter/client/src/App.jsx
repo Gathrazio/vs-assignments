@@ -8,8 +8,6 @@ export default function App() {
 
   const [currentBounties, setCurrentBounties] = useState([]);
 
-  console.log('current bounties:', currentBounties)
-
   useEffect(() => {
     load()
   }, [])
@@ -30,15 +28,24 @@ export default function App() {
       .catch(err => console.log(err))
   }
 
-  function updateBounty (bounty) {
-    fetch(`api/bounties/${bounty._id}`, {
+  function updateBounty (bounty, id) {
+    fetch(`api/bounties/${id}`, {
       method: "PUT",
       body: JSON.stringify(bounty),
       headers: { "Content-Type": "application/json" }
     })
+      .then(res => load())
+      .catch(err => console.log(err))
   }
 
-  const bountyElements = currentBounties.map(bounty => <Bounty {...bounty} key={bounty._id} submitAction={updateBounty}/>)
+  function deleteBounty (id) {
+    fetch(`api/bounties/${id}`, {
+      method: "DELETE"
+    })
+      .then(res => load())
+  }
+
+  const bountyElements = currentBounties.map(bounty => <Bounty {...bounty} key={bounty._id} submitAction={updateBounty} currentBounties={currentBounties} deleteBounty={deleteBounty}/>)
 
   return (
     <div className="app-wrapper">
