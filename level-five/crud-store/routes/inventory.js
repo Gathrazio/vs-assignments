@@ -24,18 +24,6 @@ inventoryRouter.route('/')
     })
 
 inventoryRouter.route('/:itemId')
-    .get((req, res, next) => { // get one by id
-        InventoryItem.findOne(
-            { _id: req.params.itemId },
-            (err, item) => {
-                if (err) {
-                    res.status(500)
-                    return next(err)
-                }
-                return res.status(200).send(item)
-            }
-        )
-    })
     .put((req, res, next) => { // update one by id
         InventoryItem.findOneAndUpdate(
             { _id: req.params.itemId },
@@ -44,21 +32,45 @@ inventoryRouter.route('/:itemId')
             (err, updatedItem) => {
                 if (err) {
                     res.status(500)
-                    return next(err)
+                    return next(new Error("Item to be updated has never existed."))
+                }
+                if (!updatedItem) {
+                    res.status(404)
+                    return next(new Error("Item to be updated has previously been deleted."))
                 }
                 return res.status(201).send(updatedItem)
             }
         )
     })
-    .delete((req, res, next) => {
+    .delete((req, res, next) => { // delete one by id
         InventoryItem.findOneAndDelete(
             { _id: req.params.itemId },
             (err, deletedItem) => {
                 if (err) {
                     res.status(500)
-                    return next(err)
+                    return next(new Error("Item to be deleted has never existed."))
+                }
+                if (!deletedItem) {
+                    res.status(500)
+                    return next(new Error("Item to be deleted has previously been deleted."))
                 }
                 return res.status(200).send(`Successfully deleted ${deletedItem.title} from the inventory.`)
+            }
+        )
+    })
+    .get((req, res, next) => { // get one by id
+        InventoryItem.findOne(
+            { _id: req.params.itemId },
+            (err, item) => {
+                if (err) {
+                    res.status(500)
+                    return next(new Error("Item's ID does not exist"))
+                }
+                if (!item) {
+                    res.status(404)
+                    return next(new Error("Item not found in inventory!"))
+                }
+                return res.status(200).send(item)
             }
         )
     })
