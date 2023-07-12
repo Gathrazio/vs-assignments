@@ -64,11 +64,11 @@ inventoryRouter.route('/:itemId')
             (err, item) => {
                 if (err) {
                     res.status(500)
-                    return next(new Error("Item's ID does not exist"))
+                    return next(new Error("Item desired has never existed."))
                 }
                 if (!item) {
                     res.status(404)
-                    return next(new Error("Item not found in inventory!"))
+                    return next(new Error("Item desired has previously been deleted."))
                 }
                 return res.status(200).send(item)
             }
