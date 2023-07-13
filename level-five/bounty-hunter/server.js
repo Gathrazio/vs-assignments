@@ -9,8 +9,11 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 //connect to db
-mongoose.set('strictQuery', false)
-mongoose.connect(process.env.MONGO_URL, () => console.log('connected to bountiesdb'))
+mongoose.set('strictQuery', true)
+// mongoose.connect(process.env.MONGO_URL)
+mongoose.connect('mongodb://localhost:27017/localbountiesdb')
+    .then(() => console.log('Connected to localbountiesdb!'));
+
 
 // routes
 app.use('/api/bounties', require('./routes/bountyRouter.js'))
