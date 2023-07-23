@@ -12,7 +12,7 @@
 const validateDependencies = (deps) => {
 
     const graph = {};
-    for (let i = 0; i < deps.length; i++) { // what you helped me build; the creation of the graph
+    for (let i = 0; i < deps.length; i++) { // the creation of the graph
         const key = deps[i][0];
         if (graph[key]) {
             graph[key].push(deps[i][1])
