@@ -36,6 +36,6 @@ const validateDependencies = (deps) => {
     return true; // if nothing goes wrong for any of the primaryDependencies, return true
 }
 
-console.log(validateDependencies([["A","B"],["B","C"],["C","E"],["G","H"],["E","R"],["E","A"]]))
+// console.log(validateDependencies([["A","B"],["B","C"],["C","E"],["G","H"],["E","R"],["E","A"]]))
 
 module.exports = validateDependencies;
