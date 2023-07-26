@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     username: {
@@ -14,6 +14,7 @@ const userSchema = new Schema({
     },
     isAdmin: {
         type: Boolean,
+        required: true,
         default: false
     }
 }, { timestamps: true })
