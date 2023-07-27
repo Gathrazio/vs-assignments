@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 
 export default function IssueForm () {
 
-    const { postIssue, addIssue } = useContext(UserContext);
+    const { postIssue, addIssue, userInfo } = useContext(UserContext);
 
     const [inputValues, setInputValues] = useState({
         title: '',
@@ -18,6 +18,8 @@ export default function IssueForm () {
             [name]: value
         }))
     }
+
+    console.log(userInfo)
 
     function handleSubmit (e) {
         e.preventDefault()

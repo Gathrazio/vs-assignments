@@ -30,7 +30,7 @@
   margin: 30px;
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 400px;
   border: 1px solid rgb(145, 145, 145);
   border-radius: 8px;
 }
@@ -52,6 +52,10 @@
 }
 
 /* Profile */
+
+.issue-form {
+  width: 500px;
+}
 
 .nav-wrapper {
   height: 150px;
@@ -96,7 +100,7 @@
 }
 
 .welcomebar-wrapper {
-  background-color: aqua;
+  background-color: rgb(143, 205, 253);
   height: 80px;
   display: flex;
   justify-content: center;
@@ -107,7 +111,14 @@
 .newissue-wrapper, .myissues-wrapper {
   height: calc(100vh - 230px);
   background-color: brown;
+  padding: 10px;
 }
+
+.myissues-wrapper {
+  overflow-y: scroll;
+  padding-bottom: 0px;
+}
+
 
 .selected {
   background-color: rgb(120, 120, 120);
@@ -115,4 +126,23 @@
 
 .issue-input-description {
   height: 150px;
+}
+
+.issue-wrapper {
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: rgb(247, 240, 209);
+}
+
+.issue-title {
+  height: 50px;
+  line-height: 48px;
+  font-size: 1.4rem;
+  padding-left: 10px;
+  background-color: rgb(255, 169, 83);
+}
+
+.issue-description {
+  background-color: none;
+  padding: 10px;
 }

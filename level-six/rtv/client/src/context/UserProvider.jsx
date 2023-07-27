@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react'
+import { useState, createContext, useEffect } from 'react'
 import axios from 'axios';
 
 export const UserContext = createContext();
@@ -48,6 +48,7 @@ export default function UserProvider (props) {
         }))
         localStorage.setItem("token", token)
         localStorage.setItem("user", JSON.stringify(user))
+        loadUserIssues()
     }
 
     async function postIssue (newIssue) {
@@ -61,6 +62,21 @@ export default function UserProvider (props) {
             issues: [...prev.issues, postedIssue]
         }))
     }
+
+    function loadUserIssues () {
+        userAxios.get('/api/protected/issues/user')
+            .then(res => {
+                setUserState(prevState => ({
+                    ...prevState,
+                    issues: res.data
+                }))
+            })
+            .catch(err => console.log(err))
+    }
+
+    useEffect(() => {
+        loadUserIssues()
+    }, [])
 
 
     return (
