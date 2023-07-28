@@ -13,8 +13,8 @@ authRouter.post('/signup', (req, res, next) => {
             const newUser = new User(req.body);
             newUser.save()
                 .then(savedUser => {
-                    const token = jwt.sign(savedUser.toObject(), process.env.USER_SECRET);
-                    return res.status(201).send({ token, user: savedUser });
+                    const token = jwt.sign(savedUser.withoutPassword(), process.env.USER_SECRET);
+                    return res.status(201).send({ token, user: savedUser.withoutPassword() });
                 })
                 .catch(err => {
                     res.status(500)
@@ -34,12 +34,19 @@ authRouter.post('/login', (req, res, next) => {
                 res.status(403)
                 return next(new Error("User does not exist."));
             }
-            if (req.body.password !== user.password) {
-                res.status(403)
-                return next(new Error("Password is incorrect."))
-            }
-            const token = jwt.sign(user.toObject(), process.env.USER_SECRET);
-            res.status(200).send({ token, user })
+            
+            user.checkPassword(req.body.password, (err, isMatch) => {
+                if (err) {
+                    res.status(403)
+                    return next(new Error("Failed to check password."));
+                }
+                if (!isMatch) {
+                    res.status(403)
+                    return next(new Error("Password is incorrect."));
+                }
+                const token = jwt.sign(user.withoutPassword(), process.env.USER_SECRET);
+                res.status(200).send({ token, user: user.withoutPassword() })
+            })
         })
         .catch(err => {
             res.status(500)

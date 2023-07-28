@@ -28,7 +28,6 @@ export default function Auth () {
         login(inputInfo)
             .then(
                 function (res) {
-                    console.log(res.data)
                     setUser(res.data)
                     Swal.fire({
                         icon: "success",
@@ -39,10 +38,9 @@ export default function Auth () {
                 function (err) {
                     Swal.fire({
                         icon: "error",
-                        title: "Username or password is incorrect.",
+                        title: err.response.data.errMsg,
                         confirmButtonText: "OK"
                     })
-                    console.dir(err.response.data.errMsg)
                 }
             )
     }
@@ -64,10 +62,9 @@ export default function Auth () {
                 function (err) {
                     Swal.fire({
                         icon: "error",
-                        title: "Username is already taken.",
+                        title: err.response.data.errMsg,
                         confirmButtonText: "OK"
                     })
-                    console.dir(err.response.data.errMsg)
                 }
             )
         
