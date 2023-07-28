@@ -3,6 +3,7 @@ import Profile from './components/Profile'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { UserContext } from './context/UserProvider.jsx'
+import ProtectedRoute from './components/ProtectedRoute'
 import './index.css'
 
 export default function App () {
@@ -18,7 +19,11 @@ export default function App () {
         />
         <Route
           path="/profile"
-          element={<Profile token={token} logout={logout} />}
+          element={
+            <ProtectedRoute token={token} redirectTo="/">
+              <Profile />
+            </ProtectedRoute>
+          }
         />
       </Routes>
     </div>

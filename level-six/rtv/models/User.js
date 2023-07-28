@@ -48,4 +48,11 @@ userSchema.methods.withoutPassword = function () {
     return user;
 }
 
+userSchema.methods.justUsername = function () {
+    const user = this.toObject();
+    delete user.password
+    delete user.isAdmin
+    return user;
+}
+
 module.exports = mongoose.model("User", userSchema);

@@ -19,14 +19,11 @@ export default function IssueForm () {
         }))
     }
 
-    console.log(userInfo)
-
     function handleSubmit (e) {
         e.preventDefault()
         postIssue(inputValues)
             .then(
                 function (res) {
-                    console.log(res.data)
                     addIssue(res.data)
                     Swal.fire({
                         icon: "success",

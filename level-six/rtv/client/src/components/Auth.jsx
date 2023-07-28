@@ -51,7 +51,6 @@ export default function Auth () {
         signup(inputInfo)
             .then(
                 function (res) {
-                    console.log(res.data)
                     setUser(res.data)
                     Swal.fire({
                         icon: "success",

@@ -19,6 +19,7 @@ export default function UserProvider (props) {
         issues: []
     };
     const [userState, setUserState] = useState(initState);
+    const [users, setUsers] = useState([]);
 
     async function signup (credentials) {
         const res = await axios.post('/api/auth/signup', credentials);
@@ -51,6 +52,12 @@ export default function UserProvider (props) {
         loadUserIssues()
     }
 
+    function retrieveUsers () {
+        userAxios.get(`/api/protected/users`)
+            .then(res => setUsers(res.data))
+            .catch(err => console.log(err))
+    }
+
     async function postIssue (newIssue) {
         const res = await userAxios.post('/api/protected/issues', newIssue);
         return res;
@@ -76,6 +83,7 @@ export default function UserProvider (props) {
 
     useEffect(() => {
         loadUserIssues()
+        retrieveUsers()
     }, [])
 
 
@@ -83,6 +91,7 @@ export default function UserProvider (props) {
         <UserContext.Provider
             value={{
                 userInfo: userState,
+                users,
                 signup,
                 login,
                 logout,
