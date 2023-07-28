@@ -33,10 +33,26 @@ export default function IssueProvider (props) {
             .catch(err => console.log(err))
     }
 
+    function addComment (comment) {
+        setComments(prev => [
+            ...prev,
+            comment
+        ])
+    }
+
+    function addIssue (issue) {
+        setIssues(prev => [
+            ...prev,
+            issue
+        ])
+    }
+
     return (
         <IssueContext.Provider value={{
             comments,
-            issues
+            issues,
+            addComment,
+            addIssue
         }}>
             {props.children}
         </IssueContext.Provider>

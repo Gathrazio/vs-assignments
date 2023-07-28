@@ -134,14 +134,6 @@
   background-color: rgb(247, 240, 209);
 }
 
-.issue-title {
-  height: 50px;
-  line-height: 48px;
-  font-size: 1.4rem;
-  padding-left: 10px;
-  background-color: rgb(255, 169, 83);
-}
-
 .issue-description {
   background-color: none;
   padding: 10px;
@@ -157,7 +149,7 @@
 
 .comment-body {
   color: rgb(225, 225, 225);
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 .comment-toggle-button {
@@ -178,4 +170,54 @@
   height: 100px;
   padding: 5px;
   font-size: 1rem;
+}
+
+.comment-author-line {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.comment-author {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-left: -1px;
+}
+
+.comment-button-likes-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date {
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  margin-left: -1px;
+}
+
+.issue-title-line {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: rgb(255, 169, 83);
+}
+
+.issue-title {
+  line-height: 48px;
+  font-size: 1.4rem;
+}
+
+.react-icons {
+  font-size: 2rem;
+  margin: 0px 5px -5px 5px;
+}
+
+.like-dislike-wrapper {
+  display: flex;
+  font-size: 1.5rem;
+}
+
+.like-wrapper:hover, .dislike-wrapper:hover {
+  cursor: pointer;
 }

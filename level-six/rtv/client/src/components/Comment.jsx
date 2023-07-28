@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../context/UserProvider.jsx'
+import renderDate from '../dateRenderer.js'
 
 
 export default function Comment (props) {
@@ -15,7 +16,9 @@ export default function Comment (props) {
 
     return (
         <div className="comment-wrapper">
-            <p className="comment-author">@{commentAuthor}</p>
+            <div className="comment-author-line">
+                <p className="date"> <b>@{commentAuthor}</b> &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; <em>{renderDate(props.createdAt)}</em></p>
+            </div>
             <p className="comment-body">{props.body}</p>
         </div>
     )
