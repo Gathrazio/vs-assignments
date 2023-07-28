@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 
 export default function IssueForm () {
 
-    const { postIssue, addIssue, userInfo } = useContext(UserContext);
+    const { postIssue, addIssue } = useContext(UserContext);
 
     const [inputValues, setInputValues] = useState({
         title: '',

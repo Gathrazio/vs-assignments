@@ -47,12 +47,18 @@ export default function IssueProvider (props) {
         ])
     }
 
+    function updateIssue (updatedIssue) {
+        const issueIndex = issues.findIndex(issue => issue._id === updatedIssue._id);
+        setIssues(prev => prev.toSpliced(issueIndex, 1, updatedIssue))
+    }
+
     return (
         <IssueContext.Provider value={{
             comments,
             issues,
             addComment,
-            addIssue
+            addIssue,
+            updateIssue
         }}>
             {props.children}
         </IssueContext.Provider>

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { IssueContext } from '../context/IssueProvider.jsx'
 import Comment from './Comment'
 import renderDate from '../dateRenderer.js'
@@ -16,7 +16,7 @@ userAxios.interceptors.request.use(config => {
 
 export default function Issue (props) {
 
-    const { comments, addComment } = useContext(IssueContext);
+    const { comments, addComment, updateIssue } = useContext(IssueContext);
 
     const relevantComments = comments.filter(comment => comment.issue === props._id)
     
@@ -25,6 +25,7 @@ export default function Issue (props) {
     const [likeToggle, setLikeToggle] = useState(false);
     const [dislikeToggle, setDislikeToggle] = useState(false);
     const [commentInput, setCommentInput] = useState('');
+    const [totals, setTotals] = useState([0, 0]);
 
     function handleChange (e) {
         const { value } = e.target;
@@ -42,19 +43,90 @@ export default function Issue (props) {
         setCommentInput('')
     }
 
+    function updateIssueWithOpinion (agree) {
+        const userIndex = props.opinions.findIndex(opinion => opinion.user.toString() === JSON.parse(localStorage.getItem("user"))._id);
+            if (userIndex === -1) {
+                userAxios.put(`/api/protected/issues/update/${props._id}`, {
+                    opinions: [...props.opinions, {
+                        user: JSON.parse(localStorage.getItem("user"))._id,
+                        agree: agree
+                    }]
+                })
+                    .then(res => updateIssue(res.data))
+                    .catch(err => console.log(err))
+            } else {
+                userAxios.put(`/api/protected/issues/update/${props._id}`, {
+                    opinions: props.opinions.toSpliced(userIndex, 1, {
+                        user: JSON.parse(localStorage.getItem("user"))._id,
+                        agree: agree
+                    })
+                })
+                    .then(res => updateIssue(res.data))
+                    .catch(err => console.log(err))
+            }
+    }
+
     function handleLikeToggle () {
+        if (!likeToggle && !dislikeToggle) {
+            updateIssueWithOpinion(1)
+            setTotals(prev => [prev[0] + 1, prev[1]])
+        } else if (likeToggle && !dislikeToggle) {
+            updateIssueWithOpinion(0)
+            setTotals(prev => [prev[0] - 1, prev[1]])
+        } else if (!likeToggle && dislikeToggle) {
+            updateIssueWithOpinion(1)
+            setTotals(prev => [prev[0] + 1, prev[1] - 1])
+        }
+
+
         if (dislikeToggle) {
             setDislikeToggle(prev => !prev)
         }
         setLikeToggle(prev => !prev)
+
     }
 
     function handleDislikeToggle () {
+        if (!dislikeToggle && !likeToggle) {
+            updateIssueWithOpinion(-1)
+            setTotals(prev => [prev[0], prev[1] + 1])
+        } else if (dislikeToggle && !likeToggle){
+            updateIssueWithOpinion(0)
+            setTotals(prev => [prev[0], prev[1] - 1])
+        } else if (!dislikeToggle && likeToggle) {
+            updateIssueWithOpinion(-1)
+            setTotals(prev => [prev[0] - 1, prev[1] + 1])
+        }
+
         if (likeToggle) {
             setLikeToggle(prev => !prev)
         }
         setDislikeToggle(prev => !prev)
     }
+
+    useEffect(() => {
+        let likes = 0;
+        let dislikes = 0;
+        props.opinions.forEach(opinion => {
+            if (opinion.agree === -1) {
+                dislikes += 1;
+            } else if (opinion.agree === 1) {
+                likes += 1;
+            }
+        })
+        setTotals([likes, dislikes])
+        const userIndex = props.opinions.findIndex(opinion => opinion.user.toString() === JSON.parse(localStorage.getItem("user"))._id);
+        if (userIndex != -1) {
+            switch (props.opinions[userIndex].agree) {
+                case -1:
+                    setDislikeToggle(true)
+                    break;
+                case 1:
+                    setLikeToggle(true)
+                    break;
+            }
+        }
+    }, [])
 
 
 
@@ -78,7 +150,7 @@ export default function Issue (props) {
             <IconContext.Provider value={{ className: 'react-icons' }}>
                 
                 <div className="like-dislike-wrapper">
-                    <div>5</div>
+                    <div>{totals[0]}</div>
                     <div onClick={handleLikeToggle} className="like-wrapper">
                         { likeToggle ? 
                         <AiFillLike />
@@ -87,7 +159,7 @@ export default function Issue (props) {
                         }
                         
                     </div>
-                    <div>3</div>
+                    <div>{totals[1]}</div>
                     <div onClick={handleDislikeToggle} className="dislike-wrapper">
                     { dislikeToggle ? 
                         <AiFillDislike />
