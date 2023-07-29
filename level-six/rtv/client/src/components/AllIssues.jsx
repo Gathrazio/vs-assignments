@@ -9,7 +9,6 @@ import Issue from './Issue'
 export default function AllIssues () {
     const navigate = useNavigate();
     const { issues } = useContext(IssueContext);
-    console.log(issues)
     const ratingsArray = issues.map(issue => issue.opinions.reduce((accumulator, currentOpinion) => accumulator + currentOpinion.agree, 0));
     // console.log(ratingsArray)
     const mashedArray = issues.map((issue, index) => [issue, ratingsArray[index]])
@@ -17,7 +16,7 @@ export default function AllIssues () {
     const sortedMashedArray = mashedArray.sort((a, b) => b[1] - a[1])
     // console.log(sortedMashedArray)
     const sortedIssues = sortedMashedArray.map(tuple => tuple[0])
-    console.log(sortedIssues)
+    // console.log(sortedIssues)
     
     return (
         <div className="allissues-wrapper">

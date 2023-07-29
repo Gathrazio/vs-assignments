@@ -86,11 +86,14 @@ export default function UserProvider (props) {
     }
 
     function updateIssue (issue) {
-        const issueIndex = userState.issues.findIndex(thisIssue => thisIssue._id === issue._id);
-        setUserState(prev => ({
-            ...prev,
-            issues: prev.issues.toSpliced(issueIndex, 1, issue)
-        }))
+        if (issue.author === JSON.parse(localStorage.getItem("user"))._id) {
+            const issueIndex = userState.issues.findIndex(thisIssue => thisIssue._id === issue._id);
+            setUserState(prev => ({
+                ...prev,
+                issues: prev.issues.toSpliced(issueIndex, 1, issue)
+            }))
+        }
+        
     }
 
     useEffect(() => {
