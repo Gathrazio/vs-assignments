@@ -1,10 +1,12 @@
 import { useState, useContext } from 'react'
 import { UserContext } from '../context/UserProvider.jsx'
+import { IssueContext } from '../context/IssueProvider.jsx'
 import Swal from 'sweetalert2'
 
 export default function IssueForm () {
 
     const { postIssue, addIssue } = useContext(UserContext);
+    const { addGlobalIssue } = useContext(IssueContext);
 
     const [inputValues, setInputValues] = useState({
         title: '',
@@ -25,6 +27,7 @@ export default function IssueForm () {
             .then(
                 function (res) {
                     addIssue(res.data)
+                    addGlobalIssue(res.data)
                     Swal.fire({
                         icon: "success",
                         title: "Issue posted!",

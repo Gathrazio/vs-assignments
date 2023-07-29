@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { UserContext } from './context/UserProvider.jsx'
 import ProtectedRoute from './components/ProtectedRoute'
+import AllIssues from './components/AllIssues'
 import './index.css'
 
 export default function App () {
@@ -22,6 +23,14 @@ export default function App () {
           element={
             <ProtectedRoute token={token} redirectTo="/">
               <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/issues"
+          element={
+            <ProtectedRoute token={token} redirectTo="/">
+              <AllIssues />
             </ProtectedRoute>
           }
         />

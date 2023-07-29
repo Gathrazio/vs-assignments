@@ -12,7 +12,7 @@ export default function Auth () {
     const [inputInfo, setInputInfo] = useState(initialInfo);
     const [formToggle, setFormToggle] = useState(true);
 
-    const { signup, login, setUser, userState } = useContext(UserContext);
+    const { signup, login, setUser, users, updateUsers } = useContext(UserContext);
 
     function handleChange (e) {
         const {name, value} = e.target;
@@ -57,6 +57,9 @@ export default function Auth () {
                         title: "Your account has been successfully created and you are logged in!",
                         confirmButtonText: "OK"
                     })
+                    const thinnedUser = {...res.data.user};
+                    delete thinnedUser.isAdmin
+                    updateUsers([...users, thinnedUser])
                 },
                 function (err) {
                     Swal.fire({

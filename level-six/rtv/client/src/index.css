@@ -221,3 +221,48 @@
 .like-wrapper:hover, .dislike-wrapper:hover {
   cursor: pointer;
 }
+
+/* All Issues */
+
+.allissues-wrapper {
+  height: 100vh;
+  background-color: cadetblue;
+}
+
+.all-issues-wrap {
+  display: flex;
+  justify-content: left;
+}
+
+.back-wrapper {
+  position: absolute;
+  background-color: rgb(179, 255, 208);
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  margin-left: -5px;
+}
+
+.back-wrapper:hover {
+  cursor: pointer;
+  background-color: rgba(212, 212, 212, 0.566);
+}
+
+.react-icons-issues {
+  font-size: 3rem;
+}
+
+.all-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.issue-bay {
+  height: calc(100vh - 80px);
+  padding: 10px;
+  overflow-y: scroll;
+  padding-bottom: 0px;
+}

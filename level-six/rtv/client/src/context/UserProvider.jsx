@@ -41,6 +41,10 @@ export default function UserProvider (props) {
         })
     }
 
+    function updateUsers (users) {
+        setUsers(users)
+    }
+
     function setUser ({user, token}) {
         setUserState(prev => ({
             ...prev,
@@ -81,9 +85,19 @@ export default function UserProvider (props) {
             .catch(err => console.log(err))
     }
 
+    function updateIssue (issue) {
+        const issueIndex = userState.issues.findIndex(thisIssue => thisIssue._id === issue._id);
+        setUserState(prev => ({
+            ...prev,
+            issues: prev.issues.toSpliced(issueIndex, 1, issue)
+        }))
+    }
+
     useEffect(() => {
-        loadUserIssues()
-        retrieveUsers()
+        if (localStorage.getItem("token")) {
+            loadUserIssues()
+            retrieveUsers()
+        }
     }, [])
 
 
@@ -97,7 +111,9 @@ export default function UserProvider (props) {
                 logout,
                 setUser,
                 postIssue,
-                addIssue
+                addIssue,
+                updateIssue,
+                updateUsers
             }}>
             { props.children }
         </UserContext.Provider>

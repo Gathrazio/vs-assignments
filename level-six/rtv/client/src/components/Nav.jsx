@@ -39,7 +39,7 @@ export default function Nav ({updateToggle}) {
             <div className="options-wrapper">
                 <div onClick={() => handleToggle(0)} className={`new-issue issue-option${optionSelected.newIssue}`}>New Issue</div>
                 <div onClick={() => handleToggle(1)} className={`my-issues issue-option${optionSelected.myIssues}`}>My Issues</div>
-                <div className="all-issues issue-option">All Issues</div>
+                <div onClick={() => navigate('/issues')} className="all-issues issue-option">All Issues</div>
             </div>
         </div>
     )

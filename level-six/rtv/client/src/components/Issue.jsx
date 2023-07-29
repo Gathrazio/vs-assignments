@@ -5,6 +5,7 @@ import renderDate from '../dateRenderer.js'
 import axios from 'axios';
 import { IconContext } from "react-icons";
 import { AiOutlineLike, AiOutlineDislike, AiFillDislike, AiFillLike } from 'react-icons/ai'
+import { UserContext } from '../context/UserProvider.jsx'
 
 const userAxios = axios.create();
 
@@ -16,9 +17,11 @@ userAxios.interceptors.request.use(config => {
 
 export default function Issue (props) {
 
-    const { comments, addComment, updateIssue } = useContext(IssueContext);
+    const { comments, addComment, updateGlobalIssue } = useContext(IssueContext);
+    const { users, updateIssue } = useContext(UserContext);
 
     const relevantComments = comments.filter(comment => comment.issue === props._id)
+
     
     const [commentsToggle, setCommentsToggle] = useState(false);
     const [addCommentToggle, setAddCommentToggle] = useState(false);
@@ -46,13 +49,16 @@ export default function Issue (props) {
     function updateIssueWithOpinion (agree) {
         const userIndex = props.opinions.findIndex(opinion => opinion.user.toString() === JSON.parse(localStorage.getItem("user"))._id);
             if (userIndex === -1) {
-                userAxios.put(`/api/protected/issues/update/${props._id}`, {
+                userAxios.put(`/api/protected/issues/update/likes/${props._id}`, {
                     opinions: [...props.opinions, {
                         user: JSON.parse(localStorage.getItem("user"))._id,
                         agree: agree
                     }]
                 })
-                    .then(res => updateIssue(res.data))
+                    .then(res => {
+                        updateIssue(res.data)
+                        updateGlobalIssue(res.data)
+                    })
                     .catch(err => console.log(err))
             } else {
                 userAxios.put(`/api/protected/issues/update/${props._id}`, {
@@ -61,7 +67,10 @@ export default function Issue (props) {
                         agree: agree
                     })
                 })
-                    .then(res => updateIssue(res.data))
+                    .then(res => {
+                        updateIssue(res.data)
+                        updateGlobalIssue(res.data)
+                    })
                     .catch(err => console.log(err))
             }
     }
@@ -128,12 +137,10 @@ export default function Issue (props) {
         }
     }, [])
 
-
-
     return (
         <div className="issue-wrapper">  
             <div className="issue-title-line">
-                <p className="date"><b>@{JSON.parse(localStorage.getItem("user")).username}</b> &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; <em>{renderDate(props.createdAt)}</em></p>
+                <p className="date"><b>@{users.find(user => user._id.toString() === props.author).username}</b> &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; <em>{renderDate(props.createdAt)}</em></p>
                 <h3 className="issue-title">{props.title}</h3>
             </div>
             <p className="issue-description">{props.description}</p>
@@ -148,7 +155,6 @@ export default function Issue (props) {
             </div>
             <div className="likes-block">
             <IconContext.Provider value={{ className: 'react-icons' }}>
-                
                 <div className="like-dislike-wrapper">
                     <div>{totals[0]}</div>
                     <div onClick={handleLikeToggle} className="like-wrapper">

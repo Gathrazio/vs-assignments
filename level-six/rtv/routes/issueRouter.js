@@ -51,6 +51,25 @@ issueRouter.put('/update/:issueID', (req, res, next) => { // update an issue, bu
         })
 })
 
+issueRouter.put('/update/likes/:issueID', (req, res, next) => { // update an issue's likes
+    Issue.findOneAndUpdate(
+        { _id: req.params.issueID },
+        req.body,
+        { new: true }
+    )
+        .then(updatedIssue => {
+            if (!updatedIssue) {
+                res.status(403)
+                return next(new Error("Failed to update issue's likes; the issue may not exist."))
+            }
+            return res.status(201).send(updatedIssue)
+        })
+        .catch(err => {
+            res.status(500)
+            return next(new Error("Failed to update issue's likes."))
+        })
+})
+
 issueRouter.delete('/:issueID', (req, res, next) => { // delete an issue, but only if the user is the author
     Issue.findOneAndDelete({ _id: req.params.issueID, author: req.auth._id })
         .then(deletedIssue => {

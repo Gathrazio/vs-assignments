@@ -17,8 +17,11 @@ export default function IssueProvider (props) {
     const [issues, setIssues] = useState([]);
 
     useEffect(() => {
-        retrieveComments()
-        retrieveIssues()
+        if (localStorage.getItem("token")) {
+            retrieveComments()
+            retrieveIssues()
+        }
+        
     }, [])
 
     function retrieveComments () {
@@ -40,14 +43,14 @@ export default function IssueProvider (props) {
         ])
     }
 
-    function addIssue (issue) {
+    function addGlobalIssue (issue) {
         setIssues(prev => [
             ...prev,
             issue
         ])
     }
 
-    function updateIssue (updatedIssue) {
+    function updateGlobalIssue (updatedIssue) {
         const issueIndex = issues.findIndex(issue => issue._id === updatedIssue._id);
         setIssues(prev => prev.toSpliced(issueIndex, 1, updatedIssue))
     }
@@ -57,8 +60,8 @@ export default function IssueProvider (props) {
             comments,
             issues,
             addComment,
-            addIssue,
-            updateIssue
+            addGlobalIssue,
+            updateGlobalIssue
         }}>
             {props.children}
         </IssueContext.Provider>
