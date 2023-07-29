@@ -62,6 +62,8 @@ export default function UserProvider (props) {
             .catch(err => console.log(err))
     }
 
+    console.log(users)
+
     async function postIssue (newIssue) {
         const res = await userAxios.post('/api/protected/issues', newIssue);
         return res;
